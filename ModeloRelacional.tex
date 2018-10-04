@@ -1,0 +1,53 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[normalem]{ulem}
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+\section{Modelo Relacional}\label{modelo-relacional}
+
+\subsection{Entidades}\label{entidades}
+
+Civil(\uline{dni}, nombre, apellido)\\
+Superheroe(\uline{shid}, nombre, color de disfraz, \dashuline{dni})\\
+Habilidad(\uline{habilidadId}, nombre)\\
+OrganizacionDelictiva(\uline{mafiaId}, nombre)\\
+Direccion(\uline{idDireccion}, calle, altura, \dashuline{idBarrio})\\
+Barrio(\uline{idBarrio}, nombre)\\
+TipoDeRelacion(\uline{idTipoDeRelacion}, nombre)\\
+Incidente(\uline{idIncidente}, fecha, calle\_1, calle\_2,
+\dashuline{idTipoIncidente})\\
+TipoIncidente(\uline{idTipoIncidente}, nombre)\\
+Seguimiento(\uline{numero}, fecha, descripción, conclusión,
+estado,\uuline{idIncidente}, \dashuline{placa})\\
+Departamento(\uline{idDepartamento}, nombre, descripción)\\
+Oficial(\uline{placa},dni, nombre, apellido, rango, fechaIngreso, tipo,
+\dashuline{idDepartamento}) \\
+Investigador(\uuline{placa})\\
+RolOficial(\uline{idResponsabilidad}, descripción)\\
+RolCivil(\uline{idRolCivil})\\
+Cargo(\uline{idCargo}, fechaInicio, fechaFin, \uline{idDesignación})\\
+Sumario(\uline{idSumario}, fecha, observación, resultado, \dashuline{placa},
+\dashuline{idCargo})\\
+Designacion(\uline{idDesignación}, nombre) \\
+
+\subsection{Relaciones}\label{relaciones}
+
+Tiene(\uuline{shid}, \uuline{habilidadId})\\
+ArchienemigoDe(\uuline{shid},\uuline{dni})\\
+EsContactadoPor(\uuline{shid},\uuline{dni})\\
+EstaCompuestaPor(\uuline{mafiaId}, \uuline{dni})\\
+Conocimiento(\uuline{conocedor},\uuline{conocido},
+fechaConocimiento, \dashuline{idTipoDeRelación})
+
+\subsection{Consideraciones adicionales}\label{consideraciones-adicionales}
+
+Como en la relacion \emph{identificadoComo} ambas entidades participan
+parcialmente, decidimos poner la foreign key en superheroe, asumiendo
+que esto nos generaría menos elementos nulos en la base de datos.
+
+\end{document}
