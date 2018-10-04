@@ -13,7 +13,13 @@
 \subsection{Entidades}\label{entidades}
 
 Civil(\uline{dni}, nombre, apellido)\\
+PK = \{dni\}\\
+CK = \{dni\}\\
 Superheroe(\uline{shid}, nombre, color de disfraz, \dashuline{dni})\\
+PK = \{shid\}\\
+CK = \{shid\}\\
+FK = \{dni\}\\
+
 Habilidad(\uline{habilidadId}, nombre)\\
 OrganizacionDelictiva(\uline{mafiaId}, nombre)\\
 Direccion(\uline{idDireccion}, calle, altura, \dashuline{idBarrio})\\
@@ -29,7 +35,7 @@ Oficial(\uline{placa},dni, nombre, apellido, rango, fechaIngreso, tipo,
 \dashuline{idDepartamento}) \\
 Investigador(\uuline{placa})\\
 RolOficial(\uline{idResponsabilidad}, descripción)\\
-RolCivil(\uline{idRolCivil})\\
+RolCivil(\uline{idRolCivil}, nombre)\\
 Cargo(\uline{idCargo}, fechaInicio, fechaFin, \uline{idDesignación})\\
 Sumario(\uline{idSumario}, fecha, observación, resultado, \dashuline{placa},
 \dashuline{idCargo})\\
