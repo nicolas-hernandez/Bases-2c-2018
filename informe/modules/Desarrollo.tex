@@ -1,0 +1,140 @@
+\section{Desarrollo}
+
+\subsection{DER} 
+
+\subsection{Modelo Relacional}\label{modelo-relacional}
+
+\subsubsection{Entidades}\label{entidades}
+
+Civil(\uline{dni}, nombre, apellido)\\
+%PK = \{dni\}\\
+%CK = \{dni\}\\
+
+Superheroe(\uline{idSh}, nombre, color de disfraz, \dashuline{dni})\\
+%PK = \{idSH\}\\
+%CK = \{idSh\}\\
+%FK = \{dni\}\\
+
+Habilidad(\uline{IdHabilidad}, nombre)\\
+
+OrganizacionDelictiva(\uline{idMafia}, nombre)\\
+
+Direccion(\uline{idDireccion}, calle, altura, \dashuline{idBarrio})\\
+
+Barrio(\uline{idBarrio}, nombre)\\
+
+TipoDeRelacion(\uline{idTipoDeRelacion}, nombre)\\
+
+Incidente(\uline{idIncidente}, fecha, calle\_1, calle\_2,
+\dashuline{idTipoIncidente}, \dashuline{idDireccion})\\
+
+TipoIncidente(\uline{idTipoIncidente}, nombre)\\
+
+Seguimiento(\uline{numero}, fecha, descripción, conclusión,
+estado,\uuline{idIncidente}, \dashuline{placa}, \dashuline{idEstadoSeg})\\
+
+EstadoSeguimiento(\uline{idEstadoSeg}, estado) \\
+
+Departamento(\uline{idDepartamento}, nombre, descripción)\\
+
+Oficial(\uline{placa},dni, nombre, apellido, rango, fechaIngreso, tipo,
+\dashuline{idDepartamento}) \\
+
+Investigador(\uuline{placa})\\
+
+RolOficial(\uline{idResponsabilidad}, descripción)\\
+
+RolCivil(\uline{idRolCivil}, nombre)\\
+
+Asignación(\uline{idAsignación}, fechaInicio, \dashuline{idDesignación}, \dashuline{placa})\\
+
+Sumario(\uline{idSumario}, fecha, observación, resultado, \dashuline{placa},
+\dashuline{idAsignación}, \dashuline{idEstadoSum})\\
+
+EstadoSumario(\uline{idEstadoSum}, estado) \\
+
+Designacion(\uline{idDesignación}, nombre) \\
+
+\subsubsection{Relaciones}\label{relaciones}
+
+OficialSeInvolucró(\uuline{placa}, \uuline{idIncidente}, \uuline{idResponsabilidad})\\
+
+Posee(\uuline{idSh}, \uuline{idHabilidad})\\
+
+ArchienemigoDe(\uuline{idSh},\uuline{dni})\\
+
+EsContactadoPor(\uuline{idSh},\uuline{dni})\\
+
+SuperParticipó(\uuline{idSh}, \uuline{idIncidente})\\
+
+EstaCompuestaPor(\uuline{idMafia}, \uuline{dni})\\
+
+Conocimiento(\uuline{conocedor},\uuline{conocido},
+fechaConocimiento, \dashuline{idTipoDeRelación})\\
+
+seInvolucraron(\uuline{dni}, \uuline{idIncidente}, \dashuline{idRolCivil})\\
+
+ViveEn(\uuline{dni}, \uuline{idDirección}, fechaInicio)\\
+
+\subsubsection{Consideraciones adicionales}\label{consideraciones-adicionales}
+
+Como en la relacion \emph{identificadoComo} ambas entidades participan
+parcialmente, decidimos poner la foreign key en superheroe, asumiendo
+que esto nos generaría menos elementos nulos en la base de datos.
+
+\subsubsection{Restricciones del modelo}
+
+\begin{itemize}
+
+\item\uline{\textbf{Asignación}}:
+\begin{itemize}
+\item fecha de inicio mayor o igual a fecha de ingreso del oficial
+\item Asumimos que solo puede tener una asignación a una designación al mismo tiempo. Cuando termina una
+empieza otra asignación en otra.
+\end{itemize}
+
+
+\item\uline{\textbf{sumario:}}
+\begin{itemize}
+\item fecha del sumario mayor a fecha de ingreso del oficial a investigar.
+\item Investigador del sumario no puede investigarse a si mismo.
+\item fecha del sumario mayor o igual a la fecha de inicio de la asignación.
+\item si concluyó entonces tiene un resultado. 
+\end{itemize}
+\item\uline{\textbf{oficial:}}
+\begin{itemize}
+\item dni unicos
+\item  si se involucra en un incidente, la fecha de este último tiene que ser mayor a la fecha
+de ingreso del oficial.
+\end{itemize}
+\item\uline{\textbf{seguimiento:}}
+\begin{itemize}
+\item Solo puede ser seguida si su estado es " en proceso"
+\item Si es seguida, lo es por un oficial cuya fecha de ingreso sea menor a la fecha del seguimiento
+\item Fecha del seguimiento mayor a fecha del incidente del relacionado.
+\item Una vez que un proceso esta en estado "cerrado" no puede cambiar de estado y deja de estar seguido por un oficial.
+\item Conclusion solo tiene un valor si el estado del seguimiento es cerrado.
+\end{itemize}
+\item\uline{\textbf{roloficial:}}
+\begin{itemize}
+\item Asumimos que un oficial en un incidente puede cumplir muchos roles. Por eso es p su cardinalidad en la ternaria entre esta, oficial e incidente por la interrelacion "OficialseInvolucro".
+\end{itemize}
+
+\item\uline{\textbf{Super héroe:}}
+\begin{itemize}
+\item No puede ser archienemigo de la misma persona de la que es identificado como.
+\item No puede ser identificado como una persona que pertence a una organizacion delictiva.
+\item Asumimos que no puede formar parte de una organización delictiva.
+\item No puede participar como superhéroe en el incidente al mismo tiempo que su correspondiente 
+civil (si es que se conoce su identidad) se involucra como civil.
+\end{itemize}
+\item\uline{\textbf{Civil/Persona:}}
+\begin{itemize}
+\item  Elejimos llamar Civil a tal entidad porque entendemos que los oficiales, aunque a veces no lo parezcan, son personas. En cualquier caso creemos que esta entidad representa el aspecto cívico de un habitante de ciudad Gótica con sus propias interrelaciones y atributos.
+En este modelo asumimos que no va a existir un oficial que sea civil.
+\item En este modelo simplificamos para que un civil no pueda volver a vivir en una dirección.
+
+\end{itemize}
+\end{itemize}
+
+\subsection{Modelo Físico}
