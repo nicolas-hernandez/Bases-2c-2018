@@ -39,7 +39,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: archienemigo_de_no_es_el_mismo(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
+-- Name: archienemigo_no_es_el_mismo(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
 CREATE FUNCTION tp1.archienemigo_no_es_el_mismo() RETURNS trigger
@@ -339,19 +339,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: archienemigo_de; Type: TABLE; Schema: tp1; Owner: grupo_01
---
-
-CREATE TABLE tp1."archienemigoDe" (
-    "idSuperHeroe" integer NOT NULL,
-    dni integer NOT NULL
-);
-
-
-ALTER TABLE tp1."archienemigoDe" OWNER TO grupo_01;
-
---
--- Name: asignacion; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Asignacion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Asignacion" (
@@ -365,7 +353,7 @@ CREATE TABLE tp1."Asignacion" (
 ALTER TABLE tp1."Asignacion" OWNER TO grupo_01;
 
 --
--- Name: barrio; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Barrio; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Barrio" (
@@ -377,7 +365,7 @@ CREATE TABLE tp1."Barrio" (
 ALTER TABLE tp1."Barrio" OWNER TO grupo_01;
 
 --
--- Name: civil; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Civil; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Civil" (
@@ -390,7 +378,7 @@ CREATE TABLE tp1."Civil" (
 ALTER TABLE tp1."Civil" OWNER TO grupo_01;
 
 --
--- Name: conocimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Conocimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Conocimiento" (
@@ -404,19 +392,20 @@ CREATE TABLE tp1."Conocimiento" (
 ALTER TABLE tp1."Conocimiento" OWNER TO grupo_01;
 
 --
--- Name: departamento; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Departamento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Departamento" (
     "idDepartamento" integer NOT NULL,
-    nombre character varying(250) NOT NULL
+    nombre character varying(250) NOT NULL,
+    descripcion text DEFAULT ''::text NOT NULL
 );
 
 
 ALTER TABLE tp1."Departamento" OWNER TO grupo_01;
 
 --
--- Name: designacion; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Designacion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Designacion" (
@@ -428,7 +417,7 @@ CREATE TABLE tp1."Designacion" (
 ALTER TABLE tp1."Designacion" OWNER TO grupo_01;
 
 --
--- Name: direccion; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Direccion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Direccion" (
@@ -442,7 +431,7 @@ CREATE TABLE tp1."Direccion" (
 ALTER TABLE tp1."Direccion" OWNER TO grupo_01;
 
 --
--- Name: es_contactado_por; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: EsContactadoPor; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."EsContactadoPor" (
@@ -454,7 +443,7 @@ CREATE TABLE tp1."EsContactadoPor" (
 ALTER TABLE tp1."EsContactadoPor" OWNER TO grupo_01;
 
 --
--- Name: esta_compuesta_por; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: EstaCompuestaPor; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."EstaCompuestaPor" (
@@ -466,7 +455,7 @@ CREATE TABLE tp1."EstaCompuestaPor" (
 ALTER TABLE tp1."EstaCompuestaPor" OWNER TO grupo_01;
 
 --
--- Name: estado_seguimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: EstadoSeguimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."EstadoSeguimiento" (
@@ -478,7 +467,7 @@ CREATE TABLE tp1."EstadoSeguimiento" (
 ALTER TABLE tp1."EstadoSeguimiento" OWNER TO grupo_01;
 
 --
--- Name: estado_sumario; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: EstadoSumario; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."EstadoSumario" (
@@ -490,7 +479,7 @@ CREATE TABLE tp1."EstadoSumario" (
 ALTER TABLE tp1."EstadoSumario" OWNER TO grupo_01;
 
 --
--- Name: habilidad; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Habilidad; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Habilidad" (
@@ -502,7 +491,7 @@ CREATE TABLE tp1."Habilidad" (
 ALTER TABLE tp1."Habilidad" OWNER TO grupo_01;
 
 --
--- Name: incidente; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Incidente; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Incidente" (
@@ -518,7 +507,7 @@ CREATE TABLE tp1."Incidente" (
 ALTER TABLE tp1."Incidente" OWNER TO grupo_01;
 
 --
--- Name: oficial; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Oficial; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Oficial" (
@@ -536,7 +525,7 @@ CREATE TABLE tp1."Oficial" (
 ALTER TABLE tp1."Oficial" OWNER TO grupo_01;
 
 --
--- Name: oficial_se_involucro; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: OficialSeInvolucro; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."OficialSeInvolucro" (
@@ -549,7 +538,7 @@ CREATE TABLE tp1."OficialSeInvolucro" (
 ALTER TABLE tp1."OficialSeInvolucro" OWNER TO grupo_01;
 
 --
--- Name: organizacion_delictiva; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: OrganizacionDelictiva; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."OrganizacionDelictiva" (
@@ -561,7 +550,7 @@ CREATE TABLE tp1."OrganizacionDelictiva" (
 ALTER TABLE tp1."OrganizacionDelictiva" OWNER TO grupo_01;
 
 --
--- Name: posee; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Posee; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Posee" (
@@ -573,7 +562,7 @@ CREATE TABLE tp1."Posee" (
 ALTER TABLE tp1."Posee" OWNER TO grupo_01;
 
 --
--- Name: rol_civil; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: RolCivil; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."RolCivil" (
@@ -585,7 +574,7 @@ CREATE TABLE tp1."RolCivil" (
 ALTER TABLE tp1."RolCivil" OWNER TO grupo_01;
 
 --
--- Name: rol_oficial; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: RolOficial; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."RolOficial" (
@@ -597,7 +586,7 @@ CREATE TABLE tp1."RolOficial" (
 ALTER TABLE tp1."RolOficial" OWNER TO grupo_01;
 
 --
--- Name: se_involucraron; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: SeInvolucraron; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."SeInvolucraron" (
@@ -610,7 +599,7 @@ CREATE TABLE tp1."SeInvolucraron" (
 ALTER TABLE tp1."SeInvolucraron" OWNER TO grupo_01;
 
 --
--- Name: seguimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Seguimiento" (
@@ -627,7 +616,7 @@ CREATE TABLE tp1."Seguimiento" (
 ALTER TABLE tp1."Seguimiento" OWNER TO grupo_01;
 
 --
--- Name: sumario; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Sumario; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Sumario" (
@@ -644,7 +633,7 @@ CREATE TABLE tp1."Sumario" (
 ALTER TABLE tp1."Sumario" OWNER TO grupo_01;
 
 --
--- Name: super_participo; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: SuperParticipo; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."SuperParticipo" (
@@ -656,21 +645,22 @@ CREATE TABLE tp1."SuperParticipo" (
 ALTER TABLE tp1."SuperParticipo" OWNER TO grupo_01;
 
 --
--- Name: superheroe; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: Superheroe; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Superheroe" (
     "idSuperHeroe" integer NOT NULL,
     nombre character varying(250) NOT NULL,
     color_capa character varying(250) NOT NULL,
-    dni integer
+    dni integer,
+    color_disfraz character varying(250) DEFAULT ''::character varying NOT NULL
 );
 
 
 ALTER TABLE tp1."Superheroe" OWNER TO grupo_01;
 
 --
--- Name: tipo_de_incidente; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: TipoIncidente; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."TipoIncidente" (
@@ -682,7 +672,7 @@ CREATE TABLE tp1."TipoIncidente" (
 ALTER TABLE tp1."TipoIncidente" OWNER TO grupo_01;
 
 --
--- Name: tipo_de_relacion; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: TipoRelacion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."TipoRelacion" (
@@ -694,7 +684,7 @@ CREATE TABLE tp1."TipoRelacion" (
 ALTER TABLE tp1."TipoRelacion" OWNER TO grupo_01;
 
 --
--- Name: vive_en; Type: TABLE; Schema: tp1; Owner: grupo_01
+-- Name: ViveEn; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."ViveEn" (
@@ -707,7 +697,19 @@ CREATE TABLE tp1."ViveEn" (
 ALTER TABLE tp1."ViveEn" OWNER TO grupo_01;
 
 --
--- Name: civil Civil_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: archienemigoDe; Type: TABLE; Schema: tp1; Owner: grupo_01
+--
+
+CREATE TABLE tp1."archienemigoDe" (
+    "idSuperHeroe" integer NOT NULL,
+    dni integer NOT NULL
+);
+
+
+ALTER TABLE tp1."archienemigoDe" OWNER TO grupo_01;
+
+--
+-- Name: Civil Civil_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Civil"
@@ -715,7 +717,7 @@ ALTER TABLE ONLY tp1."Civil"
 
 
 --
--- Name: departamento Departamento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Departamento Departamento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Departamento"
@@ -723,7 +725,7 @@ ALTER TABLE ONLY tp1."Departamento"
 
 
 --
--- Name: direccion Direccion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Direccion Direccion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Direccion"
@@ -731,7 +733,7 @@ ALTER TABLE ONLY tp1."Direccion"
 
 
 --
--- Name: incidente Incidente_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Incidente Incidente_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Incidente"
@@ -739,7 +741,7 @@ ALTER TABLE ONLY tp1."Incidente"
 
 
 --
--- Name: organizacion_delictiva Organización_delictiva_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: OrganizacionDelictiva Organización_delictiva_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."OrganizacionDelictiva"
@@ -747,7 +749,7 @@ ALTER TABLE ONLY tp1."OrganizacionDelictiva"
 
 
 --
--- Name: tipo_de_relacion TipoDeRelacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: TipoRelacion TipoDeRelacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."TipoRelacion"
@@ -755,7 +757,7 @@ ALTER TABLE ONLY tp1."TipoRelacion"
 
 
 --
--- Name: tipo_de_incidente TipoIncidente_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: TipoIncidente TipoIncidente_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."TipoIncidente"
@@ -763,7 +765,7 @@ ALTER TABLE ONLY tp1."TipoIncidente"
 
 
 --
--- Name: archienemigo_de archienemigo_de_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: archienemigoDe archienemigo_de_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."archienemigoDe"
@@ -771,7 +773,7 @@ ALTER TABLE ONLY tp1."archienemigoDe"
 
 
 --
--- Name: asignacion asignacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Asignacion asignacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Asignacion"
@@ -779,7 +781,7 @@ ALTER TABLE ONLY tp1."Asignacion"
 
 
 --
--- Name: conocimiento conocimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Conocimiento conocimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Conocimiento"
@@ -787,7 +789,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- Name: designacion designacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Designacion designacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Designacion"
@@ -795,7 +797,7 @@ ALTER TABLE ONLY tp1."Designacion"
 
 
 --
--- Name: es_contactado_por es_contactado_por_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EsContactadoPor es_contactado_por_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EsContactadoPor"
@@ -803,7 +805,7 @@ ALTER TABLE ONLY tp1."EsContactadoPor"
 
 
 --
--- Name: esta_compuesta_por esta_compuesta_por_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EstaCompuestaPor esta_compuesta_por_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EstaCompuestaPor"
@@ -811,7 +813,7 @@ ALTER TABLE ONLY tp1."EstaCompuestaPor"
 
 
 --
--- Name: estado_seguimiento estadoSeguimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EstadoSeguimiento estadoSeguimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EstadoSeguimiento"
@@ -819,7 +821,7 @@ ALTER TABLE ONLY tp1."EstadoSeguimiento"
 
 
 --
--- Name: estado_sumario estado_sumario_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EstadoSumario estado_sumario_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EstadoSumario"
@@ -827,7 +829,7 @@ ALTER TABLE ONLY tp1."EstadoSumario"
 
 
 --
--- Name: barrio idBarrio; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Barrio idBarrio; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Barrio"
@@ -835,7 +837,7 @@ ALTER TABLE ONLY tp1."Barrio"
 
 
 --
--- Name: oficial oficial_dni_key; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Oficial oficial_dni_key; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Oficial"
@@ -843,7 +845,7 @@ ALTER TABLE ONLY tp1."Oficial"
 
 
 --
--- Name: oficial oficial_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Oficial oficial_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Oficial"
@@ -851,7 +853,7 @@ ALTER TABLE ONLY tp1."Oficial"
 
 
 --
--- Name: oficial_se_involucro oficial_se_involucro_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: OficialSeInvolucro oficial_se_involucro_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."OficialSeInvolucro"
@@ -859,7 +861,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- Name: habilidad pk_habilidad; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Habilidad pk_habilidad; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Habilidad"
@@ -867,7 +869,7 @@ ALTER TABLE ONLY tp1."Habilidad"
 
 
 --
--- Name: posee posee_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Posee posee_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Posee"
@@ -875,7 +877,7 @@ ALTER TABLE ONLY tp1."Posee"
 
 
 --
--- Name: rol_civil rol_civil_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: RolCivil rol_civil_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."RolCivil"
@@ -883,7 +885,7 @@ ALTER TABLE ONLY tp1."RolCivil"
 
 
 --
--- Name: rol_oficial rol_oficial_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: RolOficial rol_oficial_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."RolOficial"
@@ -891,7 +893,7 @@ ALTER TABLE ONLY tp1."RolOficial"
 
 
 --
--- Name: se_involucraron se_involucraron_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SeInvolucraron se_involucraron_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SeInvolucraron"
@@ -899,7 +901,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- Name: seguimiento seguimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento seguimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Seguimiento"
@@ -907,7 +909,7 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- Name: sumario sumario_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Sumario sumario_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Sumario"
@@ -915,7 +917,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- Name: super_participo super_participo_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SuperParticipo super_participo_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SuperParticipo"
@@ -923,7 +925,7 @@ ALTER TABLE ONLY tp1."SuperParticipo"
 
 
 --
--- Name: superheroe superheroe_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Superheroe superheroe_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Superheroe"
@@ -931,7 +933,7 @@ ALTER TABLE ONLY tp1."Superheroe"
 
 
 --
--- Name: vive_en vive_en_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: ViveEn vive_en_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."ViveEn"
@@ -960,133 +962,127 @@ CREATE INDEX fki_superheroe_dni ON tp1."Superheroe" USING btree (dni);
 
 
 --
--- Name: archienemigo_de check_archienemigo_de_si_mismo; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: archienemigoDe check_archienemigo_de_si_mismo; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_archienemigo_de_si_mismo AFTER INSERT OR UPDATE ON tp1."archienemigoDe" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.archienemigo_no_es_el_mismo();
 
 
 --
--- Name: sumario check_concluyo_tiene_resultado; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Sumario check_concluyo_tiene_resultado; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_concluyo_tiene_resultado AFTER INSERT OR UPDATE ON tp1."Sumario" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.sumario_concluyo_tiene_resultado();
 
 
 --
--- Name: oficial check_dni_no_civiles; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Oficial check_dni_no_civiles; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_dni_no_civiles AFTER INSERT OR UPDATE ON tp1."Oficial" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.dni_oficiales_civiles();
 
 
 --
--- Name: sumario check_es_tipo_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Sumario check_es_tipo_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TRIGGER check_es_tipo_investigador BEFORE INSERT OR UPDATE ON tp1."Sumario" FOR EACH ROW EXECUTE PROCEDURE tp1.sumario_es_tipo_investigador();
 
 
 --
--- Name: asignacion check_fecha_inicio_mayor_a_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Asignacion check_fecha_inicio_mayor_a_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_inicio_mayor_a_oficial AFTER INSERT OR UPDATE ON tp1."Asignacion" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_fecha_mayor_a_oficial();
 
 
 --
--- Name: sumario check_fecha_mayor_asigancion; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Sumario check_fecha_mayor_asigancion; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_mayor_asigancion AFTER INSERT OR UPDATE ON tp1."Sumario" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.sumario_fecha_mayor_asignacion();
 
 
 --
--- Name: sumario check_fecha_mayor_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Sumario check_fecha_mayor_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_mayor_investigador AFTER INSERT OR UPDATE ON tp1."Sumario" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.sumario_fecha_mayor_investigador();
 
 
 --
--- Name: oficial_se_involucro check_fecha_oficial_involucrado; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: OficialSeInvolucro check_fecha_oficial_involucrado; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_oficial_involucrado AFTER INSERT OR UPDATE ON tp1."OficialSeInvolucro" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.oficial_se_involucro_fecha();
 
 
 --
--- Name: seguimiento check_fecha_seg_incidente; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento check_fecha_seg_incidente; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_seg_incidente AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_fecha_incidente();
 
 
 --
--- Name: seguimiento check_fecha_seg_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento check_fecha_seg_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_seg_oficial AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_fecha_oficial();
 
 
 --
--- Name: sumario check_investigador_no_se_investiga; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Sumario check_investigador_no_se_investiga; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_investigador_no_se_investiga AFTER INSERT OR UPDATE ON tp1."Sumario" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.sumario_investigador_no_investigado();
 
 
 --
--- Name: asignacion check_oficial_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
---
-
--- CREATE CONSTRAINT TRIGGER check_oficial_fk AFTER INSERT OR UPDATE ON tp1."Asignacion" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_placa_fk();
---
---
--- --
--- -- Name: oficial_se_involucro check_se_involucro_placa_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
--- --
---
--- CREATE CONSTRAINT TRIGGER check_se_involucro_placa_fk AFTER INSERT OR UPDATE ON tp1."OficialSeInvolucro" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_placa_fk();
-
-
---
--- Name: seguimiento check_seg_conclusion; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento check_seg_conclusion; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_seg_conclusion AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_conclusion();
 
 
 --
--- Name: seguimiento check_seg_placa_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento check_seg_placa_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_seg_placa_fk AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_placa_fk();
 
 
 --
--- Name: seguimiento check_seguimiento_cerrado_no_cambia; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento check_seguimiento_cerrado_no_cambia; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_seguimiento_cerrado_no_cambia AFTER UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_al_cerrarse_no_puede_cambiar();
 
 
 --
--- Name: seguimiento check_solo_seguido_en_proceso; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento check_solo_seguido_en_proceso; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_solo_seguido_en_proceso AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_seguida_si_en_proceso();
 
 
 --
--- Name: superheroe check_superheroeo_no_delincuente; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- Name: Superheroe check_superheroeo_no_delincuente; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_superheroeo_no_delincuente AFTER INSERT OR UPDATE ON tp1."Superheroe" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.superheroeo_no_delincuente();
 
 
 --
--- Name: archienemigo_de archienemigo_de_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: OficialSeInvolucro OficialSeInvolucro_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+--
+
+ALTER TABLE ONLY tp1."OficialSeInvolucro"
+    ADD CONSTRAINT "OficialSeInvolucro_placa_fkey" FOREIGN KEY (placa) REFERENCES tp1."Oficial"(placa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: archienemigoDe archienemigo_de_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."archienemigoDe"
@@ -1094,7 +1090,7 @@ ALTER TABLE ONLY tp1."archienemigoDe"
 
 
 --
--- Name: archienemigo_de archienemigo_de_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: archienemigoDe archienemigo_de_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."archienemigoDe"
@@ -1102,7 +1098,7 @@ ALTER TABLE ONLY tp1."archienemigoDe"
 
 
 --
--- Name: asignacion asignacion_id_designacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Asignacion asignacion_id_designacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Asignacion"
@@ -1110,7 +1106,15 @@ ALTER TABLE ONLY tp1."Asignacion"
 
 
 --
--- Name: conocimiento conocimiento_conocedor_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Asignacion asignacion_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+--
+
+ALTER TABLE ONLY tp1."Asignacion"
+    ADD CONSTRAINT asignacion_placa_fkey FOREIGN KEY (placa) REFERENCES tp1."Oficial"(placa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: Conocimiento conocimiento_conocedor_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Conocimiento"
@@ -1118,7 +1122,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- Name: conocimiento conocimiento_conocido_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Conocimiento conocimiento_conocido_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Conocimiento"
@@ -1126,7 +1130,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- Name: conocimiento conocimiento_id_tipo_de_relacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Conocimiento conocimiento_id_tipo_de_relacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Conocimiento"
@@ -1134,7 +1138,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- Name: direccion direccion_id_barrio_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Direccion direccion_id_barrio_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Direccion"
@@ -1142,7 +1146,7 @@ ALTER TABLE ONLY tp1."Direccion"
 
 
 --
--- Name: es_contactado_por es_contactado_por_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EsContactadoPor es_contactado_por_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EsContactadoPor"
@@ -1150,7 +1154,7 @@ ALTER TABLE ONLY tp1."EsContactadoPor"
 
 
 --
--- Name: es_contactado_por es_contactado_por_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EsContactadoPor es_contactado_por_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EsContactadoPor"
@@ -1158,7 +1162,7 @@ ALTER TABLE ONLY tp1."EsContactadoPor"
 
 
 --
--- Name: esta_compuesta_por esta_compuesta_por_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EstaCompuestaPor esta_compuesta_por_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EstaCompuestaPor"
@@ -1166,7 +1170,7 @@ ALTER TABLE ONLY tp1."EstaCompuestaPor"
 
 
 --
--- Name: esta_compuesta_por esta_compuesta_por_id_mafia_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: EstaCompuestaPor esta_compuesta_por_id_mafia_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."EstaCompuestaPor"
@@ -1174,7 +1178,7 @@ ALTER TABLE ONLY tp1."EstaCompuestaPor"
 
 
 --
--- Name: incidente incidente_idDireccion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Incidente incidente_idDireccion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Incidente"
@@ -1182,7 +1186,7 @@ ALTER TABLE ONLY tp1."Incidente"
 
 
 --
--- Name: incidente incidente_idTIpoIncidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Incidente incidente_idTIpoIncidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Incidente"
@@ -1190,7 +1194,7 @@ ALTER TABLE ONLY tp1."Incidente"
 
 
 --
--- Name: oficial oficial_idDepartamento_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Oficial oficial_idDepartamento_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Oficial"
@@ -1198,7 +1202,7 @@ ALTER TABLE ONLY tp1."Oficial"
 
 
 --
--- Name: oficial_se_involucro oficial_se_involucro_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: OficialSeInvolucro oficial_se_involucro_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."OficialSeInvolucro"
@@ -1206,7 +1210,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- Name: oficial_se_involucro oficial_se_involucro_id_responsabilidad_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: OficialSeInvolucro oficial_se_involucro_id_responsabilidad_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."OficialSeInvolucro"
@@ -1214,7 +1218,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- Name: posee posee_id_habilidad_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Posee posee_id_habilidad_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Posee"
@@ -1222,7 +1226,7 @@ ALTER TABLE ONLY tp1."Posee"
 
 
 --
--- Name: posee posee_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Posee posee_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Posee"
@@ -1230,7 +1234,7 @@ ALTER TABLE ONLY tp1."Posee"
 
 
 --
--- Name: se_involucraron se_involucraron_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SeInvolucraron se_involucraron_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SeInvolucraron"
@@ -1238,7 +1242,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- Name: se_involucraron se_involucraron_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SeInvolucraron se_involucraron_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SeInvolucraron"
@@ -1246,7 +1250,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- Name: se_involucraron se_involucraron_id_rol_civil_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SeInvolucraron se_involucraron_id_rol_civil_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SeInvolucraron"
@@ -1254,7 +1258,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- Name: seguimiento seguimiento_idEstadoSeg_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento seguimiento_idEstadoSeg_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Seguimiento"
@@ -1262,7 +1266,7 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- Name: seguimiento seguimiento_idIncidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento seguimiento_idIncidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Seguimiento"
@@ -1270,7 +1274,15 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- Name: sumario sumario_estado_idEEstadoSum; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Seguimiento seguimiento_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+--
+
+ALTER TABLE ONLY tp1."Seguimiento"
+    ADD CONSTRAINT seguimiento_placa_fkey FOREIGN KEY (placa) REFERENCES tp1."Oficial"(placa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: Sumario sumario_estado_idEEstadoSum; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Sumario"
@@ -1278,7 +1290,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- Name: sumario sumario_id_asignacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Sumario sumario_id_asignacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Sumario"
@@ -1286,7 +1298,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- Name: sumario sumario_investigador_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Sumario sumario_investigador_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Sumario"
@@ -1294,7 +1306,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- Name: super_participo super_participo_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SuperParticipo super_participo_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SuperParticipo"
@@ -1302,7 +1314,7 @@ ALTER TABLE ONLY tp1."SuperParticipo"
 
 
 --
--- Name: super_participo super_participo_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: SuperParticipo super_participo_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."SuperParticipo"
@@ -1310,7 +1322,7 @@ ALTER TABLE ONLY tp1."SuperParticipo"
 
 
 --
--- Name: superheroe superheroe_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: Superheroe superheroe_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Superheroe"
@@ -1318,7 +1330,7 @@ ALTER TABLE ONLY tp1."Superheroe"
 
 
 --
--- Name: vive_en vive_en_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: ViveEn vive_en_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."ViveEn"
@@ -1326,7 +1338,7 @@ ALTER TABLE ONLY tp1."ViveEn"
 
 
 --
--- Name: vive_en vive_en_id_direccion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: ViveEn vive_en_id_direccion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."ViveEn"

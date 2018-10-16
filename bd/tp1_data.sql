@@ -16,7 +16,96 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Data for Name: civil; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Departamento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (1, 'Belgrano', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (2, 'Caballito', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (3, 'Barracas', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (4, 'Avellaneda', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (5, 'San Isidro', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (6, 'Recoleta', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (7, 'San Telmo', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (8, 'Moron', '');
+INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (9, 'Adrogue', '');
+
+
+--
+-- Data for Name: Designacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (1, 'Transito');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (2, 'Vigilancia Bancaria');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (3, 'Espionaje');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (4, 'Patrullaje');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (5, 'SWAT');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (6, 'Narcotrafico');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (7, 'Policia Cientifica');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (8, 'Delitos financieros');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (9, 'Cybercrimen');
+INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (10, 'Antiterrorista');
+
+
+--
+-- Data for Name: Oficial; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (1, 25346251, 'Pablo', 'Megueres', 'Coronel', '2008-03-04', NULL, 1);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (4, 14276572, 'Erica', 'Trungetili', 'Teniente', '2012-11-10', NULL, 1);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (5, 23468131, 'Fabian', 'Rodriguez', 'Cabp', '2011-02-04', NULL, 8);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (6, 28624356, 'Cristina', 'Peralta', 'General', '2010-02-04', NULL, 5);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (8, 14534652, 'Mariana', 'Pineri', 'Coronel', '2011-05-04', NULL, 9);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (9, 28246324, 'Nestor', 'Williams', 'Cabo', '2010-05-04', NULL, 3);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (10, 32565470, 'Camilo', 'Petrassi', 'General', '2010-02-01', NULL, 2);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (3, 15349526, 'Daniel', 'Perez', 'Teniente', '2010-02-05', 'Investigador', 1);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (7, 35246243, 'Roque', 'Villalba', 'Teniente', '2011-02-04', 'Investigador', 4);
+INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (2, 15349524, 'Jorge', 'Perez', 'Teniente', '2010-02-05', 'Investigador', 1);
+
+
+--
+-- Data for Name: Asignacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (1, '2008-03-04', 1, 1);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (2, '2010-03-04', 4, 1);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (3, '2010-02-05', 1, 2);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (4, '2014-02-05', 7, 2);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (5, '2010-02-05', 2, 3);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (6, '2015-05-05', 8, 3);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (7, '2012-11-10', 4, 4);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (8, '2016-11-10', 5, 4);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (9, '2011-02-04', 7, 5);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (10, '2013-02-04', 10, 5);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (11, '2010-02-04', 6, 6);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (12, '2018-02-04', 6, 6);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (13, '2011-02-04', 4, 7);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (14, '2017-02-04', 7, 7);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (15, '2011-05-04', 8, 8);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (16, '2012-05-04', 5, 8);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (17, '2010-05-04', 9, 9);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (18, '2010-05-04', 3, 9);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (19, '2010-02-01', 10, 10);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (21, '2016-02-01', 8, 10);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (20, '2013-02-01', 7, 10);
+
+
+--
+-- Data for Name: Barrio; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (5, 'San Isidro');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (6, 'Recoleta');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (7, 'sAN TELMO');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (9, 'Adrogue');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (1, 'Belgrano');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (2, 'Caballito');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (3, 'Barracas');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (4, 'Avellaneda');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (8, 'Moron');
+
+
+--
+-- Data for Name: Civil; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Civil" (dni, nombre, apellido) VALUES (2, 'Dick', 'Grayson');
@@ -51,105 +140,7 @@ INSERT INTO tp1."Civil" (dni, nombre, apellido) VALUES (209, 'Tim', 'Berne');
 
 
 --
--- Data for Name: superheroe; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (2, 'Robin', 'Amarilla', 2);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (5, 'Superman', 'Roja', 5);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (4, 'Spiderman', 'Roja', 4);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (1, 'Batman', 'Negra', 1);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (3, 'Barrilete Cosmico', 'celeste', 3);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (6, 'Aquaman', 'Azul', 6);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (50, 'Obi Wan Kenobi', 'Marron', NULL);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (7, 'Luke Skywalker', 'Verde', 7);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (51, 'Goku', 'Amarilla', NULL);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (52, 'Vegeta', 'Azul', NULL);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (53, 'JC Denton', 'Negra', NULL);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (54, 'Geralt', 'Negra', NULL);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (55, 'Gandalf', 'Blanca', NULL);
-INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni) VALUES (56, 'Jesus de Laferrere', 'Blanca', NULL);
-
-
---
--- Data for Name: archienemigo_de; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 100);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 101);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 102);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 104);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (2, 100);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (2, 101);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (3, 109);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (3, 110);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (53, 108);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (5, 101);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (50, 106);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (50, 107);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (7, 107);
-INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (7, 106);
-
-
---
--- Data for Name: designacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (1, 'Transito');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (2, 'Vigilancia Bancaria');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (3, 'Espionaje');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (4, 'Patrullaje');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (5, 'SWAT');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (6, 'Narcotrafico');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (7, 'Policia Cientifica');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (8, 'Delitos financieros');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (9, 'Cybercrimen');
-INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (10, 'Antiterrorista');
-
-
---
--- Data for Name: asignacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (1, '2008-03-04', 1, 1);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (2, '2010-03-04', 4, 1);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (3, '2010-02-05', 1, 2);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (4, '2014-02-05', 7, 2);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (5, '2010-02-05', 2, 3);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (6, '2015-05-05', 8, 3);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (7, '2012-11-10', 4, 4);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (8, '2016-11-10', 5, 4);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (9, '2011-02-04', 7, 5);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (10, '2013-02-04', 10, 5);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (11, '2010-02-04', 6, 6);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (12, '2018-02-04', 6, 6);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (13, '2011-02-04', 4, 7);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (14, '2017-02-04', 7, 7);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (15, '2011-05-04', 8, 8);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (16, '2012-05-04', 5, 8);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (17, '2010-05-04', 9, 9);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (18, '2010-05-04', 3, 9);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (19, '2010-02-01', 10, 10);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (21, '2016-02-01', 8, 10);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (20, '2013-02-01', 7, 10);
-
-
---
--- Data for Name: barrio; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (5, 'San Isidro');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (6, 'Recoleta');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (7, 'sAN TELMO');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (9, 'Adrogue');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (1, 'Belgrano');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (2, 'Caballito');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (3, 'Barracas');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (4, 'Avellaneda');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (8, 'Moron');
-
-
---
--- Data for Name: tipo_de_relacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: TipoRelacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."TipoRelacion" ("idTipoRelacion", nombre) VALUES (1, 'Amistad');
@@ -160,7 +151,7 @@ INSERT INTO tp1."TipoRelacion" ("idTipoRelacion", nombre) VALUES (5, 'Enemigo');
 
 
 --
--- Data for Name: conocimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Conocimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Conocimiento" (conocedor, conocido, "fechaConocimiento", "idTipoRelacion") VALUES (1, 2, '2008-05-05', 1);
@@ -170,22 +161,7 @@ INSERT INTO tp1."Conocimiento" (conocedor, conocido, "fechaConocimiento", "idTip
 
 
 --
--- Data for Name: departamento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (1, 'Belgrano');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (2, 'Caballito');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (3, 'Barracas');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (4, 'Avellaneda');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (5, 'San Isidro');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (6, 'Recoleta');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (7, 'San Telmo');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (8, 'Moron');
-INSERT INTO tp1."Departamento" ("idDepartamento", nombre) VALUES (9, 'Adrogue');
-
-
---
--- Data for Name: direccion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Direccion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (1, '9 de Julio', 251, 6);
@@ -214,7 +190,27 @@ INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (2
 
 
 --
--- Data for Name: es_contactado_por; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Superheroe; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (2, 'Robin', 'Amarilla', 2, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (5, 'Superman', 'Roja', 5, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (4, 'Spiderman', 'Roja', 4, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (1, 'Batman', 'Negra', 1, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (3, 'Barrilete Cosmico', 'celeste', 3, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (6, 'Aquaman', 'Azul', 6, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (50, 'Obi Wan Kenobi', 'Marron', NULL, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (7, 'Luke Skywalker', 'Verde', 7, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (51, 'Goku', 'Amarilla', NULL, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (52, 'Vegeta', 'Azul', NULL, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (53, 'JC Denton', 'Negra', NULL, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (54, 'Geralt', 'Negra', NULL, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (55, 'Gandalf', 'Blanca', NULL, '');
+INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_disfraz) VALUES (56, 'Jesus de Laferrere', 'Blanca', NULL, '');
+
+
+--
+-- Data for Name: EsContactadoPor; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."EsContactadoPor" ("idSuperHeroe", dni) VALUES (1, 2);
@@ -223,7 +219,7 @@ INSERT INTO tp1."EsContactadoPor" ("idSuperHeroe", dni) VALUES (50, 7);
 
 
 --
--- Data for Name: organizacion_delictiva; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: OrganizacionDelictiva; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."OrganizacionDelictiva" ("idMafia", nombre) VALUES (1, 'Liga de la Injusticia');
@@ -236,7 +232,7 @@ INSERT INTO tp1."OrganizacionDelictiva" ("idMafia", nombre) VALUES (7, 'Illumina
 
 
 --
--- Data for Name: esta_compuesta_por; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: EstaCompuestaPor; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."EstaCompuestaPor" ("idMafia", dni) VALUES (1, 100);
@@ -257,7 +253,7 @@ INSERT INTO tp1."EstaCompuestaPor" ("idMafia", dni) VALUES (6, 110);
 
 
 --
--- Data for Name: estado_seguimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: EstadoSeguimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."EstadoSeguimiento" ("idEstadoSeguimiento", estado) VALUES (1, 'Pendiente');
@@ -266,7 +262,7 @@ INSERT INTO tp1."EstadoSeguimiento" ("idEstadoSeguimiento", estado) VALUES (3, '
 
 
 --
--- Data for Name: estado_sumario; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: EstadoSumario; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."EstadoSumario" ("idEstadoSumario", estado) VALUES (1, 'Iniciado');
@@ -275,7 +271,7 @@ INSERT INTO tp1."EstadoSumario" ("idEstadoSumario", estado) VALUES (3, 'Concluyo
 
 
 --
--- Data for Name: habilidad; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Habilidad; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (1, 'Sable Laser');
@@ -295,7 +291,7 @@ INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (16, 'Armas de fuego'
 
 
 --
--- Data for Name: tipo_de_incidente; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: TipoIncidente; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."TipoIncidente" ("idTipoInicidente", nombre) VALUES (1, 'Accidente');
@@ -306,7 +302,7 @@ INSERT INTO tp1."TipoIncidente" ("idTipoInicidente", nombre) VALUES (5, 'Terrori
 
 
 --
--- Data for Name: incidente; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Incidente; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Incidente" ("idIncidente", fecha, calle_1, calle_2, "idTipoInicidente", "idDireccion") VALUES (1, '2018-10-01', 'Gorriti', 'Portugal', 2, 7);
@@ -315,23 +311,7 @@ INSERT INTO tp1."Incidente" ("idIncidente", fecha, calle_1, calle_2, "idTipoInic
 
 
 --
--- Data for Name: oficial; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
---
-
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (1, 25346251, 'Pablo', 'Megueres', 'Coronel', '2008-03-04', NULL, 1);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (4, 14276572, 'Erica', 'Trungetili', 'Teniente', '2012-11-10', NULL, 1);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (5, 23468131, 'Fabian', 'Rodriguez', 'Cabp', '2011-02-04', NULL, 8);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (6, 28624356, 'Cristina', 'Peralta', 'General', '2010-02-04', NULL, 5);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (8, 14534652, 'Mariana', 'Pineri', 'Coronel', '2011-05-04', NULL, 9);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (9, 28246324, 'Nestor', 'Williams', 'Cabo', '2010-05-04', NULL, 3);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (10, 32565470, 'Camilo', 'Petrassi', 'General', '2010-02-01', NULL, 2);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (3, 15349526, 'Daniel', 'Perez', 'Teniente', '2010-02-05', 'Investigador', 1);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (7, 35246243, 'Roque', 'Villalba', 'Teniente', '2011-02-04', 'Investigador', 4);
-INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", tipo, "idDepartamento") VALUES (2, 15349524, 'Jorge', 'Perez', 'Teniente', '2010-02-05', 'Investigador', 1);
-
-
---
--- Data for Name: rol_oficial; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: RolOficial; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."RolOficial" ("idResponsabilidad", descripcion) VALUES (1, 'Choque');
@@ -340,7 +320,7 @@ INSERT INTO tp1."RolOficial" ("idResponsabilidad", descripcion) VALUES (3, 'Peri
 
 
 --
--- Data for Name: oficial_se_involucro; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: OficialSeInvolucro; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."OficialSeInvolucro" (placa, "idIncidente", "idResponsabilidad") VALUES (8, 1, 1);
@@ -351,7 +331,7 @@ INSERT INTO tp1."OficialSeInvolucro" (placa, "idIncidente", "idResponsabilidad")
 
 
 --
--- Data for Name: posee; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Posee; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Posee" ("idSuperHeroe", "idHabilidad") VALUES (3, 3);
@@ -380,7 +360,7 @@ INSERT INTO tp1."Posee" ("idSuperHeroe", "idHabilidad") VALUES (56, 12);
 
 
 --
--- Data for Name: rol_civil; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: RolCivil; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."RolCivil" ("idRolCivil", nombre) VALUES (1, 'Victima');
@@ -389,7 +369,7 @@ INSERT INTO tp1."RolCivil" ("idRolCivil", nombre) VALUES (3, 'Testigo');
 
 
 --
--- Data for Name: se_involucraron; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: SeInvolucraron; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."SeInvolucraron" (dni, "idIncidente", "idRolCivil") VALUES (202, 1, 1);
@@ -402,7 +382,7 @@ INSERT INTO tp1."SeInvolucraron" (dni, "idIncidente", "idRolCivil") VALUES (107,
 
 
 --
--- Data for Name: seguimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Seguimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."Seguimiento" (numero, fecha, descripcion, conclusion, "idIncidente", placa, "idEstadoSeguimiento") VALUES (1, '2018-10-08', NULL, NULL, 1, 2, 2);
@@ -412,17 +392,13 @@ INSERT INTO tp1."Seguimiento" (numero, fecha, descripcion, conclusion, "idIncide
 
 
 --
--- Data for Name: sumario; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Sumario; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
-INSERT INTO tp1."Sumario" ("idSumario", fecha, observacion, resultado, placa, "idAsignacion", "idEstadoSumario") VALUES (1, '2013-05-04', NULL, NULL, 3, 7, 2);
-INSERT INTO tp1."Sumario" ("idSumario", fecha, observacion, resultado, placa, "idAsignacion", "idEstadoSumario") VALUES (2, '2011-09-22', 'Se afano todo el pibe', NULL, 7, 11, 1);
-INSERT INTO tp1."Sumario" ("idSumario", fecha, observacion, resultado, placa, "idAsignacion", "idEstadoSumario") VALUES (3, '2011-01-02', 'Coimeado', 'Terrible delincuente', 3, 3, 3);
-INSERT INTO tp1."Sumario" ("idSumario", fecha, observacion, resultado, placa, "idAsignacion", "idEstadoSumario") VALUES (4, '2012-01-02', 'Narco', NULL, 7, 3, 2);
 
 
 --
--- Data for Name: super_participo; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: SuperParticipo; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."SuperParticipo" ("idSuperHeroe", "idIncidente") VALUES (7, 1);
@@ -432,7 +408,7 @@ INSERT INTO tp1."SuperParticipo" ("idSuperHeroe", "idIncidente") VALUES (6, 3);
 
 
 --
--- Data for Name: vive_en; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: ViveEn; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
 INSERT INTO tp1."ViveEn" (dni, "idDireccion", "fechaInicio") VALUES (1, 1, '2010-02-03');
@@ -489,6 +465,26 @@ INSERT INTO tp1."ViveEn" (dni, "idDireccion", "fechaInicio") VALUES (208, 8, '20
 INSERT INTO tp1."ViveEn" (dni, "idDireccion", "fechaInicio") VALUES (209, 16, '2015-08-15');
 INSERT INTO tp1."ViveEn" (dni, "idDireccion", "fechaInicio") VALUES (209, 10, '2016-02-02');
 INSERT INTO tp1."ViveEn" (dni, "idDireccion", "fechaInicio") VALUES (210, 4, '2018-02-02');
+
+
+--
+-- Data for Name: archienemigoDe; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+--
+
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 100);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 101);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 102);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (1, 104);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (2, 100);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (2, 101);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (3, 109);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (3, 110);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (53, 108);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (5, 101);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (50, 106);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (50, 107);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (7, 107);
+INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (7, 106);
 
 
 --
