@@ -1040,14 +1040,14 @@ CREATE CONSTRAINT TRIGGER check_investigador_no_se_investiga AFTER INSERT OR UPD
 -- Name: asignacion check_oficial_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
-CREATE CONSTRAINT TRIGGER check_oficial_fk AFTER INSERT OR UPDATE ON tp1.asignacion NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_placa_fk();
-
-
+-- CREATE CONSTRAINT TRIGGER check_oficial_fk AFTER INSERT OR UPDATE ON tp1.asignacion NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_placa_fk();
 --
--- Name: oficial_se_involucro check_se_involucro_placa_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
-
-CREATE CONSTRAINT TRIGGER check_se_involucro_placa_fk AFTER INSERT OR UPDATE ON tp1.oficial_se_involucro NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_placa_fk();
+-- --
+-- -- Name: oficial_se_involucro check_se_involucro_placa_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+-- --
+--
+-- CREATE CONSTRAINT TRIGGER check_se_involucro_placa_fk AFTER INSERT OR UPDATE ON tp1.oficial_se_involucro NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_placa_fk();
 
 
 --
