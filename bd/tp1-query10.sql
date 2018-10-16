@@ -1,5 +1,6 @@
-SELECT distinct i."idIncidente", i.fecha, i.calle_1, i.calle_2, d.calle, d.altura, b.nombre
-FROM tp1."Incidente" i 
+SELECT distinct i."idIncidente", ti."nombre", i.fecha, i.calle_1, i.calle_2, d.calle, d.altura, b.nombre
+FROM tp1."Incidente" i
+JOIN tp1."TipoIncidente" ti ON i."idTipoInicidente" = ti."idTipoInicidente"
 JOIN tp1."SuperParticipo" sp ON i."idIncidente" = sp."idIncidente"
 JOIN tp1."Superheroe" sh ON sp."idSuperHeroe" = sh."idSuperHeroe"
 JOIN tp1."SeInvolucraron" si ON i."idIncidente" = si."idIncidente"

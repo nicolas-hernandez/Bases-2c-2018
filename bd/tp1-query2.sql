@@ -1,4 +1,4 @@
-SELECT i."idIncidente", ti.nombre, i.fecha, i.calle_1, i.calle_2, d.calle, d.altura, b.nombre,
+SELECT i."idIncidente", ti.nombre, ti.nombre, i.fecha, i.calle_1, i.calle_2, d.calle, d.altura, b.nombre,
 c.dni, c.nombre, c.apellido, rc.nombre
 FROM tp1."Incidente" i
 JOIN tp1."TipoIncidente" ti ON i."idTipoInicidente" = ti."idTipoInicidente"
