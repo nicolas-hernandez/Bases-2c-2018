@@ -247,6 +247,24 @@ $$;
 ALTER FUNCTION tp1.sumario_concluyo_tiene_resultado() OWNER TO grupo_01;
 
 --
+-- Name: sumario_es_tipo_investigador(); Type: FUNCTION; Schema: tp1; Owner: postgres
+--
+
+CREATE FUNCTION tp1.sumario_es_tipo_investigador() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF (SELECT o.tipo FROM tp1.oficial o where new.placa = o.placa) != 'Investigador' THEN
+      RAISE EXCEPTION 'El oficial que investiga debe tener tipo Investigador';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+
+ALTER FUNCTION tp1.sumario_es_tipo_investigador() OWNER TO postgres;
+
+--
 -- Name: sumario_fecha_mayor_asignacion(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -269,9 +287,8 @@ ALTER FUNCTION tp1.sumario_fecha_mayor_asignacion() OWNER TO grupo_01;
 
 CREATE FUNCTION tp1.sumario_fecha_mayor_investigador() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
-BEGIN
-    IF EXISTS (SELECT * FROM tp1.investigador i where new.placa = i.placa and new.fecha < i.fecha_ingreso ) THEN
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1.oficial i where new.placa = i.placa and new.fecha < i.fecha_ingreso ) THEN
       RAISE EXCEPTION 'fecha sumario menor a fecha de ingreso del investigador';              
     END IF;
     RETURN NULL;
@@ -517,17 +534,6 @@ CREATE TABLE tp1.oficial (
 
 
 ALTER TABLE tp1.oficial OWNER TO grupo_01;
-
---
--- Name: investigador; Type: TABLE; Schema: tp1; Owner: grupo_01
---
-
-CREATE TABLE tp1.investigador (
-)
-INHERITS (tp1.oficial);
-
-
-ALTER TABLE tp1.investigador OWNER TO grupo_01;
 
 --
 -- Name: oficial_se_involucro; Type: TABLE; Schema: tp1; Owner: grupo_01
@@ -829,30 +835,6 @@ ALTER TABLE ONLY tp1.barrio
 
 
 --
--- Name: investigador investigador_dni_key; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1.investigador
-    ADD CONSTRAINT investigador_dni_key UNIQUE (dni);
-
-
---
--- Name: investigador investigador_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1.investigador
-    ADD CONSTRAINT investigador_pkey PRIMARY KEY (placa);
-
-
---
--- Name: investigador investigador_tipo_check; Type: CHECK CONSTRAINT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE tp1.investigador
-    ADD CONSTRAINT investigador_tipo_check CHECK ((tipo = 'Investigador'::bpchar)) NOT VALID;
-
-
---
 -- Name: oficial oficial_dni_key; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -996,6 +978,13 @@ CREATE CONSTRAINT TRIGGER check_concluyo_tiene_resultado AFTER INSERT OR UPDATE 
 --
 
 CREATE CONSTRAINT TRIGGER check_dni_no_civiles AFTER INSERT OR UPDATE ON tp1.oficial NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.dni_oficiales_civiles();
+
+
+--
+-- Name: sumario check_es_tipo_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+--
+
+CREATE TRIGGER check_es_tipo_investigador BEFORE INSERT OR UPDATE ON tp1.sumario FOR EACH ROW EXECUTE PROCEDURE tp1.sumario_es_tipo_investigador();
 
 
 --
@@ -1201,14 +1190,6 @@ ALTER TABLE ONLY tp1.incidente
 
 
 --
--- Name: investigador investigador_id_departamento_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1.investigador
-    ADD CONSTRAINT investigador_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES tp1.departamento(id_departamento);
-
-
---
 -- Name: oficial oficial_idDepartamento_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1289,6 +1270,14 @@ ALTER TABLE ONLY tp1.seguimiento
 
 
 --
+-- Name: sumario sumario_estado_idEEstadoSum; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+--
+
+ALTER TABLE ONLY tp1.sumario
+    ADD CONSTRAINT "sumario_estado_idEEstadoSum" FOREIGN KEY (id_estado_sumario) REFERENCES tp1.estado_sumario(id_estado_sumario) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
 -- Name: sumario sumario_id_asignacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1297,11 +1286,11 @@ ALTER TABLE ONLY tp1.sumario
 
 
 --
--- Name: sumario sumario_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
+-- Name: sumario sumario_investigador_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1.sumario
-    ADD CONSTRAINT sumario_placa_fkey FOREIGN KEY (placa) REFERENCES tp1.investigador(placa);
+    ADD CONSTRAINT sumario_investigador_placa_fkey FOREIGN KEY (placa) REFERENCES tp1.oficial(placa) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
