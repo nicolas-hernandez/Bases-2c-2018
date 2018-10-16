@@ -370,7 +370,7 @@ ALTER TABLE tp1.asignacion OWNER TO grupo_01;
 
 CREATE TABLE tp1.barrio (
     id_barrio integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -382,8 +382,8 @@ ALTER TABLE tp1.barrio OWNER TO grupo_01;
 
 CREATE TABLE tp1.civil (
     dni integer NOT NULL,
-    nombre character(250) NOT NULL,
-    apellido character(250) NOT NULL
+    nombre character varying(250) NOT NULL,
+    apellido character varying(250) NOT NULL
 );
 
 
@@ -409,7 +409,7 @@ ALTER TABLE tp1.conocimiento OWNER TO grupo_01;
 
 CREATE TABLE tp1.departamento (
     id_departamento integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -421,7 +421,7 @@ ALTER TABLE tp1.departamento OWNER TO grupo_01;
 
 CREATE TABLE tp1.designacion (
     id_designacion integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -433,7 +433,7 @@ ALTER TABLE tp1.designacion OWNER TO grupo_01;
 
 CREATE TABLE tp1.direccion (
     id_direccion integer NOT NULL,
-    calle character(250) NOT NULL,
+    calle character varying(250) NOT NULL,
     altura integer NOT NULL,
     id_barrio integer NOT NULL
 );
@@ -471,7 +471,7 @@ ALTER TABLE tp1.esta_compuesta_por OWNER TO grupo_01;
 
 CREATE TABLE tp1.estado_seguimiento (
     id_estado_seg integer NOT NULL,
-    estado character(250) NOT NULL
+    estado character varying(250) NOT NULL
 );
 
 
@@ -483,7 +483,7 @@ ALTER TABLE tp1.estado_seguimiento OWNER TO grupo_01;
 
 CREATE TABLE tp1.estado_sumario (
     id_estado_sumario integer NOT NULL,
-    estado character(25) NOT NULL
+    estado character varying(25) NOT NULL
 );
 
 
@@ -495,7 +495,7 @@ ALTER TABLE tp1.estado_sumario OWNER TO grupo_01;
 
 CREATE TABLE tp1.habilidad (
     id_habilidad integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -508,8 +508,8 @@ ALTER TABLE tp1.habilidad OWNER TO grupo_01;
 CREATE TABLE tp1.incidente (
     id_incidente integer NOT NULL,
     fecha date NOT NULL,
-    calle_1 character(250) NOT NULL,
-    calle_2 character(250) NOT NULL,
+    calle_1 character varying(250) NOT NULL,
+    calle_2 character varying(250) NOT NULL,
     id_tipo_incidente integer NOT NULL,
     id_direccion integer NOT NULL
 );
@@ -524,11 +524,11 @@ ALTER TABLE tp1.incidente OWNER TO grupo_01;
 CREATE TABLE tp1.oficial (
     placa integer NOT NULL,
     dni integer NOT NULL,
-    nombre character(250) NOT NULL,
-    apellido character(250) NOT NULL,
-    rango character(250) NOT NULL,
+    nombre character varying(250) NOT NULL,
+    apellido character varying(250) NOT NULL,
+    rango character varying(250) NOT NULL,
     fecha_ingreso date NOT NULL,
-    tipo character(250),
+    tipo character varying(250),
     id_departamento integer NOT NULL
 );
 
@@ -554,7 +554,7 @@ ALTER TABLE tp1.oficial_se_involucro OWNER TO grupo_01;
 
 CREATE TABLE tp1.organizacion_delictiva (
     id_mafia integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -578,7 +578,7 @@ ALTER TABLE tp1.posee OWNER TO grupo_01;
 
 CREATE TABLE tp1.rol_civil (
     id_rol_civil integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -590,7 +590,7 @@ ALTER TABLE tp1.rol_civil OWNER TO grupo_01;
 
 CREATE TABLE tp1.rol_oficial (
     id_responsabilidad integer NOT NULL,
-    descripcion character(250) NOT NULL
+    descripcion text
 );
 
 
@@ -616,8 +616,8 @@ ALTER TABLE tp1.se_involucraron OWNER TO grupo_01;
 CREATE TABLE tp1.seguimiento (
     numero integer NOT NULL,
     fecha date NOT NULL,
-    descripcion character(250),
-    conclusion character(250),
+    descripcion text,
+    conclusion text,
     id_incidente integer NOT NULL,
     placa integer,
     id_estado_seg integer NOT NULL
@@ -633,8 +633,8 @@ ALTER TABLE tp1.seguimiento OWNER TO grupo_01;
 CREATE TABLE tp1.sumario (
     id_sumario integer NOT NULL,
     fecha date NOT NULL,
-    observacion character(250),
-    resultado character(250),
+    observacion text,
+    resultado text,
     placa integer NOT NULL,
     id_asignacion integer NOT NULL,
     id_estado_sumario integer NOT NULL
@@ -661,8 +661,8 @@ ALTER TABLE tp1.super_participo OWNER TO grupo_01;
 
 CREATE TABLE tp1.superheroe (
     id_sh integer NOT NULL,
-    nombre character(250) NOT NULL,
-    color_capa character(250) NOT NULL,
+    nombre character varying(250) NOT NULL,
+    color_capa character varying(250) NOT NULL,
     dni integer
 );
 
@@ -675,7 +675,7 @@ ALTER TABLE tp1.superheroe OWNER TO grupo_01;
 
 CREATE TABLE tp1.tipo_de_incidente (
     id_tipo_incidente integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
@@ -687,7 +687,7 @@ ALTER TABLE tp1.tipo_de_incidente OWNER TO grupo_01;
 
 CREATE TABLE tp1.tipo_de_relacion (
     id_tipo_de_relacion integer NOT NULL,
-    nombre character(250) NOT NULL
+    nombre character varying(250) NOT NULL
 );
 
 
