@@ -46,7 +46,7 @@ CREATE FUNCTION tp1.archienemigo_de_no_es_el_mismo() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    IF EXISTS (SELECT * FROM tp1.superheroe sh, tp1.civil c where new.id_sh = sh.id_sh and c.dni = new.dni and sh.dni is not null and sh.dni = new.dni ) THEN
+    IF EXISTS (SELECT * FROM tp1.superheroe sh, tp1.civil c where new."idSuperHeroe" = sh."idSuperHeroe" and c.dni = new.dni and sh.dni is not null and sh.dni = new.dni ) THEN
       RAISE EXCEPTION 'no puede ser archienemigo de si mismo';              
     END IF;
     RETURN NULL;
@@ -64,7 +64,7 @@ CREATE FUNCTION tp1.asignacion_fecha_mayor_a_oficial() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    IF EXISTS (SELECT * FROM tp1.oficial o where new.placa = o.placa and new.fecha_inicio < o.fecha_ingreso ) THEN
+    IF EXISTS (SELECT * FROM tp1.oficial o where new.placa = o.placa and new."fechaInicio" < o."fechaIngreso" ) THEN
       RAISE EXCEPTION 'fecha de asignacion menor a fecha de ingreso del oficial';              
     END IF;
     RETURN NULL;
@@ -116,7 +116,7 @@ ALTER FUNCTION tp1.dni_oficiales_civiles() OWNER TO grupo_01;
 CREATE FUNCTION tp1.oficial_se_involucro_fecha() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.oficial o, tp1.incidente i where new.placa = o.placa and i.id_incidente = new.id_incidente and i.fecha < o.fecha_ingreso ) THEN
+    IF EXISTS (SELECT * FROM tp1.oficial o, tp1.incidente i where new.placa = o.placa and i."idIncidente" = new."idIncidente" and i.fecha < o."fechaIngreso" ) THEN
       RAISE EXCEPTION 'Fecha de oficial menor a fecha de incidente';              
     END IF;
     RETURN NULL;
@@ -134,7 +134,7 @@ CREATE FUNCTION tp1.seguimiento_al_cerrarse_no_puede_cambiar() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    IF EXISTS (SELECT * FROM tp1.estado_seguimiento e where new.id_estado_seg = e.id_estado_seg and e.id_estado_seg != 3 and old.id_estado_seg = 3 ) THEN
+    IF EXISTS (SELECT * FROM tp1.estado_seguimiento e where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" and e."idEstadoSeguimiento" != 3 and old."idEstadoSeguimiento" = 3 ) THEN
       RAISE EXCEPTION 'seguimiento al cerrare no puede cambiar de estado';              
     END IF;
     RETURN NULL;
@@ -151,7 +151,7 @@ ALTER FUNCTION tp1.seguimiento_al_cerrarse_no_puede_cambiar() OWNER TO grupo_01;
 CREATE FUNCTION tp1.seguimiento_conclusion() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.estado_seguimiento e where new.id_estado_seg = e.id_estado_seg and ( (e.id_estado_seg = 3 and new.conclusion is NULL) or (e.id_estado_seg != 3 and new.conclusion is not NULL) )  ) THEN
+    IF EXISTS (SELECT * FROM tp1.estado_seguimiento e where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" and ( (e."idEstadoSeguimiento" = 3 and new.conclusion is NULL) or (e."idEstadoSeguimiento" != 3 and new.conclusion is not NULL) )  ) THEN
       RAISE EXCEPTION 'al cerrarse se tiene una conclusion';              
     END IF;
     RETURN NULL;
@@ -168,7 +168,7 @@ ALTER FUNCTION tp1.seguimiento_conclusion() OWNER TO grupo_01;
 CREATE FUNCTION tp1.seguimiento_fecha_incidente() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.incidente i where i.id_incidente = new.id_incidente and new.fecha < i.fecha ) THEN
+    IF EXISTS (SELECT * FROM tp1.incidente i where i."idIncidente" = new."idIncidente" and new.fecha < i.fecha ) THEN
       RAISE EXCEPTION 'fecha incidente menor a fecha de seguimiento';              
     END IF;
     RETURN NULL;
@@ -185,7 +185,7 @@ ALTER FUNCTION tp1.seguimiento_fecha_incidente() OWNER TO grupo_01;
 CREATE FUNCTION tp1.seguimiento_fecha_oficial() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.oficial o where o.placa = new.placa and new.fecha < o.fecha_ingreso ) THEN
+    IF EXISTS (SELECT * FROM tp1.oficial o where o.placa = new.placa and new.fecha < o."fechaIngreso" ) THEN
       RAISE EXCEPTION 'fehcha de ingreos de oficial mayor a fecha de seguimiento';              
     END IF;
     RETURN NULL;
@@ -202,7 +202,7 @@ ALTER FUNCTION tp1.seguimiento_fecha_oficial() OWNER TO grupo_01;
 CREATE FUNCTION tp1.seguimiento_placa_fk() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF new.id_estado_seg = 2 and NOT EXISTS (SELECT * FROM tp1.estado_seguimiento e, tp1.oficial o where new.id_estado_seg = e.id_estado_seg and e.id_estado_seg = 2 and new.placa = o.placa  ) THEN
+    IF new."idEstadoSeguimiento" = 2 and NOT EXISTS (SELECT * FROM tp1.estado_seguimiento e, tp1.oficial o where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" and e."idEstadoSeguimiento" = 2 and new.placa = o.placa  ) THEN
       RAISE EXCEPTION 'clave foranea';              
     END IF;
     RETURN NULL;
@@ -219,7 +219,7 @@ ALTER FUNCTION tp1.seguimiento_placa_fk() OWNER TO grupo_01;
 CREATE FUNCTION tp1.seguimiento_seguida_si_en_proceso() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.estado_seguimiento e where new.id_estado_seg = e.id_estado_seg and ((e.id_estado_seg = 2 and new.placa is NULL) or (e.id_estado_seg != 2 and new.placa is not NULL) ) ) THEN
+    IF EXISTS (SELECT * FROM tp1.estado_seguimiento e where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" and ((e."idEstadoSeguimiento" = 2 and new.placa is NULL) or (e."idEstadoSeguimiento" != 2 and new.placa is not NULL) ) ) THEN
       RAISE EXCEPTION 'Solo puede ser seguido cuando esta en proceso';              
     END IF;
     RETURN NULL;
@@ -236,7 +236,7 @@ ALTER FUNCTION tp1.seguimiento_seguida_si_en_proceso() OWNER TO grupo_01;
 CREATE FUNCTION tp1.sumario_concluyo_tiene_resultado() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.estado_sumario e where new.id_estado_sumario = 3 and new.resultado IS NULL ) THEN
+    IF EXISTS (SELECT * FROM tp1.estado_sumario e where new."idEstadoSumario" = 3 and new.resultado IS NULL ) THEN
       RAISE EXCEPTION 'Si concluyo tiene resultado';              
     END IF;
     RETURN NULL;
@@ -271,7 +271,7 @@ ALTER FUNCTION tp1.sumario_es_tipo_investigador() OWNER TO postgres;
 CREATE FUNCTION tp1.sumario_fecha_mayor_asignacion() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.asignacion a where new.id_asignacion = a.id_asignacion and new.fecha < a.fecha_inicio ) THEN
+    IF EXISTS (SELECT * FROM tp1.asignacion a where new."idAsignacion" = a."idAsignacion" and new.fecha < a."fechaInicio" ) THEN
       RAISE EXCEPTION 'fecha de sumario menor a la de asignacion';              
     END IF;
     RETURN NULL;
@@ -288,7 +288,7 @@ ALTER FUNCTION tp1.sumario_fecha_mayor_asignacion() OWNER TO grupo_01;
 CREATE FUNCTION tp1.sumario_fecha_mayor_investigador() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.oficial i where new.placa = i.placa and new.fecha < i.fecha_ingreso ) THEN
+    IF EXISTS (SELECT * FROM tp1.oficial i where new.placa = i.placa and new.fecha < i."fechaIngreso" ) THEN
       RAISE EXCEPTION 'fecha sumario menor a fecha de ingreso del investigador';              
     END IF;
     RETURN NULL;
@@ -305,7 +305,7 @@ ALTER FUNCTION tp1.sumario_fecha_mayor_investigador() OWNER TO grupo_01;
 CREATE FUNCTION tp1.sumario_investigador_no_investigado() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1.asignacion a where new.id_asignacion = a.id_asignacion and new.placa = a.placa ) THEN
+    IF EXISTS (SELECT * FROM tp1.asignacion a where new."idAsignacion" = a."idAsignacion" and new.placa = a.placa ) THEN
       RAISE EXCEPTION 'Un investigador no puede investigarse a si mismo';              
     END IF;
     RETURN NULL;
@@ -343,7 +343,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE tp1.archienemigo_de (
-    id_sh integer NOT NULL,
+    "idSuperHeroe" integer NOT NULL,
     dni integer NOT NULL
 );
 
@@ -355,9 +355,9 @@ ALTER TABLE tp1.archienemigo_de OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.asignacion (
-    id_asignacion integer NOT NULL,
-    fecha_inicio date NOT NULL,
-    id_designacion integer NOT NULL,
+    "idAsignacion" integer NOT NULL,
+    "fechaInicio" date NOT NULL,
+    "idDesignacion" integer NOT NULL,
     placa integer NOT NULL
 );
 
@@ -369,7 +369,7 @@ ALTER TABLE tp1.asignacion OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.barrio (
-    id_barrio integer NOT NULL,
+    "idBarrio" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -396,8 +396,8 @@ ALTER TABLE tp1.civil OWNER TO grupo_01;
 CREATE TABLE tp1.conocimiento (
     conocedor integer NOT NULL,
     conocido integer NOT NULL,
-    fecha_conocimiento date NOT NULL,
-    id_tipo_de_relacion integer NOT NULL
+    "fechaConocimiento" date NOT NULL,
+    "idTipoRelacion" integer NOT NULL
 );
 
 
@@ -408,7 +408,7 @@ ALTER TABLE tp1.conocimiento OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.departamento (
-    id_departamento integer NOT NULL,
+    "idDepartamento" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -420,7 +420,7 @@ ALTER TABLE tp1.departamento OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.designacion (
-    id_designacion integer NOT NULL,
+    "idDesignacion" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -432,10 +432,10 @@ ALTER TABLE tp1.designacion OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.direccion (
-    id_direccion integer NOT NULL,
+    "idDireccion" integer NOT NULL,
     calle character varying(250) NOT NULL,
     altura integer NOT NULL,
-    id_barrio integer NOT NULL
+    "idBarrio" integer NOT NULL
 );
 
 
@@ -446,7 +446,7 @@ ALTER TABLE tp1.direccion OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.es_contactado_por (
-    id_sh integer NOT NULL,
+    "idSuperHeroe" integer NOT NULL,
     dni integer NOT NULL
 );
 
@@ -458,7 +458,7 @@ ALTER TABLE tp1.es_contactado_por OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.esta_compuesta_por (
-    id_mafia integer NOT NULL,
+    "idMafia" integer NOT NULL,
     dni integer NOT NULL
 );
 
@@ -470,7 +470,7 @@ ALTER TABLE tp1.esta_compuesta_por OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.estado_seguimiento (
-    id_estado_seg integer NOT NULL,
+    "idEstadoSeguimiento" integer NOT NULL,
     estado character varying(250) NOT NULL
 );
 
@@ -482,7 +482,7 @@ ALTER TABLE tp1.estado_seguimiento OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.estado_sumario (
-    id_estado_sumario integer NOT NULL,
+    "idEstadoSumario" integer NOT NULL,
     estado character varying(25) NOT NULL
 );
 
@@ -494,7 +494,7 @@ ALTER TABLE tp1.estado_sumario OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.habilidad (
-    id_habilidad integer NOT NULL,
+    "idHabilidad" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -506,12 +506,12 @@ ALTER TABLE tp1.habilidad OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.incidente (
-    id_incidente integer NOT NULL,
+    "idIncidente" integer NOT NULL,
     fecha date NOT NULL,
     calle_1 character varying(250) NOT NULL,
     calle_2 character varying(250) NOT NULL,
-    id_tipo_incidente integer NOT NULL,
-    id_direccion integer NOT NULL
+    "idTipoInicidente" integer NOT NULL,
+    "idDireccion" integer NOT NULL
 );
 
 
@@ -527,9 +527,9 @@ CREATE TABLE tp1.oficial (
     nombre character varying(250) NOT NULL,
     apellido character varying(250) NOT NULL,
     rango character varying(250) NOT NULL,
-    fecha_ingreso date NOT NULL,
+    "fechaIngreso" date NOT NULL,
     tipo character varying(250),
-    id_departamento integer NOT NULL
+    "idDepartamento" integer NOT NULL
 );
 
 
@@ -541,8 +541,8 @@ ALTER TABLE tp1.oficial OWNER TO grupo_01;
 
 CREATE TABLE tp1.oficial_se_involucro (
     placa integer NOT NULL,
-    id_incidente integer NOT NULL,
-    id_responsabilidad integer NOT NULL
+    "idIncidente" integer NOT NULL,
+    "idResponsabilidad" integer NOT NULL
 );
 
 
@@ -553,7 +553,7 @@ ALTER TABLE tp1.oficial_se_involucro OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.organizacion_delictiva (
-    id_mafia integer NOT NULL,
+    "idMafia" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -565,8 +565,8 @@ ALTER TABLE tp1.organizacion_delictiva OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.posee (
-    id_sh integer NOT NULL,
-    id_habilidad integer NOT NULL
+    "idSuperHeroe" integer NOT NULL,
+    "idHabilidad" integer NOT NULL
 );
 
 
@@ -577,7 +577,7 @@ ALTER TABLE tp1.posee OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.rol_civil (
-    id_rol_civil integer NOT NULL,
+    "idRolCivil" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -589,7 +589,7 @@ ALTER TABLE tp1.rol_civil OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.rol_oficial (
-    id_responsabilidad integer NOT NULL,
+    "idResponsabilidad" integer NOT NULL,
     descripcion text
 );
 
@@ -602,8 +602,8 @@ ALTER TABLE tp1.rol_oficial OWNER TO grupo_01;
 
 CREATE TABLE tp1.se_involucraron (
     dni integer NOT NULL,
-    id_incidente integer NOT NULL,
-    id_rol_civil integer NOT NULL
+    "idIncidente" integer NOT NULL,
+    "idRolCivil" integer NOT NULL
 );
 
 
@@ -618,9 +618,9 @@ CREATE TABLE tp1.seguimiento (
     fecha date NOT NULL,
     descripcion text,
     conclusion text,
-    id_incidente integer NOT NULL,
+    "idIncidente" integer NOT NULL,
     placa integer,
-    id_estado_seg integer NOT NULL
+    "idEstadoSeguimiento" integer NOT NULL
 );
 
 
@@ -631,13 +631,13 @@ ALTER TABLE tp1.seguimiento OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.sumario (
-    id_sumario integer NOT NULL,
+    "idSumario" integer NOT NULL,
     fecha date NOT NULL,
     observacion text,
     resultado text,
     placa integer NOT NULL,
-    id_asignacion integer NOT NULL,
-    id_estado_sumario integer NOT NULL
+    "idAsignacion" integer NOT NULL,
+    "idEstadoSumario" integer NOT NULL
 );
 
 
@@ -648,8 +648,8 @@ ALTER TABLE tp1.sumario OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.super_participo (
-    id_sh integer NOT NULL,
-    id_incidente integer NOT NULL
+    "idSuperHeroe" integer NOT NULL,
+    "idIncidente" integer NOT NULL
 );
 
 
@@ -660,7 +660,7 @@ ALTER TABLE tp1.super_participo OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.superheroe (
-    id_sh integer NOT NULL,
+    "idSuperHeroe" integer NOT NULL,
     nombre character varying(250) NOT NULL,
     color_capa character varying(250) NOT NULL,
     dni integer
@@ -674,7 +674,7 @@ ALTER TABLE tp1.superheroe OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.tipo_de_incidente (
-    id_tipo_incidente integer NOT NULL,
+    "idTipoInicidente" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -686,7 +686,7 @@ ALTER TABLE tp1.tipo_de_incidente OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1.tipo_de_relacion (
-    id_tipo_de_relacion integer NOT NULL,
+    "idTipoRelacion" integer NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -699,8 +699,8 @@ ALTER TABLE tp1.tipo_de_relacion OWNER TO grupo_01;
 
 CREATE TABLE tp1.vive_en (
     dni integer NOT NULL,
-    id_direccion integer NOT NULL,
-    fecha_inicio date NOT NULL
+    "idDireccion" integer NOT NULL,
+    "fechaInicio" date NOT NULL
 );
 
 
@@ -719,7 +719,7 @@ ALTER TABLE ONLY tp1.civil
 --
 
 ALTER TABLE ONLY tp1.departamento
-    ADD CONSTRAINT "Departamento_pkey" PRIMARY KEY (id_departamento);
+    ADD CONSTRAINT "Departamento_pkey" PRIMARY KEY ("idDepartamento");
 
 
 --
@@ -727,7 +727,7 @@ ALTER TABLE ONLY tp1.departamento
 --
 
 ALTER TABLE ONLY tp1.direccion
-    ADD CONSTRAINT "Direccion_pkey" PRIMARY KEY (id_direccion);
+    ADD CONSTRAINT "Direccion_pkey" PRIMARY KEY ("idDireccion");
 
 
 --
@@ -735,7 +735,7 @@ ALTER TABLE ONLY tp1.direccion
 --
 
 ALTER TABLE ONLY tp1.incidente
-    ADD CONSTRAINT "Incidente_pkey" PRIMARY KEY (id_incidente);
+    ADD CONSTRAINT "Incidente_pkey" PRIMARY KEY ("idIncidente");
 
 
 --
@@ -743,7 +743,7 @@ ALTER TABLE ONLY tp1.incidente
 --
 
 ALTER TABLE ONLY tp1.organizacion_delictiva
-    ADD CONSTRAINT "Organización_delictiva_pkey" PRIMARY KEY (id_mafia);
+    ADD CONSTRAINT "Organización_delictiva_pkey" PRIMARY KEY ("idMafia");
 
 
 --
@@ -751,7 +751,7 @@ ALTER TABLE ONLY tp1.organizacion_delictiva
 --
 
 ALTER TABLE ONLY tp1.tipo_de_relacion
-    ADD CONSTRAINT "TipoDeRelacion_pkey" PRIMARY KEY (id_tipo_de_relacion);
+    ADD CONSTRAINT "TipoDeRelacion_pkey" PRIMARY KEY ("idTipoRelacion");
 
 
 --
@@ -759,7 +759,7 @@ ALTER TABLE ONLY tp1.tipo_de_relacion
 --
 
 ALTER TABLE ONLY tp1.tipo_de_incidente
-    ADD CONSTRAINT "TipoIncidente_pkey" PRIMARY KEY (id_tipo_incidente);
+    ADD CONSTRAINT "TipoIncidente_pkey" PRIMARY KEY ("idTipoInicidente");
 
 
 --
@@ -767,7 +767,7 @@ ALTER TABLE ONLY tp1.tipo_de_incidente
 --
 
 ALTER TABLE ONLY tp1.archienemigo_de
-    ADD CONSTRAINT archienemigo_de_pkey PRIMARY KEY (id_sh, dni);
+    ADD CONSTRAINT archienemigo_de_pkey PRIMARY KEY ("idSuperHeroe", dni);
 
 
 --
@@ -775,7 +775,7 @@ ALTER TABLE ONLY tp1.archienemigo_de
 --
 
 ALTER TABLE ONLY tp1.asignacion
-    ADD CONSTRAINT asignacion_pkey PRIMARY KEY (id_asignacion);
+    ADD CONSTRAINT asignacion_pkey PRIMARY KEY ("idAsignacion");
 
 
 --
@@ -791,7 +791,7 @@ ALTER TABLE ONLY tp1.conocimiento
 --
 
 ALTER TABLE ONLY tp1.designacion
-    ADD CONSTRAINT designacion_pkey PRIMARY KEY (id_designacion);
+    ADD CONSTRAINT designacion_pkey PRIMARY KEY ("idDesignacion");
 
 
 --
@@ -799,7 +799,7 @@ ALTER TABLE ONLY tp1.designacion
 --
 
 ALTER TABLE ONLY tp1.es_contactado_por
-    ADD CONSTRAINT es_contactado_por_pkey PRIMARY KEY (id_sh, dni);
+    ADD CONSTRAINT es_contactado_por_pkey PRIMARY KEY ("idSuperHeroe", dni);
 
 
 --
@@ -807,7 +807,7 @@ ALTER TABLE ONLY tp1.es_contactado_por
 --
 
 ALTER TABLE ONLY tp1.esta_compuesta_por
-    ADD CONSTRAINT esta_compuesta_por_pkey PRIMARY KEY (id_mafia, dni);
+    ADD CONSTRAINT esta_compuesta_por_pkey PRIMARY KEY ("idMafia", dni);
 
 
 --
@@ -815,7 +815,7 @@ ALTER TABLE ONLY tp1.esta_compuesta_por
 --
 
 ALTER TABLE ONLY tp1.estado_seguimiento
-    ADD CONSTRAINT "estadoSeguimiento_pkey" PRIMARY KEY (id_estado_seg);
+    ADD CONSTRAINT "estadoSeguimiento_pkey" PRIMARY KEY ("idEstadoSeguimiento");
 
 
 --
@@ -823,7 +823,7 @@ ALTER TABLE ONLY tp1.estado_seguimiento
 --
 
 ALTER TABLE ONLY tp1.estado_sumario
-    ADD CONSTRAINT estado_sumario_pkey PRIMARY KEY (id_estado_sumario);
+    ADD CONSTRAINT estado_sumario_pkey PRIMARY KEY ("idEstadoSumario");
 
 
 --
@@ -831,7 +831,7 @@ ALTER TABLE ONLY tp1.estado_sumario
 --
 
 ALTER TABLE ONLY tp1.barrio
-    ADD CONSTRAINT "idBarrio" PRIMARY KEY (id_barrio);
+    ADD CONSTRAINT "idBarrio" PRIMARY KEY ("idBarrio");
 
 
 --
@@ -855,7 +855,7 @@ ALTER TABLE ONLY tp1.oficial
 --
 
 ALTER TABLE ONLY tp1.oficial_se_involucro
-    ADD CONSTRAINT oficial_se_involucro_pkey PRIMARY KEY (placa, id_incidente, id_responsabilidad);
+    ADD CONSTRAINT oficial_se_involucro_pkey PRIMARY KEY (placa, "idIncidente", "idResponsabilidad");
 
 
 --
@@ -863,7 +863,7 @@ ALTER TABLE ONLY tp1.oficial_se_involucro
 --
 
 ALTER TABLE ONLY tp1.habilidad
-    ADD CONSTRAINT pk_habilidad PRIMARY KEY (id_habilidad);
+    ADD CONSTRAINT pk_habilidad PRIMARY KEY ("idHabilidad");
 
 
 --
@@ -871,7 +871,7 @@ ALTER TABLE ONLY tp1.habilidad
 --
 
 ALTER TABLE ONLY tp1.posee
-    ADD CONSTRAINT posee_pkey PRIMARY KEY (id_sh, id_habilidad);
+    ADD CONSTRAINT posee_pkey PRIMARY KEY ("idSuperHeroe", "idHabilidad");
 
 
 --
@@ -879,7 +879,7 @@ ALTER TABLE ONLY tp1.posee
 --
 
 ALTER TABLE ONLY tp1.rol_civil
-    ADD CONSTRAINT rol_civil_pkey PRIMARY KEY (id_rol_civil);
+    ADD CONSTRAINT rol_civil_pkey PRIMARY KEY ("idRolCivil");
 
 
 --
@@ -887,7 +887,7 @@ ALTER TABLE ONLY tp1.rol_civil
 --
 
 ALTER TABLE ONLY tp1.rol_oficial
-    ADD CONSTRAINT rol_oficial_pkey PRIMARY KEY (id_responsabilidad);
+    ADD CONSTRAINT rol_oficial_pkey PRIMARY KEY ("idResponsabilidad");
 
 
 --
@@ -895,7 +895,7 @@ ALTER TABLE ONLY tp1.rol_oficial
 --
 
 ALTER TABLE ONLY tp1.se_involucraron
-    ADD CONSTRAINT se_involucraron_pkey PRIMARY KEY (dni, id_incidente);
+    ADD CONSTRAINT se_involucraron_pkey PRIMARY KEY (dni, "idIncidente");
 
 
 --
@@ -903,7 +903,7 @@ ALTER TABLE ONLY tp1.se_involucraron
 --
 
 ALTER TABLE ONLY tp1.seguimiento
-    ADD CONSTRAINT seguimiento_pkey PRIMARY KEY (numero, id_incidente);
+    ADD CONSTRAINT seguimiento_pkey PRIMARY KEY (numero, "idIncidente");
 
 
 --
@@ -911,7 +911,7 @@ ALTER TABLE ONLY tp1.seguimiento
 --
 
 ALTER TABLE ONLY tp1.sumario
-    ADD CONSTRAINT sumario_pkey PRIMARY KEY (id_sumario);
+    ADD CONSTRAINT sumario_pkey PRIMARY KEY ("idSumario");
 
 
 --
@@ -919,7 +919,7 @@ ALTER TABLE ONLY tp1.sumario
 --
 
 ALTER TABLE ONLY tp1.super_participo
-    ADD CONSTRAINT super_participo_pkey PRIMARY KEY (id_sh, id_incidente);
+    ADD CONSTRAINT super_participo_pkey PRIMARY KEY ("idSuperHeroe", "idIncidente");
 
 
 --
@@ -927,7 +927,7 @@ ALTER TABLE ONLY tp1.super_participo
 --
 
 ALTER TABLE ONLY tp1.superheroe
-    ADD CONSTRAINT superheroe_pkey PRIMARY KEY (id_sh);
+    ADD CONSTRAINT superheroe_pkey PRIMARY KEY ("idSuperHeroe");
 
 
 --
@@ -935,21 +935,21 @@ ALTER TABLE ONLY tp1.superheroe
 --
 
 ALTER TABLE ONLY tp1.vive_en
-    ADD CONSTRAINT vive_en_pkey PRIMARY KEY (dni, id_direccion);
+    ADD CONSTRAINT vive_en_pkey PRIMARY KEY (dni, "idDireccion");
 
 
 --
 -- Name: fki_idDireccion; Type: INDEX; Schema: tp1; Owner: grupo_01
 --
 
-CREATE INDEX "fki_idDireccion" ON tp1.incidente USING btree (id_direccion);
+CREATE INDEX "fki_idDireccion" ON tp1.incidente USING btree ("idDireccion");
 
 
 --
 -- Name: fki_idTipoIncidente; Type: INDEX; Schema: tp1; Owner: grupo_01
 --
 
-CREATE INDEX "fki_idTipoIncidente" ON tp1.incidente USING btree (id_tipo_incidente);
+CREATE INDEX "fki_idTipoIncidente" ON tp1.incidente USING btree ("idTipoInicidente");
 
 
 --
@@ -1098,7 +1098,7 @@ ALTER TABLE ONLY tp1.archienemigo_de
 --
 
 ALTER TABLE ONLY tp1.archienemigo_de
-    ADD CONSTRAINT archienemigo_de_id_sh_fkey FOREIGN KEY (id_sh) REFERENCES tp1.superheroe(id_sh);
+    ADD CONSTRAINT archienemigo_de_id_sh_fkey FOREIGN KEY ("idSuperHeroe") REFERENCES tp1.superheroe("idSuperHeroe");
 
 
 --
@@ -1106,7 +1106,7 @@ ALTER TABLE ONLY tp1.archienemigo_de
 --
 
 ALTER TABLE ONLY tp1.asignacion
-    ADD CONSTRAINT asignacion_id_designacion_fkey FOREIGN KEY (id_designacion) REFERENCES tp1.designacion(id_designacion);
+    ADD CONSTRAINT asignacion_id_designacion_fkey FOREIGN KEY ("idDesignacion") REFERENCES tp1.designacion("idDesignacion");
 
 
 --
@@ -1130,7 +1130,7 @@ ALTER TABLE ONLY tp1.conocimiento
 --
 
 ALTER TABLE ONLY tp1.conocimiento
-    ADD CONSTRAINT conocimiento_id_tipo_de_relacion_fkey FOREIGN KEY (id_tipo_de_relacion) REFERENCES tp1.tipo_de_relacion(id_tipo_de_relacion);
+    ADD CONSTRAINT conocimiento_id_tipo_de_relacion_fkey FOREIGN KEY ("idTipoRelacion") REFERENCES tp1.tipo_de_relacion("idTipoRelacion");
 
 
 --
@@ -1138,7 +1138,7 @@ ALTER TABLE ONLY tp1.conocimiento
 --
 
 ALTER TABLE ONLY tp1.direccion
-    ADD CONSTRAINT direccion_id_barrio_fkey FOREIGN KEY (id_barrio) REFERENCES tp1.barrio(id_barrio);
+    ADD CONSTRAINT direccion_id_barrio_fkey FOREIGN KEY ("idBarrio") REFERENCES tp1.barrio("idBarrio");
 
 
 --
@@ -1154,7 +1154,7 @@ ALTER TABLE ONLY tp1.es_contactado_por
 --
 
 ALTER TABLE ONLY tp1.es_contactado_por
-    ADD CONSTRAINT es_contactado_por_id_sh_fkey FOREIGN KEY (id_sh) REFERENCES tp1.superheroe(id_sh);
+    ADD CONSTRAINT es_contactado_por_id_sh_fkey FOREIGN KEY ("idSuperHeroe") REFERENCES tp1.superheroe("idSuperHeroe");
 
 
 --
@@ -1170,7 +1170,7 @@ ALTER TABLE ONLY tp1.esta_compuesta_por
 --
 
 ALTER TABLE ONLY tp1.esta_compuesta_por
-    ADD CONSTRAINT esta_compuesta_por_id_mafia_fkey FOREIGN KEY (id_mafia) REFERENCES tp1.organizacion_delictiva(id_mafia);
+    ADD CONSTRAINT esta_compuesta_por_id_mafia_fkey FOREIGN KEY ("idMafia") REFERENCES tp1.organizacion_delictiva("idMafia");
 
 
 --
@@ -1178,7 +1178,7 @@ ALTER TABLE ONLY tp1.esta_compuesta_por
 --
 
 ALTER TABLE ONLY tp1.incidente
-    ADD CONSTRAINT "incidente_idDireccion_fkey" FOREIGN KEY (id_direccion) REFERENCES tp1.direccion(id_direccion);
+    ADD CONSTRAINT "incidente_idDireccion_fkey" FOREIGN KEY ("idDireccion") REFERENCES tp1.direccion("idDireccion");
 
 
 --
@@ -1186,7 +1186,7 @@ ALTER TABLE ONLY tp1.incidente
 --
 
 ALTER TABLE ONLY tp1.incidente
-    ADD CONSTRAINT "incidente_idTIpoIncidente_fkey" FOREIGN KEY (id_tipo_incidente) REFERENCES tp1.tipo_de_incidente(id_tipo_incidente);
+    ADD CONSTRAINT "incidente_idTIpoIncidente_fkey" FOREIGN KEY ("idTipoInicidente") REFERENCES tp1.tipo_de_incidente("idTipoInicidente");
 
 
 --
@@ -1194,7 +1194,7 @@ ALTER TABLE ONLY tp1.incidente
 --
 
 ALTER TABLE ONLY tp1.oficial
-    ADD CONSTRAINT "oficial_idDepartamento_fkey" FOREIGN KEY (id_departamento) REFERENCES tp1.departamento(id_departamento);
+    ADD CONSTRAINT "oficial_idDepartamento_fkey" FOREIGN KEY ("idDepartamento") REFERENCES tp1.departamento("idDepartamento");
 
 
 --
@@ -1202,7 +1202,7 @@ ALTER TABLE ONLY tp1.oficial
 --
 
 ALTER TABLE ONLY tp1.oficial_se_involucro
-    ADD CONSTRAINT oficial_se_involucro_id_incidente_fkey FOREIGN KEY (id_incidente) REFERENCES tp1.incidente(id_incidente);
+    ADD CONSTRAINT oficial_se_involucro_id_incidente_fkey FOREIGN KEY ("idIncidente") REFERENCES tp1.incidente("idIncidente");
 
 
 --
@@ -1210,7 +1210,7 @@ ALTER TABLE ONLY tp1.oficial_se_involucro
 --
 
 ALTER TABLE ONLY tp1.oficial_se_involucro
-    ADD CONSTRAINT oficial_se_involucro_id_responsabilidad_fkey FOREIGN KEY (id_responsabilidad) REFERENCES tp1.rol_oficial(id_responsabilidad);
+    ADD CONSTRAINT oficial_se_involucro_id_responsabilidad_fkey FOREIGN KEY ("idResponsabilidad") REFERENCES tp1.rol_oficial("idResponsabilidad");
 
 
 --
@@ -1218,7 +1218,7 @@ ALTER TABLE ONLY tp1.oficial_se_involucro
 --
 
 ALTER TABLE ONLY tp1.posee
-    ADD CONSTRAINT posee_id_habilidad_fkey FOREIGN KEY (id_habilidad) REFERENCES tp1.habilidad(id_habilidad);
+    ADD CONSTRAINT posee_id_habilidad_fkey FOREIGN KEY ("idHabilidad") REFERENCES tp1.habilidad("idHabilidad");
 
 
 --
@@ -1226,7 +1226,7 @@ ALTER TABLE ONLY tp1.posee
 --
 
 ALTER TABLE ONLY tp1.posee
-    ADD CONSTRAINT posee_id_sh_fkey FOREIGN KEY (id_sh) REFERENCES tp1.superheroe(id_sh);
+    ADD CONSTRAINT posee_id_sh_fkey FOREIGN KEY ("idSuperHeroe") REFERENCES tp1.superheroe("idSuperHeroe");
 
 
 --
@@ -1242,7 +1242,7 @@ ALTER TABLE ONLY tp1.se_involucraron
 --
 
 ALTER TABLE ONLY tp1.se_involucraron
-    ADD CONSTRAINT se_involucraron_id_incidente_fkey FOREIGN KEY (id_incidente) REFERENCES tp1.incidente(id_incidente);
+    ADD CONSTRAINT se_involucraron_id_incidente_fkey FOREIGN KEY ("idIncidente") REFERENCES tp1.incidente("idIncidente");
 
 
 --
@@ -1250,7 +1250,7 @@ ALTER TABLE ONLY tp1.se_involucraron
 --
 
 ALTER TABLE ONLY tp1.se_involucraron
-    ADD CONSTRAINT se_involucraron_id_rol_civil_fkey FOREIGN KEY (id_rol_civil) REFERENCES tp1.rol_civil(id_rol_civil);
+    ADD CONSTRAINT se_involucraron_id_rol_civil_fkey FOREIGN KEY ("idRolCivil") REFERENCES tp1.rol_civil("idRolCivil");
 
 
 --
@@ -1258,7 +1258,7 @@ ALTER TABLE ONLY tp1.se_involucraron
 --
 
 ALTER TABLE ONLY tp1.seguimiento
-    ADD CONSTRAINT "seguimiento_idEstadoSeg_fkey" FOREIGN KEY (id_estado_seg) REFERENCES tp1.estado_seguimiento(id_estado_seg);
+    ADD CONSTRAINT "seguimiento_idEstadoSeg_fkey" FOREIGN KEY ("idEstadoSeguimiento") REFERENCES tp1.estado_seguimiento("idEstadoSeguimiento");
 
 
 --
@@ -1266,7 +1266,7 @@ ALTER TABLE ONLY tp1.seguimiento
 --
 
 ALTER TABLE ONLY tp1.seguimiento
-    ADD CONSTRAINT "seguimiento_idIncidente_fkey" FOREIGN KEY (id_incidente) REFERENCES tp1.incidente(id_incidente);
+    ADD CONSTRAINT "seguimiento_idIncidente_fkey" FOREIGN KEY ("idIncidente") REFERENCES tp1.incidente("idIncidente");
 
 
 --
@@ -1274,7 +1274,7 @@ ALTER TABLE ONLY tp1.seguimiento
 --
 
 ALTER TABLE ONLY tp1.sumario
-    ADD CONSTRAINT "sumario_estado_idEEstadoSum" FOREIGN KEY (id_estado_sumario) REFERENCES tp1.estado_sumario(id_estado_sumario) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT "sumario_estado_idEEstadoSum" FOREIGN KEY ("idEstadoSumario") REFERENCES tp1.estado_sumario("idEstadoSumario") ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --
@@ -1282,7 +1282,7 @@ ALTER TABLE ONLY tp1.sumario
 --
 
 ALTER TABLE ONLY tp1.sumario
-    ADD CONSTRAINT sumario_id_asignacion_fkey FOREIGN KEY (id_asignacion) REFERENCES tp1.asignacion(id_asignacion);
+    ADD CONSTRAINT sumario_id_asignacion_fkey FOREIGN KEY ("idAsignacion") REFERENCES tp1.asignacion("idAsignacion");
 
 
 --
@@ -1298,7 +1298,7 @@ ALTER TABLE ONLY tp1.sumario
 --
 
 ALTER TABLE ONLY tp1.super_participo
-    ADD CONSTRAINT super_participo_id_incidente_fkey FOREIGN KEY (id_incidente) REFERENCES tp1.incidente(id_incidente);
+    ADD CONSTRAINT super_participo_id_incidente_fkey FOREIGN KEY ("idIncidente") REFERENCES tp1.incidente("idIncidente");
 
 
 --
@@ -1306,7 +1306,7 @@ ALTER TABLE ONLY tp1.super_participo
 --
 
 ALTER TABLE ONLY tp1.super_participo
-    ADD CONSTRAINT super_participo_id_sh_fkey FOREIGN KEY (id_sh) REFERENCES tp1.superheroe(id_sh);
+    ADD CONSTRAINT super_participo_id_sh_fkey FOREIGN KEY ("idSuperHeroe") REFERENCES tp1.superheroe("idSuperHeroe");
 
 
 --
@@ -1330,7 +1330,7 @@ ALTER TABLE ONLY tp1.vive_en
 --
 
 ALTER TABLE ONLY tp1.vive_en
-    ADD CONSTRAINT vive_en_id_direccion_fkey FOREIGN KEY (id_direccion) REFERENCES tp1.direccion(id_direccion);
+    ADD CONSTRAINT vive_en_id_direccion_fkey FOREIGN KEY ("idDireccion") REFERENCES tp1.direccion("idDireccion");
 
 
 --
