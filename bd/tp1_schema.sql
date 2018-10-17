@@ -82,6 +82,26 @@ $$;
 
 ALTER FUNCTION tp1.asignacion_fecha_mayor_a_oficial() OWNER TO grupo_01;
 
+-- TOC entry 269 (class 1255 OID 20248)
+-- Name: civil_no_superparticipo(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
+--
+
+CREATE FUNCTION tp1.civil_no_superparticipo() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c , tp1."SuperParticipo" sp  where sp."idSuperHeroe" = sh."idSuperHeroe" and c.dni = sh.dni and c.dni = new.dni and new."idIncidente" = sp."idIncidente" ) THEN
+      RAISE EXCEPTION 'no puede participar como superheroe y como civil al mismo tiempo';
+    END IF;
+    RETURN NULL;
+  END;
+
+$$;
+
+
+ALTER FUNCTION tp1.civil_no_superparticipo() OWNER TO grupo_01;
+
+
 --
 -- TOC entry 227 (class 1255 OID 18520)
 -- Name: dni_oficiales_civiles(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
@@ -90,7 +110,7 @@ ALTER FUNCTION tp1.asignacion_fecha_mayor_a_oficial() OWNER TO grupo_01;
 CREATE FUNCTION tp1.dni_oficiales_civiles() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1."Civil" c where new.dni = c.dni ) THEN
+    IF EXISTS (SELECT * FROM tp1."Civil" c, tp1."Oficial" o where new.dni = c.dni or new.dni = o.dni) THEN
       RAISE EXCEPTION 'No puede haber un oficial con mismo dni que un civil';              
     END IF;
     RETURN NULL;
@@ -319,6 +339,25 @@ $$;
 
 
 ALTER FUNCTION tp1.superheroeo_no_delincuente() OWNER TO grupo_01;
+
+--
+-- TOC entry 268 (class 1255 OID 20245)
+-- Name: superparticipo_no_civil(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
+--
+
+CREATE FUNCTION tp1.superparticipo_no_civil() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c , tp1."SeInvolucraron" si  where new."idSuperHeroe" = sh."idSuperHeroe" and c.dni = sh.dni and c.dni = si.dni and new."idIncidente" = si."idIncidente" ) THEN
+      RAISE EXCEPTION 'no puede participar como superheroe y como civil al mismo tiempo';
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+
+ALTER FUNCTION tp1.superparticipo_no_civil() OWNER TO grupo_01;
+
 
 SET default_tablespace = '';
 
@@ -1107,6 +1146,12 @@ CREATE CONSTRAINT TRIGGER check_seg_conclusion AFTER INSERT OR UPDATE ON tp1."Se
 
 CREATE CONSTRAINT TRIGGER check_seguimiento_cerrado_no_cambia AFTER UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_al_cerrarse_no_puede_cambiar();
 
+-- TOC entry 3023 (class 2620 OID 20250)
+-- Name: SeInvolucraron check_seinvolucraron_no_sh; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+--
+
+CREATE CONSTRAINT TRIGGER check_seinvolucraron_no_sh AFTER INSERT OR UPDATE ON tp1."SeInvolucraron" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.civil_no_superparticipo();
+
 
 --
 -- TOC entry 2979 (class 2620 OID 18733)
@@ -1122,6 +1167,17 @@ CREATE CONSTRAINT TRIGGER check_solo_seguido_en_proceso AFTER INSERT OR UPDATE O
 --
 
 CREATE CONSTRAINT TRIGGER check_superheroeo_no_delincuente AFTER INSERT OR UPDATE ON tp1."Superheroe" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.superheroeo_no_delincuente();
+
+-- TOC entry 3034 (class 2620 OID 20247)
+-- Name: SuperParticipo check_superparticipo_no_civil; Type: TRIGGER; Schema: tp1; Owner: grupo_01
+--
+
+CREATE CONSTRAINT TRIGGER check_superparticipo_no_civil AFTER INSERT OR UPDATE ON tp1."SuperParticipo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.superparticipo_no_civil();
+
+
+
+-- TOC entry 3028 (class 2620 OID 20071)
+ 
 
 
 --
