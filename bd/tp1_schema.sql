@@ -191,23 +191,6 @@ $$;
 
 ALTER FUNCTION tp1.seguimiento_fecha_oficial() OWNER TO grupo_01;
 
---
--- TOC entry 245 (class 1255 OID 18526)
--- Name: seguimiento_placa_fk(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
---
-
-CREATE FUNCTION tp1.seguimiento_placa_fk() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$BEGIN
-    IF new."idEstadoSeguimiento" = 2 and NOT EXISTS (SELECT * FROM tp1."EstadoSeguimiento" e, tp1."Oficial" o where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" and e."idEstadoSeguimiento" = 2 and new.placa = o.placa  ) THEN
-      RAISE EXCEPTION 'clave foranea';              
-    END IF;
-    RETURN NULL;
-  END;
-$$;
-
-
-ALTER FUNCTION tp1.seguimiento_placa_fk() OWNER TO grupo_01;
 
 --
 -- TOC entry 246 (class 1255 OID 18527)
@@ -1115,14 +1098,6 @@ CREATE CONSTRAINT TRIGGER check_investigador_no_se_investiga AFTER INSERT OR UPD
 --
 
 CREATE CONSTRAINT TRIGGER check_seg_conclusion AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_conclusion();
-
-
---
--- TOC entry 2977 (class 2620 OID 18729)
--- Name: Seguimiento check_seg_placa_fk; Type: TRIGGER; Schema: tp1; Owner: grupo_01
---
-
-CREATE CONSTRAINT TRIGGER check_seg_placa_fk AFTER INSERT OR UPDATE ON tp1."Seguimiento" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.seguimiento_placa_fk();
 
 
 --
