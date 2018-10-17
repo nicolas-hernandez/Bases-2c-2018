@@ -5,7 +5,7 @@
 -- Dumped from database version 10.5 (Ubuntu 10.5-1.pgdg16.04+1)
 -- Dumped by pg_dump version 10.5 (Ubuntu 10.5-1.pgdg16.04+1)
 
--- Started on 2018-10-17 10:00:07 -03
+-- Started on 2018-10-16 12:07:33 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,7 +18,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 4 (class 2615 OID 19812)
+-- TOC entry 7 (class 2615 OID 18516)
 -- Name: tp1; Type: SCHEMA; Schema: -; Owner: grupo_01
 --
 
@@ -36,7 +36,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 3165 (class 0 OID 0)
+-- TOC entry 3114 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -45,7 +45,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- TOC entry 241 (class 1255 OID 19813)
+-- TOC entry 224 (class 1255 OID 18517)
 -- Name: archienemigo_no_es_el_mismo(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -64,7 +64,7 @@ $$;
 ALTER FUNCTION tp1.archienemigo_no_es_el_mismo() OWNER TO grupo_01;
 
 --
--- TOC entry 242 (class 1255 OID 19814)
+-- TOC entry 225 (class 1255 OID 18518)
 -- Name: asignacion_fecha_mayor_a_oficial(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -83,34 +83,14 @@ $$;
 ALTER FUNCTION tp1.asignacion_fecha_mayor_a_oficial() OWNER TO grupo_01;
 
 --
--- TOC entry 269 (class 1255 OID 20248)
--- Name: civil_no_superparticipo(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
---
-
-CREATE FUNCTION tp1.civil_no_superparticipo() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c , tp1."SuperParticipo" sp  where sp."idSuperHeroe" = sh."idSuperHeroe" and c.dni = sh.dni and c.dni = new.dni and new."idIncidente" = sp."idIncidente" ) THEN
-      RAISE EXCEPTION 'no puede participar como superheroe y como civil al mismo tiempo';              
-    END IF;
-    RETURN NULL;
-  END;
-
-$$;
-
-
-ALTER FUNCTION tp1.civil_no_superparticipo() OWNER TO grupo_01;
-
---
--- TOC entry 243 (class 1255 OID 19815)
+-- TOC entry 227 (class 1255 OID 18520)
 -- Name: dni_oficiales_civiles(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
 CREATE FUNCTION tp1.dni_oficiales_civiles() RETURNS trigger
     LANGUAGE plpgsql
     AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1."Civil" c, tp1."Oficial" o where new.dni = c.dni or new.dni = o.dni) THEN
+    IF EXISTS (SELECT * FROM tp1."Civil" c where new.dni = c.dni ) THEN
       RAISE EXCEPTION 'No puede haber un oficial con mismo dni que un civil';              
     END IF;
     RETURN NULL;
@@ -121,7 +101,7 @@ $$;
 ALTER FUNCTION tp1.dni_oficiales_civiles() OWNER TO grupo_01;
 
 --
--- TOC entry 244 (class 1255 OID 19816)
+-- TOC entry 228 (class 1255 OID 18521)
 -- Name: oficial_se_involucro_fecha(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -139,7 +119,7 @@ $$;
 ALTER FUNCTION tp1.oficial_se_involucro_fecha() OWNER TO grupo_01;
 
 --
--- TOC entry 257 (class 1255 OID 19817)
+-- TOC entry 241 (class 1255 OID 18522)
 -- Name: seguimiento_al_cerrarse_no_puede_cambiar(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -158,7 +138,7 @@ $$;
 ALTER FUNCTION tp1.seguimiento_al_cerrarse_no_puede_cambiar() OWNER TO grupo_01;
 
 --
--- TOC entry 258 (class 1255 OID 19818)
+-- TOC entry 242 (class 1255 OID 18523)
 -- Name: seguimiento_conclusion(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -176,7 +156,7 @@ $$;
 ALTER FUNCTION tp1.seguimiento_conclusion() OWNER TO grupo_01;
 
 --
--- TOC entry 259 (class 1255 OID 19819)
+-- TOC entry 243 (class 1255 OID 18524)
 -- Name: seguimiento_fecha_incidente(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -194,7 +174,7 @@ $$;
 ALTER FUNCTION tp1.seguimiento_fecha_incidente() OWNER TO grupo_01;
 
 --
--- TOC entry 260 (class 1255 OID 19820)
+-- TOC entry 244 (class 1255 OID 18525)
 -- Name: seguimiento_fecha_oficial(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -211,8 +191,9 @@ $$;
 
 ALTER FUNCTION tp1.seguimiento_fecha_oficial() OWNER TO grupo_01;
 
+
 --
--- TOC entry 261 (class 1255 OID 19821)
+-- TOC entry 246 (class 1255 OID 18527)
 -- Name: seguimiento_seguida_si_en_proceso(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -230,7 +211,7 @@ $$;
 ALTER FUNCTION tp1.seguimiento_seguida_si_en_proceso() OWNER TO grupo_01;
 
 --
--- TOC entry 262 (class 1255 OID 19822)
+-- TOC entry 247 (class 1255 OID 18528)
 -- Name: sumario_concluyo_tiene_resultado(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -248,7 +229,7 @@ $$;
 ALTER FUNCTION tp1.sumario_concluyo_tiene_resultado() OWNER TO grupo_01;
 
 --
--- TOC entry 263 (class 1255 OID 19823)
+-- TOC entry 248 (class 1255 OID 18529)
 -- Name: sumario_es_tipo_investigador(); Type: FUNCTION; Schema: tp1; Owner: postgres
 --
 
@@ -266,7 +247,7 @@ $$;
 ALTER FUNCTION tp1.sumario_es_tipo_investigador() OWNER TO postgres;
 
 --
--- TOC entry 264 (class 1255 OID 19824)
+-- TOC entry 249 (class 1255 OID 18530)
 -- Name: sumario_fecha_mayor_asignacion(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -284,7 +265,7 @@ $$;
 ALTER FUNCTION tp1.sumario_fecha_mayor_asignacion() OWNER TO grupo_01;
 
 --
--- TOC entry 265 (class 1255 OID 19825)
+-- TOC entry 250 (class 1255 OID 18531)
 -- Name: sumario_fecha_mayor_investigador(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -302,7 +283,7 @@ $$;
 ALTER FUNCTION tp1.sumario_fecha_mayor_investigador() OWNER TO grupo_01;
 
 --
--- TOC entry 266 (class 1255 OID 19826)
+-- TOC entry 251 (class 1255 OID 18532)
 -- Name: sumario_investigador_no_investigado(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -320,7 +301,7 @@ $$;
 ALTER FUNCTION tp1.sumario_investigador_no_investigado() OWNER TO grupo_01;
 
 --
--- TOC entry 267 (class 1255 OID 19827)
+-- TOC entry 252 (class 1255 OID 18533)
 -- Name: superheroeo_no_delincuente(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
 
@@ -339,75 +320,29 @@ $$;
 
 ALTER FUNCTION tp1.superheroeo_no_delincuente() OWNER TO grupo_01;
 
---
--- TOC entry 268 (class 1255 OID 20245)
--- Name: superparticipo_no_civil(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
---
-
-CREATE FUNCTION tp1.superparticipo_no_civil() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$BEGIN
-    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c , tp1."SeInvolucraron" si  where new."idSuperHeroe" = sh."idSuperHeroe" and c.dni = sh.dni and c.dni = si.dni and new."idIncidente" = si."idIncidente" ) THEN
-      RAISE EXCEPTION 'no puede participar como superheroe y como civil al mismo tiempo';              
-    END IF;
-    RETURN NULL;
-  END;
-$$;
-
-
-ALTER FUNCTION tp1.superparticipo_no_civil() OWNER TO grupo_01;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- TOC entry 198 (class 1259 OID 19830)
--- Name: Asignacion; Type: TABLE; Schema: tp1; Owner: abg
+-- TOC entry 196 (class 1259 OID 18534)
+-- Name: Asignacion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Asignacion" (
-    "idAsignacion" integer NOT NULL,
+    "idAsignacion" serial NOT NULL,
     "fechaInicio" date NOT NULL,
     "idDesignacion" integer NOT NULL,
     placa integer NOT NULL
 );
 
-
-ALTER TABLE tp1."Asignacion" OWNER TO abg;
-
 --
--- TOC entry 197 (class 1259 OID 19828)
--- Name: Asignacion_idAsignacion_seq; Type: SEQUENCE; Schema: tp1; Owner: abg
---
-
-CREATE SEQUENCE tp1."Asignacion_idAsignacion_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Asignacion_idAsignacion_seq" OWNER TO abg;
-
---
--- TOC entry 3166 (class 0 OID 0)
--- Dependencies: 197
--- Name: Asignacion_idAsignacion_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: abg
---
-
-ALTER SEQUENCE tp1."Asignacion_idAsignacion_seq" OWNED BY tp1."Asignacion"."idAsignacion";
-
-
---
--- TOC entry 200 (class 1259 OID 19836)
+-- TOC entry 197 (class 1259 OID 18537)
 -- Name: Barrio; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Barrio" (
-    "idBarrio" integer NOT NULL,
+    "idBarrio" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -415,32 +350,7 @@ CREATE TABLE tp1."Barrio" (
 ALTER TABLE tp1."Barrio" OWNER TO grupo_01;
 
 --
--- TOC entry 199 (class 1259 OID 19834)
--- Name: Barrio_idBarrio_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Barrio_idBarrio_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Barrio_idBarrio_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3167 (class 0 OID 0)
--- Dependencies: 199
--- Name: Barrio_idBarrio_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Barrio_idBarrio_seq" OWNED BY tp1."Barrio"."idBarrio";
-
-
---
--- TOC entry 201 (class 1259 OID 19840)
+-- TOC entry 198 (class 1259 OID 18540)
 -- Name: Civil; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -454,7 +364,7 @@ CREATE TABLE tp1."Civil" (
 ALTER TABLE tp1."Civil" OWNER TO grupo_01;
 
 --
--- TOC entry 202 (class 1259 OID 19846)
+-- TOC entry 199 (class 1259 OID 18546)
 -- Name: Conocimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -469,12 +379,12 @@ CREATE TABLE tp1."Conocimiento" (
 ALTER TABLE tp1."Conocimiento" OWNER TO grupo_01;
 
 --
--- TOC entry 204 (class 1259 OID 19851)
+-- TOC entry 200 (class 1259 OID 18549)
 -- Name: Departamento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Departamento" (
-    "idDepartamento" integer NOT NULL,
+    "idDepartamento" serial NOT NULL,
     nombre character varying(250) NOT NULL,
     descripcion text DEFAULT ''::text NOT NULL
 );
@@ -483,37 +393,12 @@ CREATE TABLE tp1."Departamento" (
 ALTER TABLE tp1."Departamento" OWNER TO grupo_01;
 
 --
--- TOC entry 203 (class 1259 OID 19849)
--- Name: Departamento_idDepartamento_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Departamento_idDepartamento_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Departamento_idDepartamento_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3168 (class 0 OID 0)
--- Dependencies: 203
--- Name: Departamento_idDepartamento_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Departamento_idDepartamento_seq" OWNED BY tp1."Departamento"."idDepartamento";
-
-
---
--- TOC entry 206 (class 1259 OID 19861)
+-- TOC entry 201 (class 1259 OID 18556)
 -- Name: Designacion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Designacion" (
-    "idDesignacion" integer NOT NULL,
+    "idDesignacion" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -521,37 +406,12 @@ CREATE TABLE tp1."Designacion" (
 ALTER TABLE tp1."Designacion" OWNER TO grupo_01;
 
 --
--- TOC entry 205 (class 1259 OID 19859)
--- Name: Designacion_idDesignacion_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Designacion_idDesignacion_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Designacion_idDesignacion_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3169 (class 0 OID 0)
--- Dependencies: 205
--- Name: Designacion_idDesignacion_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Designacion_idDesignacion_seq" OWNED BY tp1."Designacion"."idDesignacion";
-
-
---
--- TOC entry 208 (class 1259 OID 19867)
+-- TOC entry 202 (class 1259 OID 18559)
 -- Name: Direccion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Direccion" (
-    "idDireccion" integer NOT NULL,
+    "idDireccion" serial NOT NULL,
     calle character varying(250) NOT NULL,
     altura integer NOT NULL,
     "idBarrio" integer NOT NULL
@@ -561,32 +421,7 @@ CREATE TABLE tp1."Direccion" (
 ALTER TABLE tp1."Direccion" OWNER TO grupo_01;
 
 --
--- TOC entry 207 (class 1259 OID 19865)
--- Name: Direccion_idDireccion_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Direccion_idDireccion_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Direccion_idDireccion_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3170 (class 0 OID 0)
--- Dependencies: 207
--- Name: Direccion_idDireccion_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Direccion_idDireccion_seq" OWNED BY tp1."Direccion"."idDireccion";
-
-
---
--- TOC entry 209 (class 1259 OID 19871)
+-- TOC entry 203 (class 1259 OID 18562)
 -- Name: EsContactadoPor; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -599,7 +434,7 @@ CREATE TABLE tp1."EsContactadoPor" (
 ALTER TABLE tp1."EsContactadoPor" OWNER TO grupo_01;
 
 --
--- TOC entry 210 (class 1259 OID 19874)
+-- TOC entry 204 (class 1259 OID 18565)
 -- Name: EstaCompuestaPor; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -612,12 +447,12 @@ CREATE TABLE tp1."EstaCompuestaPor" (
 ALTER TABLE tp1."EstaCompuestaPor" OWNER TO grupo_01;
 
 --
--- TOC entry 212 (class 1259 OID 19879)
+-- TOC entry 205 (class 1259 OID 18568)
 -- Name: EstadoSeguimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."EstadoSeguimiento" (
-    "idEstadoSeguimiento" integer NOT NULL,
+    "idEstadoSeguimiento" serial NOT NULL,
     estado character varying(250) NOT NULL
 );
 
@@ -625,37 +460,12 @@ CREATE TABLE tp1."EstadoSeguimiento" (
 ALTER TABLE tp1."EstadoSeguimiento" OWNER TO grupo_01;
 
 --
--- TOC entry 211 (class 1259 OID 19877)
--- Name: EstadoSeguimiento_idEstadoSeguimiento_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."EstadoSeguimiento_idEstadoSeguimiento_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."EstadoSeguimiento_idEstadoSeguimiento_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3171 (class 0 OID 0)
--- Dependencies: 211
--- Name: EstadoSeguimiento_idEstadoSeguimiento_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."EstadoSeguimiento_idEstadoSeguimiento_seq" OWNED BY tp1."EstadoSeguimiento"."idEstadoSeguimiento";
-
-
---
--- TOC entry 214 (class 1259 OID 19885)
+-- TOC entry 206 (class 1259 OID 18571)
 -- Name: EstadoSumario; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."EstadoSumario" (
-    "idEstadoSumario" integer NOT NULL,
+    "idEstadoSumario" serial NOT NULL,
     estado character varying(25) NOT NULL
 );
 
@@ -663,37 +473,12 @@ CREATE TABLE tp1."EstadoSumario" (
 ALTER TABLE tp1."EstadoSumario" OWNER TO grupo_01;
 
 --
--- TOC entry 213 (class 1259 OID 19883)
--- Name: EstadoSumario_idEstadoSumario_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."EstadoSumario_idEstadoSumario_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."EstadoSumario_idEstadoSumario_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3172 (class 0 OID 0)
--- Dependencies: 213
--- Name: EstadoSumario_idEstadoSumario_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."EstadoSumario_idEstadoSumario_seq" OWNED BY tp1."EstadoSumario"."idEstadoSumario";
-
-
---
--- TOC entry 216 (class 1259 OID 19891)
+-- TOC entry 207 (class 1259 OID 18574)
 -- Name: Habilidad; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Habilidad" (
-    "idHabilidad" integer NOT NULL,
+    "idHabilidad" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -701,37 +486,12 @@ CREATE TABLE tp1."Habilidad" (
 ALTER TABLE tp1."Habilidad" OWNER TO grupo_01;
 
 --
--- TOC entry 215 (class 1259 OID 19889)
--- Name: Habilidad_idHabilidad_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Habilidad_idHabilidad_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Habilidad_idHabilidad_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3173 (class 0 OID 0)
--- Dependencies: 215
--- Name: Habilidad_idHabilidad_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Habilidad_idHabilidad_seq" OWNED BY tp1."Habilidad"."idHabilidad";
-
-
---
--- TOC entry 218 (class 1259 OID 19897)
+-- TOC entry 208 (class 1259 OID 18577)
 -- Name: Incidente; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Incidente" (
-    "idIncidente" integer NOT NULL,
+    "idIncidente" serial NOT NULL,
     fecha date NOT NULL,
     calle_1 character varying(250) NOT NULL,
     calle_2 character varying(250) NOT NULL,
@@ -743,32 +503,7 @@ CREATE TABLE tp1."Incidente" (
 ALTER TABLE tp1."Incidente" OWNER TO grupo_01;
 
 --
--- TOC entry 217 (class 1259 OID 19895)
--- Name: Incidente_idIncidente_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Incidente_idIncidente_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Incidente_idIncidente_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3174 (class 0 OID 0)
--- Dependencies: 217
--- Name: Incidente_idIncidente_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Incidente_idIncidente_seq" OWNED BY tp1."Incidente"."idIncidente";
-
-
---
--- TOC entry 219 (class 1259 OID 19904)
+-- TOC entry 209 (class 1259 OID 18583)
 -- Name: Oficial; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -787,7 +522,7 @@ CREATE TABLE tp1."Oficial" (
 ALTER TABLE tp1."Oficial" OWNER TO grupo_01;
 
 --
--- TOC entry 220 (class 1259 OID 19910)
+-- TOC entry 210 (class 1259 OID 18589)
 -- Name: OficialSeInvolucro; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -801,12 +536,12 @@ CREATE TABLE tp1."OficialSeInvolucro" (
 ALTER TABLE tp1."OficialSeInvolucro" OWNER TO grupo_01;
 
 --
--- TOC entry 222 (class 1259 OID 19915)
+-- TOC entry 211 (class 1259 OID 18592)
 -- Name: OrganizacionDelictiva; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."OrganizacionDelictiva" (
-    "idMafia" integer NOT NULL,
+    "idMafia" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -814,32 +549,7 @@ CREATE TABLE tp1."OrganizacionDelictiva" (
 ALTER TABLE tp1."OrganizacionDelictiva" OWNER TO grupo_01;
 
 --
--- TOC entry 221 (class 1259 OID 19913)
--- Name: OrganizacionDelictiva_idMafia_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."OrganizacionDelictiva_idMafia_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."OrganizacionDelictiva_idMafia_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3175 (class 0 OID 0)
--- Dependencies: 221
--- Name: OrganizacionDelictiva_idMafia_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."OrganizacionDelictiva_idMafia_seq" OWNED BY tp1."OrganizacionDelictiva"."idMafia";
-
-
---
--- TOC entry 223 (class 1259 OID 19919)
+-- TOC entry 212 (class 1259 OID 18595)
 -- Name: Posee; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -852,12 +562,12 @@ CREATE TABLE tp1."Posee" (
 ALTER TABLE tp1."Posee" OWNER TO grupo_01;
 
 --
--- TOC entry 225 (class 1259 OID 19924)
+-- TOC entry 213 (class 1259 OID 18598)
 -- Name: RolCivil; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."RolCivil" (
-    "idRolCivil" integer NOT NULL,
+    "idRolCivil" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -865,37 +575,12 @@ CREATE TABLE tp1."RolCivil" (
 ALTER TABLE tp1."RolCivil" OWNER TO grupo_01;
 
 --
--- TOC entry 224 (class 1259 OID 19922)
--- Name: RolCivil_idRolCivil_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."RolCivil_idRolCivil_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."RolCivil_idRolCivil_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3176 (class 0 OID 0)
--- Dependencies: 224
--- Name: RolCivil_idRolCivil_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."RolCivil_idRolCivil_seq" OWNED BY tp1."RolCivil"."idRolCivil";
-
-
---
--- TOC entry 227 (class 1259 OID 19930)
+-- TOC entry 214 (class 1259 OID 18601)
 -- Name: RolOficial; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."RolOficial" (
-    "idResponsabilidad" integer NOT NULL,
+    "idResponsabilidad" serial NOT NULL,
     descripcion character varying(250) NOT NULL
 );
 
@@ -903,32 +588,7 @@ CREATE TABLE tp1."RolOficial" (
 ALTER TABLE tp1."RolOficial" OWNER TO grupo_01;
 
 --
--- TOC entry 226 (class 1259 OID 19928)
--- Name: RolOficial_idResponsabilidad_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."RolOficial_idResponsabilidad_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."RolOficial_idResponsabilidad_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3177 (class 0 OID 0)
--- Dependencies: 226
--- Name: RolOficial_idResponsabilidad_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."RolOficial_idResponsabilidad_seq" OWNED BY tp1."RolOficial"."idResponsabilidad";
-
-
---
--- TOC entry 228 (class 1259 OID 19934)
+-- TOC entry 215 (class 1259 OID 18607)
 -- Name: SeInvolucraron; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -942,7 +602,7 @@ CREATE TABLE tp1."SeInvolucraron" (
 ALTER TABLE tp1."SeInvolucraron" OWNER TO grupo_01;
 
 --
--- TOC entry 229 (class 1259 OID 19937)
+-- TOC entry 216 (class 1259 OID 18610)
 -- Name: Seguimiento; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -960,12 +620,12 @@ CREATE TABLE tp1."Seguimiento" (
 ALTER TABLE tp1."Seguimiento" OWNER TO grupo_01;
 
 --
--- TOC entry 231 (class 1259 OID 19945)
+-- TOC entry 217 (class 1259 OID 18616)
 -- Name: Sumario; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Sumario" (
-    "idSumario" integer NOT NULL,
+    "idSumario" serial NOT NULL,
     fecha date NOT NULL,
     observacion text,
     resultado text,
@@ -978,32 +638,7 @@ CREATE TABLE tp1."Sumario" (
 ALTER TABLE tp1."Sumario" OWNER TO grupo_01;
 
 --
--- TOC entry 230 (class 1259 OID 19943)
--- Name: Sumario_idSumario_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Sumario_idSumario_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Sumario_idSumario_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3178 (class 0 OID 0)
--- Dependencies: 230
--- Name: Sumario_idSumario_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Sumario_idSumario_seq" OWNED BY tp1."Sumario"."idSumario";
-
-
---
--- TOC entry 232 (class 1259 OID 19952)
+-- TOC entry 218 (class 1259 OID 18622)
 -- Name: SuperParticipo; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -1016,12 +651,12 @@ CREATE TABLE tp1."SuperParticipo" (
 ALTER TABLE tp1."SuperParticipo" OWNER TO grupo_01;
 
 --
--- TOC entry 234 (class 1259 OID 19957)
+-- TOC entry 219 (class 1259 OID 18625)
 -- Name: Superheroe; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."Superheroe" (
-    "idSuperHeroe" integer NOT NULL,
+    "idSuperHeroe" serial NOT NULL,
     nombre character varying(250) NOT NULL,
     color_capa character varying(250) NOT NULL,
     dni integer,
@@ -1032,37 +667,12 @@ CREATE TABLE tp1."Superheroe" (
 ALTER TABLE tp1."Superheroe" OWNER TO grupo_01;
 
 --
--- TOC entry 233 (class 1259 OID 19955)
--- Name: Superheroe_idSuperHeroe_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."Superheroe_idSuperHeroe_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."Superheroe_idSuperHeroe_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3179 (class 0 OID 0)
--- Dependencies: 233
--- Name: Superheroe_idSuperHeroe_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."Superheroe_idSuperHeroe_seq" OWNED BY tp1."Superheroe"."idSuperHeroe";
-
-
---
--- TOC entry 236 (class 1259 OID 19967)
+-- TOC entry 220 (class 1259 OID 18632)
 -- Name: TipoIncidente; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."TipoIncidente" (
-    "idTipoInicidente" integer NOT NULL,
+    "idTipoInicidente" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -1070,37 +680,12 @@ CREATE TABLE tp1."TipoIncidente" (
 ALTER TABLE tp1."TipoIncidente" OWNER TO grupo_01;
 
 --
--- TOC entry 235 (class 1259 OID 19965)
--- Name: TipoIncidente_idTipoInicidente_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."TipoIncidente_idTipoInicidente_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."TipoIncidente_idTipoInicidente_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3180 (class 0 OID 0)
--- Dependencies: 235
--- Name: TipoIncidente_idTipoInicidente_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."TipoIncidente_idTipoInicidente_seq" OWNED BY tp1."TipoIncidente"."idTipoInicidente";
-
-
---
--- TOC entry 238 (class 1259 OID 19973)
+-- TOC entry 221 (class 1259 OID 18635)
 -- Name: TipoRelacion; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
 CREATE TABLE tp1."TipoRelacion" (
-    "idTipoRelacion" integer NOT NULL,
+    "idTipoRelacion" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -1108,32 +693,7 @@ CREATE TABLE tp1."TipoRelacion" (
 ALTER TABLE tp1."TipoRelacion" OWNER TO grupo_01;
 
 --
--- TOC entry 237 (class 1259 OID 19971)
--- Name: TipoRelacion_idTipoRelacion_seq; Type: SEQUENCE; Schema: tp1; Owner: grupo_01
---
-
-CREATE SEQUENCE tp1."TipoRelacion_idTipoRelacion_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE tp1."TipoRelacion_idTipoRelacion_seq" OWNER TO grupo_01;
-
---
--- TOC entry 3181 (class 0 OID 0)
--- Dependencies: 237
--- Name: TipoRelacion_idTipoRelacion_seq; Type: SEQUENCE OWNED BY; Schema: tp1; Owner: grupo_01
---
-
-ALTER SEQUENCE tp1."TipoRelacion_idTipoRelacion_seq" OWNED BY tp1."TipoRelacion"."idTipoRelacion";
-
-
---
--- TOC entry 239 (class 1259 OID 19977)
+-- TOC entry 222 (class 1259 OID 18638)
 -- Name: ViveEn; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -1147,7 +707,7 @@ CREATE TABLE tp1."ViveEn" (
 ALTER TABLE tp1."ViveEn" OWNER TO grupo_01;
 
 --
--- TOC entry 240 (class 1259 OID 19980)
+-- TOC entry 223 (class 1259 OID 18641)
 -- Name: archienemigoDe; Type: TABLE; Schema: tp1; Owner: grupo_01
 --
 
@@ -1160,135 +720,7 @@ CREATE TABLE tp1."archienemigoDe" (
 ALTER TABLE tp1."archienemigoDe" OWNER TO grupo_01;
 
 --
--- TOC entry 2906 (class 2604 OID 19833)
--- Name: Asignacion idAsignacion; Type: DEFAULT; Schema: tp1; Owner: abg
---
-
-ALTER TABLE ONLY tp1."Asignacion" ALTER COLUMN "idAsignacion" SET DEFAULT nextval('tp1."Asignacion_idAsignacion_seq"'::regclass);
-
-
---
--- TOC entry 2907 (class 2604 OID 19839)
--- Name: Barrio idBarrio; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Barrio" ALTER COLUMN "idBarrio" SET DEFAULT nextval('tp1."Barrio_idBarrio_seq"'::regclass);
-
-
---
--- TOC entry 2908 (class 2604 OID 19854)
--- Name: Departamento idDepartamento; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Departamento" ALTER COLUMN "idDepartamento" SET DEFAULT nextval('tp1."Departamento_idDepartamento_seq"'::regclass);
-
-
---
--- TOC entry 2910 (class 2604 OID 19864)
--- Name: Designacion idDesignacion; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Designacion" ALTER COLUMN "idDesignacion" SET DEFAULT nextval('tp1."Designacion_idDesignacion_seq"'::regclass);
-
-
---
--- TOC entry 2911 (class 2604 OID 19870)
--- Name: Direccion idDireccion; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Direccion" ALTER COLUMN "idDireccion" SET DEFAULT nextval('tp1."Direccion_idDireccion_seq"'::regclass);
-
-
---
--- TOC entry 2912 (class 2604 OID 19882)
--- Name: EstadoSeguimiento idEstadoSeguimiento; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."EstadoSeguimiento" ALTER COLUMN "idEstadoSeguimiento" SET DEFAULT nextval('tp1."EstadoSeguimiento_idEstadoSeguimiento_seq"'::regclass);
-
-
---
--- TOC entry 2913 (class 2604 OID 19888)
--- Name: EstadoSumario idEstadoSumario; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."EstadoSumario" ALTER COLUMN "idEstadoSumario" SET DEFAULT nextval('tp1."EstadoSumario_idEstadoSumario_seq"'::regclass);
-
-
---
--- TOC entry 2914 (class 2604 OID 19894)
--- Name: Habilidad idHabilidad; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Habilidad" ALTER COLUMN "idHabilidad" SET DEFAULT nextval('tp1."Habilidad_idHabilidad_seq"'::regclass);
-
-
---
--- TOC entry 2915 (class 2604 OID 19900)
--- Name: Incidente idIncidente; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Incidente" ALTER COLUMN "idIncidente" SET DEFAULT nextval('tp1."Incidente_idIncidente_seq"'::regclass);
-
-
---
--- TOC entry 2916 (class 2604 OID 19918)
--- Name: OrganizacionDelictiva idMafia; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."OrganizacionDelictiva" ALTER COLUMN "idMafia" SET DEFAULT nextval('tp1."OrganizacionDelictiva_idMafia_seq"'::regclass);
-
-
---
--- TOC entry 2917 (class 2604 OID 19927)
--- Name: RolCivil idRolCivil; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."RolCivil" ALTER COLUMN "idRolCivil" SET DEFAULT nextval('tp1."RolCivil_idRolCivil_seq"'::regclass);
-
-
---
--- TOC entry 2918 (class 2604 OID 19933)
--- Name: RolOficial idResponsabilidad; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."RolOficial" ALTER COLUMN "idResponsabilidad" SET DEFAULT nextval('tp1."RolOficial_idResponsabilidad_seq"'::regclass);
-
-
---
--- TOC entry 2919 (class 2604 OID 19948)
--- Name: Sumario idSumario; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Sumario" ALTER COLUMN "idSumario" SET DEFAULT nextval('tp1."Sumario_idSumario_seq"'::regclass);
-
-
---
--- TOC entry 2920 (class 2604 OID 19960)
--- Name: Superheroe idSuperHeroe; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."Superheroe" ALTER COLUMN "idSuperHeroe" SET DEFAULT nextval('tp1."Superheroe_idSuperHeroe_seq"'::regclass);
-
-
---
--- TOC entry 2922 (class 2604 OID 19970)
--- Name: TipoIncidente idTipoInicidente; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."TipoIncidente" ALTER COLUMN "idTipoInicidente" SET DEFAULT nextval('tp1."TipoIncidente_idTipoInicidente_seq"'::regclass);
-
-
---
--- TOC entry 2923 (class 2604 OID 19976)
--- Name: TipoRelacion idTipoRelacion; Type: DEFAULT; Schema: tp1; Owner: grupo_01
---
-
-ALTER TABLE ONLY tp1."TipoRelacion" ALTER COLUMN "idTipoRelacion" SET DEFAULT nextval('tp1."TipoRelacion_idTipoRelacion_seq"'::regclass);
-
-
---
--- TOC entry 2929 (class 2606 OID 19984)
+-- TOC entry 2881 (class 2606 OID 18645)
 -- Name: Civil Civil_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1297,7 +729,7 @@ ALTER TABLE ONLY tp1."Civil"
 
 
 --
--- TOC entry 2933 (class 2606 OID 19986)
+-- TOC entry 2885 (class 2606 OID 18647)
 -- Name: Departamento Departamento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1306,7 +738,7 @@ ALTER TABLE ONLY tp1."Departamento"
 
 
 --
--- TOC entry 2937 (class 2606 OID 19988)
+-- TOC entry 2889 (class 2606 OID 18649)
 -- Name: Direccion Direccion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1315,7 +747,7 @@ ALTER TABLE ONLY tp1."Direccion"
 
 
 --
--- TOC entry 2949 (class 2606 OID 19990)
+-- TOC entry 2901 (class 2606 OID 18651)
 -- Name: Incidente Incidente_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1324,7 +756,7 @@ ALTER TABLE ONLY tp1."Incidente"
 
 
 --
--- TOC entry 2959 (class 2606 OID 19992)
+-- TOC entry 2911 (class 2606 OID 18653)
 -- Name: OrganizacionDelictiva Organización_delictiva_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1333,7 +765,7 @@ ALTER TABLE ONLY tp1."OrganizacionDelictiva"
 
 
 --
--- TOC entry 2980 (class 2606 OID 19994)
+-- TOC entry 2932 (class 2606 OID 18655)
 -- Name: TipoRelacion TipoDeRelacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1342,7 +774,7 @@ ALTER TABLE ONLY tp1."TipoRelacion"
 
 
 --
--- TOC entry 2978 (class 2606 OID 19996)
+-- TOC entry 2930 (class 2606 OID 18657)
 -- Name: TipoIncidente TipoIncidente_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1351,7 +783,7 @@ ALTER TABLE ONLY tp1."TipoIncidente"
 
 
 --
--- TOC entry 2984 (class 2606 OID 19998)
+-- TOC entry 2936 (class 2606 OID 18659)
 -- Name: archienemigoDe archienemigo_de_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1360,8 +792,8 @@ ALTER TABLE ONLY tp1."archienemigoDe"
 
 
 --
--- TOC entry 2925 (class 2606 OID 20000)
--- Name: Asignacion asignacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: abg
+-- TOC entry 2877 (class 2606 OID 18661)
+-- Name: Asignacion asignacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Asignacion"
@@ -1369,7 +801,7 @@ ALTER TABLE ONLY tp1."Asignacion"
 
 
 --
--- TOC entry 2931 (class 2606 OID 20002)
+-- TOC entry 2883 (class 2606 OID 18663)
 -- Name: Conocimiento conocimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1378,7 +810,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- TOC entry 2935 (class 2606 OID 20004)
+-- TOC entry 2887 (class 2606 OID 18665)
 -- Name: Designacion designacion_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1387,7 +819,7 @@ ALTER TABLE ONLY tp1."Designacion"
 
 
 --
--- TOC entry 2939 (class 2606 OID 20006)
+-- TOC entry 2891 (class 2606 OID 18667)
 -- Name: EsContactadoPor es_contactado_por_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1396,7 +828,7 @@ ALTER TABLE ONLY tp1."EsContactadoPor"
 
 
 --
--- TOC entry 2941 (class 2606 OID 20008)
+-- TOC entry 2893 (class 2606 OID 18669)
 -- Name: EstaCompuestaPor esta_compuesta_por_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1405,7 +837,7 @@ ALTER TABLE ONLY tp1."EstaCompuestaPor"
 
 
 --
--- TOC entry 2943 (class 2606 OID 20010)
+-- TOC entry 2895 (class 2606 OID 18671)
 -- Name: EstadoSeguimiento estadoSeguimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1414,7 +846,7 @@ ALTER TABLE ONLY tp1."EstadoSeguimiento"
 
 
 --
--- TOC entry 2945 (class 2606 OID 20012)
+-- TOC entry 2897 (class 2606 OID 18673)
 -- Name: EstadoSumario estado_sumario_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1423,7 +855,7 @@ ALTER TABLE ONLY tp1."EstadoSumario"
 
 
 --
--- TOC entry 2927 (class 2606 OID 20014)
+-- TOC entry 2879 (class 2606 OID 18675)
 -- Name: Barrio idBarrio; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1432,7 +864,7 @@ ALTER TABLE ONLY tp1."Barrio"
 
 
 --
--- TOC entry 2953 (class 2606 OID 20016)
+-- TOC entry 2905 (class 2606 OID 18677)
 -- Name: Oficial oficial_dni_key; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1441,7 +873,7 @@ ALTER TABLE ONLY tp1."Oficial"
 
 
 --
--- TOC entry 2955 (class 2606 OID 20018)
+-- TOC entry 2907 (class 2606 OID 18679)
 -- Name: Oficial oficial_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1450,7 +882,7 @@ ALTER TABLE ONLY tp1."Oficial"
 
 
 --
--- TOC entry 2957 (class 2606 OID 20020)
+-- TOC entry 2909 (class 2606 OID 18681)
 -- Name: OficialSeInvolucro oficial_se_involucro_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1459,7 +891,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- TOC entry 2947 (class 2606 OID 20022)
+-- TOC entry 2899 (class 2606 OID 18683)
 -- Name: Habilidad pk_habilidad; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1468,7 +900,7 @@ ALTER TABLE ONLY tp1."Habilidad"
 
 
 --
--- TOC entry 2961 (class 2606 OID 20024)
+-- TOC entry 2913 (class 2606 OID 18685)
 -- Name: Posee posee_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1477,7 +909,7 @@ ALTER TABLE ONLY tp1."Posee"
 
 
 --
--- TOC entry 2963 (class 2606 OID 20026)
+-- TOC entry 2915 (class 2606 OID 18687)
 -- Name: RolCivil rol_civil_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1486,7 +918,7 @@ ALTER TABLE ONLY tp1."RolCivil"
 
 
 --
--- TOC entry 2965 (class 2606 OID 20028)
+-- TOC entry 2917 (class 2606 OID 18689)
 -- Name: RolOficial rol_oficial_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1495,7 +927,7 @@ ALTER TABLE ONLY tp1."RolOficial"
 
 
 --
--- TOC entry 2967 (class 2606 OID 20030)
+-- TOC entry 2919 (class 2606 OID 18691)
 -- Name: SeInvolucraron se_involucraron_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1504,7 +936,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- TOC entry 2969 (class 2606 OID 20032)
+-- TOC entry 2921 (class 2606 OID 18693)
 -- Name: Seguimiento seguimiento_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1513,7 +945,7 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- TOC entry 2971 (class 2606 OID 20034)
+-- TOC entry 2923 (class 2606 OID 18695)
 -- Name: Sumario sumario_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1522,7 +954,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- TOC entry 2973 (class 2606 OID 20036)
+-- TOC entry 2925 (class 2606 OID 18697)
 -- Name: SuperParticipo super_participo_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1531,7 +963,7 @@ ALTER TABLE ONLY tp1."SuperParticipo"
 
 
 --
--- TOC entry 2976 (class 2606 OID 20038)
+-- TOC entry 2928 (class 2606 OID 18699)
 -- Name: Superheroe superheroe_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1540,7 +972,7 @@ ALTER TABLE ONLY tp1."Superheroe"
 
 
 --
--- TOC entry 2982 (class 2606 OID 20040)
+-- TOC entry 2934 (class 2606 OID 18701)
 -- Name: ViveEn vive_en_pkey; Type: CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1549,7 +981,7 @@ ALTER TABLE ONLY tp1."ViveEn"
 
 
 --
--- TOC entry 2950 (class 1259 OID 20041)
+-- TOC entry 2902 (class 1259 OID 18702)
 -- Name: fki_idDireccion; Type: INDEX; Schema: tp1; Owner: grupo_01
 --
 
@@ -1557,7 +989,7 @@ CREATE INDEX "fki_idDireccion" ON tp1."Incidente" USING btree ("idDireccion");
 
 
 --
--- TOC entry 2951 (class 1259 OID 20042)
+-- TOC entry 2903 (class 1259 OID 18703)
 -- Name: fki_idTipoIncidente; Type: INDEX; Schema: tp1; Owner: grupo_01
 --
 
@@ -1565,7 +997,7 @@ CREATE INDEX "fki_idTipoIncidente" ON tp1."Incidente" USING btree ("idTipoInicid
 
 
 --
--- TOC entry 2974 (class 1259 OID 20043)
+-- TOC entry 2926 (class 1259 OID 18704)
 -- Name: fki_superheroe_dni; Type: INDEX; Schema: tp1; Owner: grupo_01
 --
 
@@ -1573,7 +1005,7 @@ CREATE INDEX fki_superheroe_dni ON tp1."Superheroe" USING btree (dni);
 
 
 --
--- TOC entry 3036 (class 2620 OID 20045)
+-- TOC entry 2986 (class 2620 OID 18706)
 -- Name: archienemigoDe check_archienemigo_de_si_mismo; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1581,7 +1013,7 @@ CREATE CONSTRAINT TRIGGER check_archienemigo_de_si_mismo AFTER INSERT OR UPDATE 
 
 
 --
--- TOC entry 3029 (class 2620 OID 20047)
+-- TOC entry 2980 (class 2620 OID 18708)
 -- Name: Sumario check_concluyo_tiene_resultado; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1589,7 +1021,7 @@ CREATE CONSTRAINT TRIGGER check_concluyo_tiene_resultado AFTER INSERT OR UPDATE 
 
 
 --
--- TOC entry 3021 (class 2620 OID 20049)
+-- TOC entry 2972 (class 2620 OID 18710)
 -- Name: Oficial check_dni_no_civiles; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1597,15 +1029,7 @@ CREATE CONSTRAINT TRIGGER check_dni_no_civiles AFTER INSERT OR UPDATE ON tp1."Of
 
 
 --
--- TOC entry 3020 (class 2620 OID 20252)
--- Name: Civil check_dni_no_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
---
-
-CREATE CONSTRAINT TRIGGER check_dni_no_oficial AFTER INSERT OR UPDATE ON tp1."Civil" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.dni_oficiales_civiles();
-
-
---
--- TOC entry 3030 (class 2620 OID 20051)
+-- TOC entry 2984 (class 2620 OID 18908)
 -- Name: Sumario check_es_tipo_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1613,15 +1037,15 @@ CREATE CONSTRAINT TRIGGER check_es_tipo_investigador AFTER INSERT OR UPDATE ON t
 
 
 --
--- TOC entry 3019 (class 2620 OID 20053)
--- Name: Asignacion check_fecha_inicio_mayor_a_oficial; Type: TRIGGER; Schema: tp1; Owner: abg
+-- TOC entry 2971 (class 2620 OID 18713)
+-- Name: Asignacion check_fecha_inicio_mayor_a_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
 CREATE CONSTRAINT TRIGGER check_fecha_inicio_mayor_a_oficial AFTER INSERT OR UPDATE ON tp1."Asignacion" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.asignacion_fecha_mayor_a_oficial();
 
 
 --
--- TOC entry 3031 (class 2620 OID 20055)
+-- TOC entry 2981 (class 2620 OID 18715)
 -- Name: Sumario check_fecha_mayor_asigancion; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1629,7 +1053,7 @@ CREATE CONSTRAINT TRIGGER check_fecha_mayor_asigancion AFTER INSERT OR UPDATE ON
 
 
 --
--- TOC entry 3032 (class 2620 OID 20057)
+-- TOC entry 2982 (class 2620 OID 18717)
 -- Name: Sumario check_fecha_mayor_investigador; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1637,7 +1061,7 @@ CREATE CONSTRAINT TRIGGER check_fecha_mayor_investigador AFTER INSERT OR UPDATE 
 
 
 --
--- TOC entry 3022 (class 2620 OID 20059)
+-- TOC entry 2973 (class 2620 OID 18719)
 -- Name: OficialSeInvolucro check_fecha_oficial_involucrado; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1645,7 +1069,7 @@ CREATE CONSTRAINT TRIGGER check_fecha_oficial_involucrado AFTER INSERT OR UPDATE
 
 
 --
--- TOC entry 3024 (class 2620 OID 20061)
+-- TOC entry 2974 (class 2620 OID 18721)
 -- Name: Seguimiento check_fecha_seg_incidente; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1653,7 +1077,7 @@ CREATE CONSTRAINT TRIGGER check_fecha_seg_incidente AFTER INSERT OR UPDATE ON tp
 
 
 --
--- TOC entry 3025 (class 2620 OID 20063)
+-- TOC entry 2975 (class 2620 OID 18723)
 -- Name: Seguimiento check_fecha_seg_oficial; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1661,7 +1085,7 @@ CREATE CONSTRAINT TRIGGER check_fecha_seg_oficial AFTER INSERT OR UPDATE ON tp1.
 
 
 --
--- TOC entry 3033 (class 2620 OID 20065)
+-- TOC entry 2983 (class 2620 OID 18725)
 -- Name: Sumario check_investigador_no_se_investiga; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1669,7 +1093,7 @@ CREATE CONSTRAINT TRIGGER check_investigador_no_se_investiga AFTER INSERT OR UPD
 
 
 --
--- TOC entry 3026 (class 2620 OID 20067)
+-- TOC entry 2976 (class 2620 OID 18727)
 -- Name: Seguimiento check_seg_conclusion; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1677,7 +1101,7 @@ CREATE CONSTRAINT TRIGGER check_seg_conclusion AFTER INSERT OR UPDATE ON tp1."Se
 
 
 --
--- TOC entry 3027 (class 2620 OID 20069)
+-- TOC entry 2978 (class 2620 OID 18731)
 -- Name: Seguimiento check_seguimiento_cerrado_no_cambia; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1685,15 +1109,7 @@ CREATE CONSTRAINT TRIGGER check_seguimiento_cerrado_no_cambia AFTER UPDATE ON tp
 
 
 --
--- TOC entry 3023 (class 2620 OID 20250)
--- Name: SeInvolucraron check_seinvolucraron_no_sh; Type: TRIGGER; Schema: tp1; Owner: grupo_01
---
-
-CREATE CONSTRAINT TRIGGER check_seinvolucraron_no_sh AFTER INSERT OR UPDATE ON tp1."SeInvolucraron" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.civil_no_superparticipo();
-
-
---
--- TOC entry 3028 (class 2620 OID 20071)
+-- TOC entry 2979 (class 2620 OID 18733)
 -- Name: Seguimiento check_solo_seguido_en_proceso; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1701,7 +1117,7 @@ CREATE CONSTRAINT TRIGGER check_solo_seguido_en_proceso AFTER INSERT OR UPDATE O
 
 
 --
--- TOC entry 3035 (class 2620 OID 20073)
+-- TOC entry 2985 (class 2620 OID 18735)
 -- Name: Superheroe check_superheroeo_no_delincuente; Type: TRIGGER; Schema: tp1; Owner: grupo_01
 --
 
@@ -1709,15 +1125,7 @@ CREATE CONSTRAINT TRIGGER check_superheroeo_no_delincuente AFTER INSERT OR UPDAT
 
 
 --
--- TOC entry 3034 (class 2620 OID 20247)
--- Name: SuperParticipo check_superparticipo_no_civil; Type: TRIGGER; Schema: tp1; Owner: grupo_01
---
-
-CREATE CONSTRAINT TRIGGER check_superparticipo_no_civil AFTER INSERT OR UPDATE ON tp1."SuperParticipo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE tp1.superparticipo_no_civil();
-
-
---
--- TOC entry 2998 (class 2606 OID 20074)
+-- TOC entry 2950 (class 2606 OID 18736)
 -- Name: OficialSeInvolucro OficialSeInvolucro_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1726,7 +1134,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- TOC entry 3017 (class 2606 OID 20079)
+-- TOC entry 2969 (class 2606 OID 18741)
 -- Name: archienemigoDe archienemigo_de_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1735,7 +1143,7 @@ ALTER TABLE ONLY tp1."archienemigoDe"
 
 
 --
--- TOC entry 3018 (class 2606 OID 20084)
+-- TOC entry 2970 (class 2606 OID 18746)
 -- Name: archienemigoDe archienemigo_de_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1744,8 +1152,8 @@ ALTER TABLE ONLY tp1."archienemigoDe"
 
 
 --
--- TOC entry 2985 (class 2606 OID 20089)
--- Name: Asignacion asignacion_id_designacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: abg
+-- TOC entry 2937 (class 2606 OID 18751)
+-- Name: Asignacion asignacion_id_designacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Asignacion"
@@ -1753,8 +1161,8 @@ ALTER TABLE ONLY tp1."Asignacion"
 
 
 --
--- TOC entry 2986 (class 2606 OID 20094)
--- Name: Asignacion asignacion_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: abg
+-- TOC entry 2938 (class 2606 OID 18756)
+-- Name: Asignacion asignacion_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
 ALTER TABLE ONLY tp1."Asignacion"
@@ -1762,7 +1170,7 @@ ALTER TABLE ONLY tp1."Asignacion"
 
 
 --
--- TOC entry 2987 (class 2606 OID 20099)
+-- TOC entry 2939 (class 2606 OID 18761)
 -- Name: Conocimiento conocimiento_conocedor_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1771,7 +1179,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- TOC entry 2988 (class 2606 OID 20104)
+-- TOC entry 2940 (class 2606 OID 18766)
 -- Name: Conocimiento conocimiento_conocido_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1780,7 +1188,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- TOC entry 2989 (class 2606 OID 20109)
+-- TOC entry 2941 (class 2606 OID 18771)
 -- Name: Conocimiento conocimiento_id_tipo_de_relacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1789,7 +1197,7 @@ ALTER TABLE ONLY tp1."Conocimiento"
 
 
 --
--- TOC entry 2990 (class 2606 OID 20114)
+-- TOC entry 2942 (class 2606 OID 18776)
 -- Name: Direccion direccion_id_barrio_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1798,7 +1206,7 @@ ALTER TABLE ONLY tp1."Direccion"
 
 
 --
--- TOC entry 2991 (class 2606 OID 20119)
+-- TOC entry 2943 (class 2606 OID 18781)
 -- Name: EsContactadoPor es_contactado_por_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1807,7 +1215,7 @@ ALTER TABLE ONLY tp1."EsContactadoPor"
 
 
 --
--- TOC entry 2992 (class 2606 OID 20124)
+-- TOC entry 2944 (class 2606 OID 18786)
 -- Name: EsContactadoPor es_contactado_por_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1816,7 +1224,7 @@ ALTER TABLE ONLY tp1."EsContactadoPor"
 
 
 --
--- TOC entry 2993 (class 2606 OID 20129)
+-- TOC entry 2945 (class 2606 OID 18791)
 -- Name: EstaCompuestaPor esta_compuesta_por_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1825,7 +1233,7 @@ ALTER TABLE ONLY tp1."EstaCompuestaPor"
 
 
 --
--- TOC entry 2994 (class 2606 OID 20134)
+-- TOC entry 2946 (class 2606 OID 18796)
 -- Name: EstaCompuestaPor esta_compuesta_por_id_mafia_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1834,7 +1242,7 @@ ALTER TABLE ONLY tp1."EstaCompuestaPor"
 
 
 --
--- TOC entry 2995 (class 2606 OID 20139)
+-- TOC entry 2947 (class 2606 OID 18801)
 -- Name: Incidente incidente_idDireccion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1843,7 +1251,7 @@ ALTER TABLE ONLY tp1."Incidente"
 
 
 --
--- TOC entry 2996 (class 2606 OID 20144)
+-- TOC entry 2948 (class 2606 OID 18806)
 -- Name: Incidente incidente_idTIpoIncidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1852,7 +1260,7 @@ ALTER TABLE ONLY tp1."Incidente"
 
 
 --
--- TOC entry 2997 (class 2606 OID 20149)
+-- TOC entry 2949 (class 2606 OID 18811)
 -- Name: Oficial oficial_idDepartamento_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1861,7 +1269,7 @@ ALTER TABLE ONLY tp1."Oficial"
 
 
 --
--- TOC entry 2999 (class 2606 OID 20154)
+-- TOC entry 2951 (class 2606 OID 18816)
 -- Name: OficialSeInvolucro oficial_se_involucro_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1870,7 +1278,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- TOC entry 3000 (class 2606 OID 20159)
+-- TOC entry 2952 (class 2606 OID 18821)
 -- Name: OficialSeInvolucro oficial_se_involucro_id_responsabilidad_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1879,7 +1287,7 @@ ALTER TABLE ONLY tp1."OficialSeInvolucro"
 
 
 --
--- TOC entry 3001 (class 2606 OID 20164)
+-- TOC entry 2953 (class 2606 OID 18826)
 -- Name: Posee posee_id_habilidad_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1888,7 +1296,7 @@ ALTER TABLE ONLY tp1."Posee"
 
 
 --
--- TOC entry 3002 (class 2606 OID 20169)
+-- TOC entry 2954 (class 2606 OID 18831)
 -- Name: Posee posee_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1897,7 +1305,7 @@ ALTER TABLE ONLY tp1."Posee"
 
 
 --
--- TOC entry 3003 (class 2606 OID 20174)
+-- TOC entry 2955 (class 2606 OID 18836)
 -- Name: SeInvolucraron se_involucraron_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1906,7 +1314,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- TOC entry 3004 (class 2606 OID 20179)
+-- TOC entry 2956 (class 2606 OID 18841)
 -- Name: SeInvolucraron se_involucraron_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1915,7 +1323,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- TOC entry 3005 (class 2606 OID 20184)
+-- TOC entry 2957 (class 2606 OID 18846)
 -- Name: SeInvolucraron se_involucraron_id_rol_civil_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1924,7 +1332,7 @@ ALTER TABLE ONLY tp1."SeInvolucraron"
 
 
 --
--- TOC entry 3006 (class 2606 OID 20189)
+-- TOC entry 2958 (class 2606 OID 18851)
 -- Name: Seguimiento seguimiento_idEstadoSeg_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1933,7 +1341,7 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- TOC entry 3007 (class 2606 OID 20194)
+-- TOC entry 2959 (class 2606 OID 18856)
 -- Name: Seguimiento seguimiento_idIncidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1942,7 +1350,7 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- TOC entry 3008 (class 2606 OID 20199)
+-- TOC entry 2960 (class 2606 OID 18861)
 -- Name: Seguimiento seguimiento_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1951,7 +1359,7 @@ ALTER TABLE ONLY tp1."Seguimiento"
 
 
 --
--- TOC entry 3009 (class 2606 OID 20204)
+-- TOC entry 2961 (class 2606 OID 18866)
 -- Name: Sumario sumario_estado_idEEstadoSum; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1960,7 +1368,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- TOC entry 3010 (class 2606 OID 20209)
+-- TOC entry 2962 (class 2606 OID 18871)
 -- Name: Sumario sumario_id_asignacion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1969,7 +1377,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- TOC entry 3011 (class 2606 OID 20214)
+-- TOC entry 2963 (class 2606 OID 18876)
 -- Name: Sumario sumario_investigador_placa_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1978,7 +1386,7 @@ ALTER TABLE ONLY tp1."Sumario"
 
 
 --
--- TOC entry 3012 (class 2606 OID 20219)
+-- TOC entry 2964 (class 2606 OID 18881)
 -- Name: SuperParticipo super_participo_id_incidente_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1987,7 +1395,7 @@ ALTER TABLE ONLY tp1."SuperParticipo"
 
 
 --
--- TOC entry 3013 (class 2606 OID 20224)
+-- TOC entry 2965 (class 2606 OID 18886)
 -- Name: SuperParticipo super_participo_id_sh_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -1996,7 +1404,7 @@ ALTER TABLE ONLY tp1."SuperParticipo"
 
 
 --
--- TOC entry 3014 (class 2606 OID 20229)
+-- TOC entry 2966 (class 2606 OID 18891)
 -- Name: Superheroe superheroe_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -2005,7 +1413,7 @@ ALTER TABLE ONLY tp1."Superheroe"
 
 
 --
--- TOC entry 3015 (class 2606 OID 20234)
+-- TOC entry 2967 (class 2606 OID 18896)
 -- Name: ViveEn vive_en_dni_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -2014,7 +1422,7 @@ ALTER TABLE ONLY tp1."ViveEn"
 
 
 --
--- TOC entry 3016 (class 2606 OID 20239)
+-- TOC entry 2968 (class 2606 OID 18901)
 -- Name: ViveEn vive_en_id_direccion_fkey; Type: FK CONSTRAINT; Schema: tp1; Owner: grupo_01
 --
 
@@ -2022,7 +1430,7 @@ ALTER TABLE ONLY tp1."ViveEn"
     ADD CONSTRAINT vive_en_id_direccion_fkey FOREIGN KEY ("idDireccion") REFERENCES tp1."Direccion"("idDireccion");
 
 
--- Completed on 2018-10-17 10:00:08 -03
+-- Completed on 2018-10-16 12:07:33 -03
 
 --
 -- PostgreSQL database dump complete
