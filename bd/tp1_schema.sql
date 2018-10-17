@@ -83,25 +83,6 @@ $$;
 ALTER FUNCTION tp1.asignacion_fecha_mayor_a_oficial() OWNER TO grupo_01;
 
 --
--- TOC entry 226 (class 1255 OID 18519)
--- Name: asignacion_placa_fk(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
---
-
-CREATE FUNCTION tp1.asignacion_placa_fk() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-    IF NOT EXISTS (SELECT * FROM tp1."Oficial" o where new.placa = o.placa ) THEN
-      RAISE EXCEPTION 'No existe ese oficial';              
-    END IF;
-    RETURN NULL;
-  END;
-$$;
-
-
-ALTER FUNCTION tp1.asignacion_placa_fk() OWNER TO grupo_01;
-
---
 -- TOC entry 227 (class 1255 OID 18520)
 -- Name: dni_oficiales_civiles(); Type: FUNCTION; Schema: tp1; Owner: grupo_01
 --
