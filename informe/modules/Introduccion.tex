@@ -1,5 +1,21 @@
 \section{Introducción}
 
+En este trabajo práctico se captura la realidad de la ciudad gótica definida por enunciado y se la implementa en una base de datos relacional. Para esto primero se diseñó el MER (Modelo Entidad Relación) y el MR (Modelo Relacional) y se definen las restricciones y asunciones a tener en cuenta. En base a lo mencionado se procede implementar la base de datos en Postgres SQL. Las restricciones serán implementadas mediante function triggers.
 
+Como parte del enunciado, también, se pide responder a una serie de consultas, las cuales influyen intrinsecamente en el diseño realizado, ya que debemos poder responder a las mismas. Las consultas se listan a continuación:
 
-
+\begin{itemize}
+\item Listado de incidentes en un rango de fechas, mostrando los datos de las per-
+sonas y policías involucrados con el rol que jugó cada uno en el incidente
+\item  Dada una organización delictiva, el detalle de incidentes en que participaron
+las personas que componen dicha organización
+\item  La lista de todos los oficiales con sus rangos, de un departamento dado.
+\item  El ranking de oficiales que participaron en más incidentes
+\item  Los barrios con mayor cantidad de incidentes.
+\item  Todos los oficiales sumariados que participaron de algún incidente.
+\item  Las personas involucradas en incidentes ocurridos en el barrio donde viven
+\item  Los superheroes que tienen una habilidad determinada
+\item  Los superheroes que han participado en algún incidente.
+\item  Listado de todos los incidentes en donde estuvieron involucrados superheroes
+y fueron causados por los "archienemigos" de los superheroes involucrados.
+\end{itemize}

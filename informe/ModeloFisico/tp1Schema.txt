@@ -1,0 +1,709 @@
+Triggers (Restricciones):
+
+CREATE FUNCTION tp1.archienemigo_no_es_el_mismo() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c 
+    where new."idSuperHeroe" = sh."idSuperHeroe" and c.dni = new.dni 
+    and sh.dni is not null and sh.dni = new.dni ) THEN
+      RAISE EXCEPTION 'no puede ser archienemigo de si mismo';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.asignacion_fecha_mayor_a_oficial() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM tp1."Oficial" o 
+    where new.placa = o.placa 
+    and new."fechaInicio" < o."fechaIngreso" ) THEN
+      RAISE EXCEPTION 'fecha de asignacion menor a fecha de ingreso del oficial';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.civil_no_superparticipo() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c , tp1."SuperParticipo" sp  
+    where sp."idSuperHeroe" = sh."idSuperHeroe" 
+    and c.dni = sh.dni and c.dni = new.dni 
+    and new."idIncidente" = sp."idIncidente" ) THEN
+      RAISE EXCEPTION 'no puede participar como superheroe y como civil al mismo tiempo';
+    END IF;
+    RETURN NULL;
+  END;
+
+$$;
+
+CREATE FUNCTION tp1.dni_oficiales_civiles() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Civil" c, tp1."Oficial" o 
+    where new.dni = c.dni or new.dni = o.dni) THEN
+      RAISE EXCEPTION 'No puede haber un oficial con mismo dni que un civil';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.oficial_se_involucro_fecha() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Oficial" o, tp1."Incidente" i 
+    where new.placa = o.placa and i."idIncidente" = new."idIncidente" 
+    and i.fecha < o."fechaIngreso" ) THEN
+      RAISE EXCEPTION 'Fecha de oficial menor a fecha de incidente';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.seguimiento_al_cerrarse_no_puede_cambiar() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM tp1."EstadoSeguimiento" e 
+    where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" 
+    and e."idEstadoSeguimiento" != 3 
+    and old."idEstadoSeguimiento" = 3 ) THEN
+      RAISE EXCEPTION 'seguimiento al cerrare no puede cambiar de estado';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.seguimiento_conclusion() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."EstadoSeguimiento" e 
+    where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" 
+    and ( (e."idEstadoSeguimiento" = 3 and new.conclusion is NULL) 
+    or (e."idEstadoSeguimiento" != 3 and new.conclusion is not NULL) )  
+    ) THEN
+      RAISE EXCEPTION 'al cerrarse se tiene una conclusion';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.seguimiento_fecha_incidente() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Incidente" i 
+    where i."idIncidente" = new."idIncidente" 
+    and new.fecha < i.fecha ) THEN
+      RAISE EXCEPTION 'fecha incidente menor a fecha de seguimiento';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.seguimiento_fecha_oficial() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Oficial" o 
+    where o.placa = new.placa and new.fecha < o."fechaIngreso" ) 
+    THEN
+      RAISE EXCEPTION 'fehcha de ingreos de oficial mayor a fecha de seguimiento';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.seguimiento_seguida_si_en_proceso() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."EstadoSeguimiento" e 
+    where new."idEstadoSeguimiento" = e."idEstadoSeguimiento" 
+    and ((e."idEstadoSeguimiento" = 2 and new.placa is NULL) 
+    or (e."idEstadoSeguimiento" != 2 and new.placa is not NULL) ) ) 
+    THEN
+      RAISE EXCEPTION 'Solo puede ser seguido cuando esta en proceso';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.sumario_concluyo_tiene_resultado() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."EstadoSumario" e 
+    where new."idEstadoSumario" = 3 and new.resultado IS NULL ) 
+    THEN
+      RAISE EXCEPTION 'Si concluyo tiene resultado';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.sumario_es_tipo_investigador() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF (SELECT o.tipo FROM tp1."Oficial" o 
+    where new.placa = o.placa and o.tipo != 'Investigador') 
+    THEN
+      RAISE EXCEPTION 'El oficial que investiga debe tener tipo Investigador';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.sumario_fecha_mayor_asignacion() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Asignacion" a 
+    where new."idAsignacion" = a."idAsignacion" and new.fecha < a."fechaInicio" ) 
+    THEN
+      RAISE EXCEPTION 'fecha de sumario menor a la de asignacion';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.sumario_fecha_mayor_investigador() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Oficial" i 
+    where new.placa = i.placa and new.fecha < i."fechaIngreso" ) 
+    THEN
+      RAISE EXCEPTION 'fecha sumario menor a fecha de ingreso del investigador';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.sumario_investigador_no_investigado() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Asignacion" a 
+    where new."idAsignacion" = a."idAsignacion" and new.placa = a.placa ) 
+    THEN
+      RAISE EXCEPTION 'Un investigador no puede investigarse a si mismo';              
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+CREATE FUNCTION tp1.superheroeo_no_delincuente() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF EXISTS (SELECT * FROM tp1."Civil" c, tp1."EstaCompuestaPor" comp 
+    where new.dni = c.dni and comp.dni = new.dni) 
+    THEN
+      RAISE EXCEPTION 'No puede haber un oficial con mismo dni que un civil';              
+    END IF;
+    RETURN NULL;
+  END;
+
+$$;
+
+CREATE FUNCTION tp1.superparticipo_no_civil() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$BEGIN
+    IF EXISTS (SELECT * FROM tp1."Superheroe" sh, tp1."Civil" c , tp1."SeInvolucraron" si  
+    where new."idSuperHeroe" = sh."idSuperHeroe" and c.dni = sh.dni 
+    and c.dni = si.dni and new."idIncidente" = si."idIncidente" ) 
+    THEN
+      RAISE EXCEPTION 'no puede participar como superheroe y como civil al mismo tiempo';
+    END IF;
+    RETURN NULL;
+  END;
+$$;
+
+Tables:
+
+CREATE TABLE tp1."Asignacion" (
+    "idAsignacion" serial NOT NULL,
+    "fechaInicio" date NOT NULL,
+    "idDesignacion" integer NOT NULL,
+    placa integer NOT NULL
+);
+
+CREATE TABLE tp1."Barrio" (
+    "idBarrio" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."Civil" (
+    dni integer NOT NULL,
+    nombre character varying(250) NOT NULL,
+    apellido character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."Conocimiento" (
+    conocedor integer NOT NULL,
+    conocido integer NOT NULL,
+    "fechaConocimiento" date NOT NULL,
+    "idTipoRelacion" integer NOT NULL
+);
+
+CREATE TABLE tp1."Departamento" (
+    "idDepartamento" serial NOT NULL,
+    nombre character varying(250) NOT NULL,
+    descripcion text DEFAULT ''::text NOT NULL
+);
+
+CREATE TABLE tp1."Designacion" (
+    "idDesignacion" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."Direccion" (
+    "idDireccion" serial NOT NULL,
+    calle character varying(250) NOT NULL,
+    altura integer NOT NULL,
+    "idBarrio" integer NOT NULL
+);
+
+CREATE TABLE tp1."EsContactadoPor" (
+    "idSuperHeroe" integer NOT NULL,
+    dni integer NOT NULL
+);
+
+CREATE TABLE tp1."EstaCompuestaPor" (
+    "idMafia" integer NOT NULL,
+    dni integer NOT NULL
+);
+
+CREATE TABLE tp1."EstadoSeguimiento" (
+    "idEstadoSeguimiento" serial NOT NULL,
+    estado character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."EstadoSumario" (
+    "idEstadoSumario" serial NOT NULL,
+    estado character varying(25) NOT NULL
+);
+
+CREATE TABLE tp1."Habilidad" (
+    "idHabilidad" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."Incidente" (
+    "idIncidente" serial NOT NULL,
+    fecha date NOT NULL,
+    calle_1 character varying(250) NOT NULL,
+    calle_2 character varying(250) NOT NULL,
+    "idTipoInicidente" integer NOT NULL,
+    "idDireccion" integer NOT NULL
+);
+
+CREATE TABLE tp1."Oficial" (
+    placa integer NOT NULL,
+    dni integer NOT NULL,
+    nombre character varying(250) NOT NULL,
+    apellido character varying(250) NOT NULL,
+    rango character varying(250) NOT NULL,
+    "fechaIngreso" date NOT NULL,
+    tipo character varying(250),
+    "idDepartamento" integer NOT NULL
+);
+
+CREATE TABLE tp1."OficialSeInvolucro" (
+    placa integer NOT NULL,
+    "idIncidente" integer NOT NULL,
+    "idResponsabilidad" integer NOT NULL
+);
+
+CREATE TABLE tp1."OrganizacionDelictiva" (
+    "idMafia" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."Posee" (
+    "idSuperHeroe" integer NOT NULL,
+    "idHabilidad" integer NOT NULL
+);
+
+CREATE TABLE tp1."RolCivil" (
+    "idRolCivil" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."RolOficial" (
+    "idResponsabilidad" serial NOT NULL,
+    descripcion character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."SeInvolucraron" (
+    dni integer NOT NULL,
+    "idIncidente" integer NOT NULL,
+    "idRolCivil" integer NOT NULL
+);
+
+CREATE TABLE tp1."Seguimiento" (
+    numero integer NOT NULL,
+    fecha date NOT NULL,
+    descripcion text,
+    conclusion text,
+    "idIncidente" integer NOT NULL,
+    placa integer,
+    "idEstadoSeguimiento" integer NOT NULL
+);
+
+CREATE TABLE tp1."Sumario" (
+    "idSumario" serial NOT NULL,
+    fecha date NOT NULL,
+    observacion text,
+    resultado text,
+    placa integer NOT NULL,
+    "idAsignacion" integer NOT NULL,
+    "idEstadoSumario" integer NOT NULL
+);
+
+CREATE TABLE tp1."SuperParticipo" (
+    "idSuperHeroe" integer NOT NULL,
+    "idIncidente" integer NOT NULL
+);
+
+CREATE TABLE tp1."Superheroe" (
+    "idSuperHeroe" serial NOT NULL,
+    nombre character varying(250) NOT NULL,
+    color_capa character varying(250) NOT NULL,
+    dni integer,
+    color_disfraz character varying(250) DEFAULT ''::character varying NOT NULL
+);
+
+CREATE TABLE tp1."TipoIncidente" (
+    "idTipoInicidente" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."TipoRelacion" (
+    "idTipoRelacion" serial NOT NULL,
+    nombre character varying(250) NOT NULL
+);
+
+CREATE TABLE tp1."ViveEn" (
+    dni integer NOT NULL,
+    "idDireccion" integer NOT NULL,
+    "fechaInicio" date NOT NULL
+);
+
+CREATE TABLE tp1."archienemigoDe" (
+    "idSuperHeroe" integer NOT NULL,
+    dni integer NOT NULL
+);
+
+ALTER TABLE ONLY tp1."Civil"
+    ADD CONSTRAINT "Civil_pkey" PRIMARY KEY (dni);
+
+ALTER TABLE ONLY tp1."Departamento"
+    ADD CONSTRAINT "Departamento_pkey" PRIMARY KEY ("idDepartamento");
+
+ALTER TABLE ONLY tp1."Direccion"
+    ADD CONSTRAINT "Direccion_pkey" PRIMARY KEY ("idDireccion");
+
+ALTER TABLE ONLY tp1."Incidente"
+    ADD CONSTRAINT "Incidente_pkey" PRIMARY KEY ("idIncidente");
+
+ALTER TABLE ONLY tp1."OrganizacionDelictiva"
+    ADD CONSTRAINT "Organización_delictiva_pkey" PRIMARY KEY ("idMafia");
+
+ALTER TABLE ONLY tp1."TipoRelacion"
+    ADD CONSTRAINT "TipoDeRelacion_pkey" PRIMARY KEY ("idTipoRelacion");
+
+ALTER TABLE ONLY tp1."TipoIncidente"
+    ADD CONSTRAINT "TipoIncidente_pkey" PRIMARY KEY ("idTipoInicidente");
+
+ALTER TABLE ONLY tp1."archienemigoDe"
+    ADD CONSTRAINT archienemigo_de_pkey PRIMARY KEY ("idSuperHeroe", dni);
+
+ALTER TABLE ONLY tp1."Asignacion"
+    ADD CONSTRAINT asignacion_pkey PRIMARY KEY ("idAsignacion");
+
+ALTER TABLE ONLY tp1."Conocimiento"
+    ADD CONSTRAINT conocimiento_pkey PRIMARY KEY (conocedor, conocido);
+
+ALTER TABLE ONLY tp1."Designacion"
+    ADD CONSTRAINT designacion_pkey PRIMARY KEY ("idDesignacion");
+
+ALTER TABLE ONLY tp1."EsContactadoPor"
+    ADD CONSTRAINT es_contactado_por_pkey PRIMARY KEY ("idSuperHeroe", dni);
+
+ALTER TABLE ONLY tp1."EstaCompuestaPor"
+    ADD CONSTRAINT esta_compuesta_por_pkey PRIMARY KEY ("idMafia", dni);
+
+ALTER TABLE ONLY tp1."EstadoSeguimiento"
+    ADD CONSTRAINT "estadoSeguimiento_pkey" PRIMARY KEY ("idEstadoSeguimiento");
+
+ALTER TABLE ONLY tp1."EstadoSumario"
+    ADD CONSTRAINT estado_sumario_pkey PRIMARY KEY ("idEstadoSumario");
+
+ALTER TABLE ONLY tp1."Barrio"
+    ADD CONSTRAINT "idBarrio" PRIMARY KEY ("idBarrio");
+
+ALTER TABLE ONLY tp1."Oficial"
+    ADD CONSTRAINT oficial_dni_key UNIQUE (dni);
+
+ALTER TABLE ONLY tp1."Oficial"
+    ADD CONSTRAINT oficial_pkey PRIMARY KEY (placa);
+
+ALTER TABLE ONLY tp1."OficialSeInvolucro"
+    ADD CONSTRAINT oficial_se_involucro_pkey PRIMARY KEY (placa, "idIncidente", "idResponsabilidad");
+
+ALTER TABLE ONLY tp1."Habilidad"
+    ADD CONSTRAINT pk_habilidad PRIMARY KEY ("idHabilidad");
+
+ALTER TABLE ONLY tp1."Posee"
+    ADD CONSTRAINT posee_pkey PRIMARY KEY ("idSuperHeroe", "idHabilidad");
+
+ALTER TABLE ONLY tp1."RolCivil"
+    ADD CONSTRAINT rol_civil_pkey PRIMARY KEY ("idRolCivil");
+
+ALTER TABLE ONLY tp1."RolOficial"
+    ADD CONSTRAINT rol_oficial_pkey PRIMARY KEY ("idResponsabilidad");
+
+ALTER TABLE ONLY tp1."SeInvolucraron"
+    ADD CONSTRAINT se_involucraron_pkey PRIMARY KEY (dni, "idIncidente");
+
+ALTER TABLE ONLY tp1."Seguimiento"
+    ADD CONSTRAINT seguimiento_pkey PRIMARY KEY (numero, "idIncidente");
+
+ALTER TABLE ONLY tp1."Sumario"
+    ADD CONSTRAINT sumario_pkey PRIMARY KEY ("idSumario");
+
+ALTER TABLE ONLY tp1."SuperParticipo"
+    ADD CONSTRAINT super_participo_pkey PRIMARY KEY ("idSuperHeroe", "idIncidente");
+
+ALTER TABLE ONLY tp1."Superheroe"
+    ADD CONSTRAINT superheroe_pkey PRIMARY KEY ("idSuperHeroe");
+
+ALTER TABLE ONLY tp1."ViveEn"
+    ADD CONSTRAINT vive_en_pkey PRIMARY KEY (dni, "idDireccion");
+
+CREATE INDEX "fki_idDireccion" ON tp1."Incidente" USING btree ("idDireccion");
+
+CREATE INDEX "fki_idTipoIncidente" ON tp1."Incidente" USING btree ("idTipoInicidente");
+
+CREATE INDEX fki_superheroe_dni ON tp1."Superheroe" USING btree (dni);
+
+CREATE CONSTRAINT TRIGGER check_archienemigo_de_si_mismo 
+AFTER INSERT OR UPDATE ON tp1."archienemigoDe" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.archienemigo_no_es_el_mismo();
+
+CREATE CONSTRAINT TRIGGER check_concluyo_tiene_resultado 
+AFTER INSERT OR UPDATE ON tp1."Sumario" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.sumario_concluyo_tiene_resultado();
+
+CREATE CONSTRAINT TRIGGER check_dni_no_civiles 
+AFTER INSERT OR UPDATE ON tp1."Oficial" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.dni_oficiales_civiles();
+
+CREATE CONSTRAINT TRIGGER check_es_tipo_investigador 
+AFTER INSERT OR UPDATE ON tp1."Sumario" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.sumario_es_tipo_investigador();
+
+CREATE CONSTRAINT TRIGGER check_fecha_inicio_mayor_a_oficial 
+AFTER INSERT OR UPDATE ON tp1."Asignacion" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.asignacion_fecha_mayor_a_oficial();
+
+CREATE CONSTRAINT TRIGGER check_fecha_mayor_asigancion 
+AFTER INSERT OR UPDATE ON tp1."Sumario" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.sumario_fecha_mayor_asignacion();
+
+CREATE CONSTRAINT TRIGGER check_fecha_mayor_investigador 
+AFTER INSERT OR UPDATE ON tp1."Sumario" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.sumario_fecha_mayor_investigador();
+
+CREATE CONSTRAINT TRIGGER check_fecha_oficial_involucrado 
+AFTER INSERT OR UPDATE ON tp1."OficialSeInvolucro" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.oficial_se_involucro_fecha();
+
+CREATE CONSTRAINT TRIGGER check_fecha_seg_incidente 
+AFTER INSERT OR UPDATE ON tp1."Seguimiento" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.seguimiento_fecha_incidente();
+
+CREATE CONSTRAINT TRIGGER check_fecha_seg_oficial 
+AFTER INSERT OR UPDATE ON tp1."Seguimiento" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.seguimiento_fecha_oficial();
+
+CREATE CONSTRAINT TRIGGER check_investigador_no_se_investiga 
+AFTER INSERT OR UPDATE ON tp1."Sumario" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE
+tp1.sumario_investigador_no_investigado();
+
+CREATE CONSTRAINT TRIGGER check_seg_conclusion 
+AFTER INSERT OR UPDATE ON tp1."Seguimiento"
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.seguimiento_conclusion();
+
+CREATE CONSTRAINT TRIGGER check_seguimiento_cerrado_no_cambia 
+AFTER UPDATE ON tp1."Seguimiento" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.seguimiento_al_cerrarse_no_puede_cambiar();
+
+CREATE CONSTRAINT TRIGGER check_seinvolucraron_no_sh 
+AFTER INSERT OR UPDATE ON tp1."SeInvolucraron" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.civil_no_superparticipo();
+
+CREATE CONSTRAINT TRIGGER check_solo_seguido_en_proceso 
+AFTER INSERT OR UPDATE ON tp1."Seguimiento" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.seguimiento_seguida_si_en_proceso();
+
+CREATE CONSTRAINT TRIGGER check_superheroeo_no_delincuente 
+AFTER INSERT OR UPDATE ON tp1."Superheroe"
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.superheroeo_no_delincuente();
+
+CREATE CONSTRAINT TRIGGER check_superparticipo_no_civil 
+AFTER INSERT OR UPDATE ON tp1."SuperParticipo" 
+NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE 
+tp1.superparticipo_no_civil();
+
+ALTER TABLE ONLY tp1."OficialSeInvolucro"
+    ADD CONSTRAINT "OficialSeInvolucro_placa_fkey" FOREIGN KEY (placa) 
+REFERENCES tp1."Oficial"(placa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY tp1."archienemigoDe"
+    ADD CONSTRAINT archienemigo_de_dni_fkey FOREIGN KEY (dni) 
+REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."archienemigoDe"
+    ADD CONSTRAINT archienemigo_de_id_sh_fkey FOREIGN KEY ("idSuperHeroe") 
+REFERENCES tp1."Superheroe"("idSuperHeroe");
+
+ALTER TABLE ONLY tp1."Asignacion"
+    ADD CONSTRAINT asignacion_id_designacion_fkey FOREIGN KEY ("idDesignacion") 
+REFERENCES tp1."Designacion"("idDesignacion");
+
+ALTER TABLE ONLY tp1."Asignacion"
+    ADD CONSTRAINT asignacion_placa_fkey FOREIGN KEY (placa) REFERENCES tp1."Oficial"(placa) 
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY tp1."Conocimiento"
+    ADD CONSTRAINT conocimiento_conocedor_fkey FOREIGN KEY (conocedor) 
+REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."Conocimiento"
+    ADD CONSTRAINT conocimiento_conocido_fkey FOREIGN KEY (conocido) 
+REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."Conocimiento"
+    ADD CONSTRAINT conocimiento_id_tipo_de_relacion_fkey FOREIGN KEY ("idTipoRelacion") 
+REFERENCES tp1."TipoRelacion"("idTipoRelacion");
+
+ALTER TABLE ONLY tp1."Direccion"
+    ADD CONSTRAINT direccion_id_barrio_fkey FOREIGN KEY ("idBarrio") 
+REFERENCES tp1."Barrio"("idBarrio");
+
+ALTER TABLE ONLY tp1."EsContactadoPor"
+    ADD CONSTRAINT es_contactado_por_dni_fkey FOREIGN KEY (dni) 
+REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."EsContactadoPor"
+    ADD CONSTRAINT es_contactado_por_id_sh_fkey FOREIGN KEY ("idSuperHeroe") 
+REFERENCES tp1."Superheroe"("idSuperHeroe");
+
+ALTER TABLE ONLY tp1."EstaCompuestaPor"
+    ADD CONSTRAINT esta_compuesta_por_dni_fkey FOREIGN KEY (dni) 
+REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."EstaCompuestaPor"
+    ADD CONSTRAINT esta_compuesta_por_id_mafia_fkey FOREIGN KEY ("idMafia") 
+REFERENCES tp1."OrganizacionDelictiva"("idMafia");
+
+ALTER TABLE ONLY tp1."Incidente"
+    ADD CONSTRAINT "incidente_idDireccion_fkey" FOREIGN KEY ("idDireccion") 
+REFERENCES tp1."Direccion"("idDireccion");
+
+ALTER TABLE ONLY tp1."Incidente"
+    ADD CONSTRAINT "incidente_idTIpoIncidente_fkey" FOREIGN KEY ("idTipoInicidente") 
+REFERENCES tp1."TipoIncidente"("idTipoInicidente");
+
+ALTER TABLE ONLY tp1."Oficial"
+    ADD CONSTRAINT "oficial_idDepartamento_fkey" FOREIGN KEY ("idDepartamento") 
+REFERENCES tp1."Departamento"("idDepartamento");
+
+ALTER TABLE ONLY tp1."OficialSeInvolucro"
+    ADD CONSTRAINT oficial_se_involucro_id_incidente_fkey FOREIGN KEY ("idIncidente") 
+REFERENCES tp1."Incidente"("idIncidente");
+
+ALTER TABLE ONLY tp1."OficialSeInvolucro"
+    ADD CONSTRAINT oficial_se_involucro_id_responsabilidad_fkey FOREIGN KEY ("idResponsabilidad") 
+REFERENCES tp1."RolOficial"("idResponsabilidad");
+
+ALTER TABLE ONLY tp1."Posee"
+    ADD CONSTRAINT posee_id_habilidad_fkey FOREIGN KEY ("idHabilidad") 
+REFERENCES tp1."Habilidad"("idHabilidad");
+
+ALTER TABLE ONLY tp1."Posee"
+    ADD CONSTRAINT posee_id_sh_fkey FOREIGN KEY ("idSuperHeroe")
+REFERENCES tp1."Superheroe"("idSuperHeroe");
+
+ALTER TABLE ONLY tp1."SeInvolucraron"
+    ADD CONSTRAINT se_involucraron_dni_fkey FOREIGN KEY (dni) 
+REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."SeInvolucraron"
+    ADD CONSTRAINT se_involucraron_id_incidente_fkey FOREIGN KEY ("idIncidente") 
+REFERENCES tp1."Incidente"("idIncidente");
+
+ALTER TABLE ONLY tp1."SeInvolucraron"
+    ADD CONSTRAINT se_involucraron_id_rol_civil_fkey FOREIGN KEY ("idRolCivil") 
+REFERENCES tp1."RolCivil"("idRolCivil");
+
+ALTER TABLE ONLY tp1."Seguimiento"
+    ADD CONSTRAINT "seguimiento_idEstadoSeg_fkey" FOREIGN KEY ("idEstadoSeguimiento") 
+REFERENCES tp1."EstadoSeguimiento"("idEstadoSeguimiento");
+
+ALTER TABLE ONLY tp1."Seguimiento"
+    ADD CONSTRAINT "seguimiento_idIncidente_fkey" FOREIGN KEY ("idIncidente") 
+REFERENCES tp1."Incidente"("idIncidente");
+
+ALTER TABLE ONLY tp1."Seguimiento"
+    ADD CONSTRAINT seguimiento_placa_fkey FOREIGN KEY (placa) 
+REFERENCES tp1."Oficial"(placa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY tp1."Sumario"
+    ADD CONSTRAINT "sumario_estado_idEEstadoSum" FOREIGN KEY ("idEstadoSumario") 
+REFERENCES tp1."EstadoSumario"("idEstadoSumario") 
+ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+ALTER TABLE ONLY tp1."Sumario"
+    ADD CONSTRAINT sumario_id_asignacion_fkey FOREIGN KEY ("idAsignacion") 
+REFERENCES tp1."Asignacion"("idAsignacion");
+
+ALTER TABLE ONLY tp1."Sumario"
+    ADD CONSTRAINT sumario_investigador_placa_fkey FOREIGN KEY (placa)
+REFERENCES tp1."Oficial"(placa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY tp1."SuperParticipo"
+    ADD CONSTRAINT super_participo_id_incidente_fkey FOREIGN KEY ("idIncidente")
+REFERENCES tp1."Incidente"("idIncidente");
+
+ALTER TABLE ONLY tp1."SuperParticipo"
+    ADD CONSTRAINT super_participo_id_sh_fkey FOREIGN KEY ("idSuperHeroe") 
+REFERENCES tp1."Superheroe"("idSuperHeroe");
+
+ALTER TABLE ONLY tp1."Superheroe"
+    ADD CONSTRAINT superheroe_dni_fkey FOREIGN KEY (dni) REFERENCES tp1."Civil"(dni) 
+ON UPDATE CASCADE;
+
+ALTER TABLE ONLY tp1."ViveEn"
+    ADD CONSTRAINT vive_en_dni_fkey FOREIGN KEY (dni) REFERENCES tp1."Civil"(dni);
+
+ALTER TABLE ONLY tp1."ViveEn"
+    ADD CONSTRAINT vive_en_id_direccion_fkey FOREIGN KEY ("idDireccion") 
+REFERENCES tp1."Direccion"("idDireccion");
+
