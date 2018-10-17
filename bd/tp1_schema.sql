@@ -581,7 +581,7 @@ ALTER TABLE tp1."RolCivil" OWNER TO grupo_01;
 
 CREATE TABLE tp1."RolOficial" (
     "idResponsabilidad" serial NOT NULL,
-    descripcion text
+    descripcion character varying(250) NOT NULL,
 );
 
 
