@@ -1,4 +1,11 @@
-SELECT distinct i."idIncidente", ti."nombre", i.fecha, i.calle_1, i.calle_2, d.calle, d.altura, b.nombre
+SELECT distinct i."idIncidente",
+                ti."nombre" as "tipoIncidente",
+                i.fecha as "fechaIncidente",
+                d.calle   as "calleDireccion",
+                d.altura as "alturaDireccion",
+                i.calle_1 as "calle_1",
+                i.calle_2 as "calle_2",
+                b.nombre as "nombreBarrio"
 FROM tp1."Incidente" i
 JOIN tp1."TipoIncidente" ti ON i."idTipoInicidente" = ti."idTipoInicidente"
 JOIN tp1."SuperParticipo" sp ON i."idIncidente" = sp."idIncidente"

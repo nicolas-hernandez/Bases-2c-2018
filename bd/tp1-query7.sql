@@ -1,4 +1,7 @@
-SELECT distinct civil.dni, civil.nombre, civil.apellido, binc.nombre
+SELECT distinct civil.dni as dniCivil,
+				civil.nombre as nombreCivil,
+				civil.apellido as apellidoCivil,
+				binc.nombre as nombreBarrio
 FROM tp1."Incidente" i 
 JOIN tp1."SeInvolucraron" si ON i."idIncidente" = si."idIncidente"
 JOIN tp1."Direccion" dinc ON i."idDireccion" = dinc."idDireccion"

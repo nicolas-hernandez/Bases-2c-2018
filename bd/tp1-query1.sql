@@ -29,4 +29,4 @@ JOIN tp1."SeInvolucraron" si ON i."idIncidente" = si."idIncidente"
 JOIN tp1."Civil" c ON si.dni = c.dni
 JOIN tp1."RolCivil" rc ON si."idRolCivil" = rc."idRolCivil"
 WHERE i.fecha < '2018-10-07' and i.fecha > '2018-09-15'
-ORDER BY 1 ASC, 5 ASC
+ORDER BY 1 ASC, 5 ASC;
