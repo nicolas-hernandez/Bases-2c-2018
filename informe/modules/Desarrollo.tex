@@ -17,12 +17,12 @@ Civil(\uline{dni}, nombre, apellido)\\
 %PK = \{dni\}\\
 %CK = \{dni\}\\
 
-Superheroe(\uline{idSh}, nombre, color de disfraz, \dashuline{dni})\\
-%PK = \{idSH\}\\
-%CK = \{idSh\}\\
+Superheroe(\uline{idSuperheroe}, nombre, color de disfraz, \dashuline{dni})\\
+%PK = \{idSuperheroe\}\\
+%CK = \{idSuperheroe\}\\
 %FK = \{dni\}\\
 
-Habilidad(\uline{IdHabilidad}, nombre)\\
+Habilidad(\uline{idHabilidad}, nombre)\\
 
 OrganizacionDelictiva(\uline{idMafia}, nombre)\\
 
@@ -30,7 +30,7 @@ Direccion(\uline{idDireccion}, calle, altura, \dashuline{idBarrio})\\
 
 Barrio(\uline{idBarrio}, nombre)\\
 
-TipoDeRelacion(\uline{idTipoDeRelacion}, nombre)\\
+TipoRelacion(\uline{idTipoRelacion}, nombre)\\
 
 Incidente(\uline{idIncidente}, fecha, calle\_1, calle\_2,
 \dashuline{idTipoIncidente}, \dashuline{idDireccion})\\
@@ -60,17 +60,17 @@ EstadoSumario(\uline{idEstadoSum}, estado) \\
 
 Designacion(\uline{idDesignación}, nombre) \\
 
-\subsubsection{Relaciones}\label{relaciones}
+\subsubsection{Interrelaciones}\label{relaciones}
 
 OficialSeInvolucró(\uuline{placa}, \uuline{idIncidente}, \uuline{idResponsabilidad})\\
 
-Posee(\uuline{idSh}, \uuline{idHabilidad})\\
+Posee(\uuline{idSuperheroe}, \uuline{idHabilidad})\\
 
-ArchienemigoDe(\uuline{idSh},\uuline{dni})\\
+ArchienemigoDe(\uuline{idSuperheroe},\uuline{dni})\\
 
-EsContactadoPor(\uuline{idSh},\uuline{dni})\\
+EsContactadoPor(\uuline{idSuperheroe},\uuline{dni})\\
 
-SuperParticipó(\uuline{idSh}, \uuline{idIncidente})\\
+SuperParticipó(\uuline{idSuperheroe}, \uuline{idIncidente})\\
 
 EstaCompuestaPor(\uuline{idMafia}, \uuline{dni})\\
 
