@@ -366,14 +366,11 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE tp1."Asignacion" (
-    "idAsignacion" integer NOT NULL,
+    "idAsignacion" serial NOT NULL,
     "fechaInicio" date NOT NULL,
     "idDesignacion" integer NOT NULL,
     placa integer NOT NULL
 );
-
-
-ALTER TABLE tp1."Asignacion" OWNER TO grupo_01;
 
 --
 -- TOC entry 197 (class 1259 OID 18537)
@@ -381,7 +378,7 @@ ALTER TABLE tp1."Asignacion" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Barrio" (
-    "idBarrio" integer NOT NULL,
+    "idBarrio" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -423,7 +420,7 @@ ALTER TABLE tp1."Conocimiento" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Departamento" (
-    "idDepartamento" integer NOT NULL,
+    "idDepartamento" serial NOT NULL,
     nombre character varying(250) NOT NULL,
     descripcion text DEFAULT ''::text NOT NULL
 );
@@ -437,7 +434,7 @@ ALTER TABLE tp1."Departamento" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Designacion" (
-    "idDesignacion" integer NOT NULL,
+    "idDesignacion" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -450,7 +447,7 @@ ALTER TABLE tp1."Designacion" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Direccion" (
-    "idDireccion" integer NOT NULL,
+    "idDireccion" serial NOT NULL,
     calle character varying(250) NOT NULL,
     altura integer NOT NULL,
     "idBarrio" integer NOT NULL
@@ -491,7 +488,7 @@ ALTER TABLE tp1."EstaCompuestaPor" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."EstadoSeguimiento" (
-    "idEstadoSeguimiento" integer NOT NULL,
+    "idEstadoSeguimiento" serial NOT NULL,
     estado character varying(250) NOT NULL
 );
 
@@ -504,7 +501,7 @@ ALTER TABLE tp1."EstadoSeguimiento" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."EstadoSumario" (
-    "idEstadoSumario" integer NOT NULL,
+    "idEstadoSumario" serial NOT NULL,
     estado character varying(25) NOT NULL
 );
 
@@ -517,7 +514,7 @@ ALTER TABLE tp1."EstadoSumario" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Habilidad" (
-    "idHabilidad" integer NOT NULL,
+    "idHabilidad" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -530,7 +527,7 @@ ALTER TABLE tp1."Habilidad" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Incidente" (
-    "idIncidente" integer NOT NULL,
+    "idIncidente" serial NOT NULL,
     fecha date NOT NULL,
     calle_1 character varying(250) NOT NULL,
     calle_2 character varying(250) NOT NULL,
@@ -580,7 +577,7 @@ ALTER TABLE tp1."OficialSeInvolucro" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."OrganizacionDelictiva" (
-    "idMafia" integer NOT NULL,
+    "idMafia" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -606,7 +603,7 @@ ALTER TABLE tp1."Posee" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."RolCivil" (
-    "idRolCivil" integer NOT NULL,
+    "idRolCivil" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -619,7 +616,7 @@ ALTER TABLE tp1."RolCivil" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."RolOficial" (
-    "idResponsabilidad" integer NOT NULL,
+    "idResponsabilidad" serial NOT NULL,
     descripcion text
 );
 
@@ -664,7 +661,7 @@ ALTER TABLE tp1."Seguimiento" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Sumario" (
-    "idSumario" integer NOT NULL,
+    "idSumario" serial NOT NULL,
     fecha date NOT NULL,
     observacion text,
     resultado text,
@@ -695,7 +692,7 @@ ALTER TABLE tp1."SuperParticipo" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."Superheroe" (
-    "idSuperHeroe" integer NOT NULL,
+    "idSuperHeroe" serial NOT NULL,
     nombre character varying(250) NOT NULL,
     color_capa character varying(250) NOT NULL,
     dni integer,
@@ -711,7 +708,7 @@ ALTER TABLE tp1."Superheroe" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."TipoIncidente" (
-    "idTipoInicidente" integer NOT NULL,
+    "idTipoInicidente" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 
@@ -724,7 +721,7 @@ ALTER TABLE tp1."TipoIncidente" OWNER TO grupo_01;
 --
 
 CREATE TABLE tp1."TipoRelacion" (
-    "idTipoRelacion" integer NOT NULL,
+    "idTipoRelacion" serial NOT NULL,
     nombre character varying(250) NOT NULL
 );
 

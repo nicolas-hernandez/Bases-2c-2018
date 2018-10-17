@@ -2,10 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.5 (Ubuntu 10.5-1.pgdg16.04+1)
--- Dumped by pg_dump version 10.5 (Ubuntu 10.5-1.pgdg16.04+1)
-
--- Started on 2018-10-16 12:09:23 -03
+-- Dumped from database version 10.5
+-- Dumped by pg_dump version 10.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,8 +16,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3112 (class 0 OID 18549)
--- Dependencies: 200
 -- Data for Name: Departamento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -35,8 +31,6 @@ INSERT INTO tp1."Departamento" ("idDepartamento", nombre, descripcion) VALUES (9
 
 
 --
--- TOC entry 3113 (class 0 OID 18556)
--- Dependencies: 201
 -- Data for Name: Designacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -53,8 +47,6 @@ INSERT INTO tp1."Designacion" ("idDesignacion", nombre) VALUES (10, 'Antiterrori
 
 
 --
--- TOC entry 3121 (class 0 OID 18583)
--- Dependencies: 209
 -- Data for Name: Oficial; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -71,9 +63,7 @@ INSERT INTO tp1."Oficial" (placa, dni, nombre, apellido, rango, "fechaIngreso", 
 
 
 --
--- TOC entry 3108 (class 0 OID 18534)
--- Dependencies: 196
--- Data for Name: Asignacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
+-- Data for Name: Asignacion; Type: TABLE DATA; Schema: tp1; Owner: postgres
 --
 
 INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (1, '2008-03-04', 1, 1);
@@ -95,30 +85,26 @@ INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", pl
 INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (17, '2010-05-04', 9, 9);
 INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (18, '2010-05-04', 3, 9);
 INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (19, '2010-02-01', 10, 10);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (21, '2016-02-01', 8, 10);
-INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (20, '2013-02-01', 7, 10);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (20, '2016-02-01', 8, 10);
+INSERT INTO tp1."Asignacion" ("idAsignacion", "fechaInicio", "idDesignacion", placa) VALUES (21, '2013-02-01', 7, 10);
 
 
 --
--- TOC entry 3109 (class 0 OID 18537)
--- Dependencies: 197
 -- Data for Name: Barrio; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (5, 'San Isidro');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (6, 'Recoleta');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (7, 'sAN TELMO');
-INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (9, 'Adrogue');
 INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (1, 'Belgrano');
 INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (2, 'Caballito');
 INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (3, 'Barracas');
 INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (4, 'Avellaneda');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (5, 'San Isidro');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (6, 'Recoleta');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (7, 'sAN TELMO');
 INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (8, 'Moron');
+INSERT INTO tp1."Barrio" ("idBarrio", nombre) VALUES (9, 'Adrogue');
 
 
 --
--- TOC entry 3110 (class 0 OID 18540)
--- Dependencies: 198
 -- Data for Name: Civil; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -154,8 +140,6 @@ INSERT INTO tp1."Civil" (dni, nombre, apellido) VALUES (209, 'Tim', 'Berne');
 
 
 --
--- TOC entry 3133 (class 0 OID 18635)
--- Dependencies: 221
 -- Data for Name: TipoRelacion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -167,8 +151,6 @@ INSERT INTO tp1."TipoRelacion" ("idTipoRelacion", nombre) VALUES (5, 'Enemigo');
 
 
 --
--- TOC entry 3111 (class 0 OID 18546)
--- Dependencies: 199
 -- Data for Name: Conocimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -179,8 +161,6 @@ INSERT INTO tp1."Conocimiento" (conocedor, conocido, "fechaConocimiento", "idTip
 
 
 --
--- TOC entry 3114 (class 0 OID 18559)
--- Dependencies: 202
 -- Data for Name: Direccion; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -198,20 +178,18 @@ INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (1
 INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (12, 'Juan Domingo Peron', 1017, 4);
 INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (13, 'Juan Domingo Peron', 1945, 7);
 INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (14, 'JUlio Roca', 1945, 8);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (16, 'Guillermo Brown', 256, 9);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (17, 'Guillermo Brown', 323, 9);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (18, 'Cabildo', 5540, 1);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (19, 'Cabildo', 5545, 1);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (20, 'Cabildo', 6540, 1);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (21, 'Cabildo', 7213, 1);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (22, 'Iriarte', 2456, 3);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (23, 'Iriarte', 2356, 3);
-INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (24, 'Iriarte', 250, 3);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (15, 'Guillermo Brown', 256, 9);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (16, 'Guillermo Brown', 323, 9);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (17, 'Cabildo', 5540, 1);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (18, 'Cabildo', 5545, 1);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (19, 'Cabildo', 6540, 1);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (20, 'Cabildo', 7213, 1);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (21, 'Iriarte', 2456, 3);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (22, 'Iriarte', 2356, 3);
+INSERT INTO tp1."Direccion" ("idDireccion", calle, altura, "idBarrio") VALUES (23, 'Iriarte', 250, 3);
 
 
 --
--- TOC entry 3131 (class 0 OID 18625)
--- Dependencies: 219
 -- Data for Name: Superheroe; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -232,8 +210,6 @@ INSERT INTO tp1."Superheroe" ("idSuperHeroe", nombre, color_capa, dni, color_dis
 
 
 --
--- TOC entry 3115 (class 0 OID 18562)
--- Dependencies: 203
 -- Data for Name: EsContactadoPor; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -243,8 +219,6 @@ INSERT INTO tp1."EsContactadoPor" ("idSuperHeroe", dni) VALUES (50, 7);
 
 
 --
--- TOC entry 3123 (class 0 OID 18592)
--- Dependencies: 211
 -- Data for Name: OrganizacionDelictiva; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -258,8 +232,6 @@ INSERT INTO tp1."OrganizacionDelictiva" ("idMafia", nombre) VALUES (7, 'Illumina
 
 
 --
--- TOC entry 3116 (class 0 OID 18565)
--- Dependencies: 204
 -- Data for Name: EstaCompuestaPor; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -281,8 +253,6 @@ INSERT INTO tp1."EstaCompuestaPor" ("idMafia", dni) VALUES (6, 110);
 
 
 --
--- TOC entry 3117 (class 0 OID 18568)
--- Dependencies: 205
 -- Data for Name: EstadoSeguimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -292,8 +262,6 @@ INSERT INTO tp1."EstadoSeguimiento" ("idEstadoSeguimiento", estado) VALUES (3, '
 
 
 --
--- TOC entry 3118 (class 0 OID 18571)
--- Dependencies: 206
 -- Data for Name: EstadoSumario; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -303,8 +271,6 @@ INSERT INTO tp1."EstadoSumario" ("idEstadoSumario", estado) VALUES (3, 'Concluyo
 
 
 --
--- TOC entry 3119 (class 0 OID 18574)
--- Dependencies: 207
 -- Data for Name: Habilidad; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -313,20 +279,20 @@ INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (2, 'La fuerza');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (3, 'Gambetear');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (4, 'Trepar');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (5, 'Artes Marciales');
+INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (6, 'Artes Marcianas');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (7, 'Volar');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (8, 'Nadar');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (9, 'Espada');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (10, 'Genki-dama');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (11, 'kamehameha');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (12, 'Respawnear al tercer dia');
+INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (13, 'Correr');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (14, 'Magia');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (15, 'Hacking');
 INSERT INTO tp1."Habilidad" ("idHabilidad", nombre) VALUES (16, 'Armas de fuego');
 
 
 --
--- TOC entry 3132 (class 0 OID 18632)
--- Dependencies: 220
 -- Data for Name: TipoIncidente; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -338,8 +304,6 @@ INSERT INTO tp1."TipoIncidente" ("idTipoInicidente", nombre) VALUES (5, 'Terrori
 
 
 --
--- TOC entry 3120 (class 0 OID 18577)
--- Dependencies: 208
 -- Data for Name: Incidente; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -349,8 +313,6 @@ INSERT INTO tp1."Incidente" ("idIncidente", fecha, calle_1, calle_2, "idTipoInic
 
 
 --
--- TOC entry 3126 (class 0 OID 18601)
--- Dependencies: 214
 -- Data for Name: RolOficial; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -360,8 +322,6 @@ INSERT INTO tp1."RolOficial" ("idResponsabilidad", descripcion) VALUES (3, 'Peri
 
 
 --
--- TOC entry 3122 (class 0 OID 18589)
--- Dependencies: 210
 -- Data for Name: OficialSeInvolucro; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -373,8 +333,6 @@ INSERT INTO tp1."OficialSeInvolucro" (placa, "idIncidente", "idResponsabilidad")
 
 
 --
--- TOC entry 3124 (class 0 OID 18595)
--- Dependencies: 212
 -- Data for Name: Posee; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -404,8 +362,6 @@ INSERT INTO tp1."Posee" ("idSuperHeroe", "idHabilidad") VALUES (56, 12);
 
 
 --
--- TOC entry 3125 (class 0 OID 18598)
--- Dependencies: 213
 -- Data for Name: RolCivil; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -415,8 +371,6 @@ INSERT INTO tp1."RolCivil" ("idRolCivil", nombre) VALUES (3, 'Testigo');
 
 
 --
--- TOC entry 3127 (class 0 OID 18607)
--- Dependencies: 215
 -- Data for Name: SeInvolucraron; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -430,8 +384,6 @@ INSERT INTO tp1."SeInvolucraron" (dni, "idIncidente", "idRolCivil") VALUES (107,
 
 
 --
--- TOC entry 3128 (class 0 OID 18610)
--- Dependencies: 216
 -- Data for Name: Seguimiento; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -442,8 +394,6 @@ INSERT INTO tp1."Seguimiento" (numero, fecha, descripcion, conclusion, "idIncide
 
 
 --
--- TOC entry 3129 (class 0 OID 18616)
--- Dependencies: 217
 -- Data for Name: Sumario; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -454,8 +404,6 @@ INSERT INTO tp1."Sumario" ("idSumario", fecha, observacion, resultado, placa, "i
 
 
 --
--- TOC entry 3130 (class 0 OID 18622)
--- Dependencies: 218
 -- Data for Name: SuperParticipo; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -466,8 +414,6 @@ INSERT INTO tp1."SuperParticipo" ("idSuperHeroe", "idIncidente") VALUES (6, 3);
 
 
 --
--- TOC entry 3134 (class 0 OID 18638)
--- Dependencies: 222
 -- Data for Name: ViveEn; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -528,8 +474,6 @@ INSERT INTO tp1."ViveEn" (dni, "idDireccion", "fechaInicio") VALUES (210, 4, '20
 
 
 --
--- TOC entry 3135 (class 0 OID 18641)
--- Dependencies: 223
 -- Data for Name: archienemigoDe; Type: TABLE DATA; Schema: tp1; Owner: grupo_01
 --
 
@@ -549,7 +493,117 @@ INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (7, 107);
 INSERT INTO tp1."archienemigoDe" ("idSuperHeroe", dni) VALUES (7, 106);
 
 
--- Completed on 2018-10-16 12:09:23 -03
+--
+-- Name: Asignacion_idAsignacion_seq; Type: SEQUENCE SET; Schema: tp1; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tp1."Asignacion_idAsignacion_seq"', 57, true);
+
+
+--
+-- Name: Barrio_idBarrio_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Barrio_idBarrio_seq"', 9, true);
+
+
+--
+-- Name: Departamento_idDepartamento_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Departamento_idDepartamento_seq"', 9, true);
+
+
+--
+-- Name: Designacion_idDesignacion_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Designacion_idDesignacion_seq"', 10, true);
+
+
+--
+-- Name: Direccion_idDireccion_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Direccion_idDireccion_seq"', 23, true);
+
+
+--
+-- Name: EstadoSeguimiento_idEstadoSeguimiento_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."EstadoSeguimiento_idEstadoSeguimiento_seq"', 3, true);
+
+
+--
+-- Name: EstadoSumario_idEstadoSumario_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."EstadoSumario_idEstadoSumario_seq"', 3, true);
+
+
+--
+-- Name: Habilidad_idHabilidad_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Habilidad_idHabilidad_seq"', 16, true);
+
+
+--
+-- Name: Incidente_idIncidente_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Incidente_idIncidente_seq"', 3, true);
+
+
+--
+-- Name: OrganizacionDelictiva_idMafia_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."OrganizacionDelictiva_idMafia_seq"', 7, true);
+
+
+--
+-- Name: RolCivil_idRolCivil_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."RolCivil_idRolCivil_seq"', 3, true);
+
+
+--
+-- Name: RolOficial_idResponsabilidad_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."RolOficial_idResponsabilidad_seq"', 3, true);
+
+
+--
+-- Name: Sumario_idSumario_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Sumario_idSumario_seq"', 4, true);
+
+
+--
+-- Name: Superheroe_idSuperHeroe_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."Superheroe_idSuperHeroe_seq"', 1, false);
+
+
+--
+-- Name: TipoIncidente_idTipoInicidente_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."TipoIncidente_idTipoInicidente_seq"', 5, true);
+
+
+--
+-- Name: TipoRelacion_idTipoRelacion_seq; Type: SEQUENCE SET; Schema: tp1; Owner: grupo_01
+--
+
+SELECT pg_catalog.setval('tp1."TipoRelacion_idTipoRelacion_seq"', 5, true);
+
 
 --
 -- PostgreSQL database dump complete
