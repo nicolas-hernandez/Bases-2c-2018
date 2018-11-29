@@ -1,0 +1,5 @@
+RETURN FLATTEN(FOR doc in Oficial
+    FILTER doc.placa == 2
+    FOR asignacion IN doc.asignaciones
+        RETURN asignacion.sumarios
+)
