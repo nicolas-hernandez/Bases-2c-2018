@@ -1,0 +1,1 @@
+FOR doc IN Incidente FILTER doc.idIncidente == 1 RETURN doc.superheroes
