@@ -1,0 +1,9 @@
+[
+  {"_id":"seInvolucraron/852000","_key":"852000","_rev":"_Xz0o3Py--_","dni":107,"idRolCivil":2,"incidentes":[{"calle_1":"Alcorta","calle_2":"Colon","fecha":"2018-10-09","idDireccion":8,"idIncidente":3,"tipoIncidente":{"idTipoInicidente":3,"nombre":"Hurto"}}]},
+  {"_id":"seInvolucraron/852150","_key":"852150","_rev":"_Xz0qqSS--_","dni":203,"idRolCivil":1,"incidentes":[{"calle_1":"Pavon","calle_2":"Mitre","fecha":"2018-10-04","idIncidente":2,"tipoIncidente":{"idTipoInicidente":4,"nombre":"Homicidio"}}]},
+  {"_id":"seInvolucraron/851104","_key":"851104","_rev":"_Xz0lAsW--_","dni":102,"idRolCivil":2,"incidentes":[{"calle_1":"Gorriti","calle_2":"Portugal","fecha":"2018-10-01","idIncidente":1,"tipoIncidente":{"idTipoInicidente":2,"nombre":"Robo"}}]},
+  {"_id":"seInvolucraron/850033","_key":"850033","_rev":"_Xz0dBpu--_","dni":210,"idRolCivil":3,"incidentes":[{"calle_1":"Alcorta","calle_2":"Colon","fecha":"2018-10-09","idDireccion":8,"idIncidente":3,"tipoIncidente":{"idTipoInicidente":3,"nombre":"Hurto"}}]},
+  {"_id":"seInvolucraron/852040","_key":"852040","_rev":"_Xz0p99K--_","dni":100,"idRolCivil":2,"incidentes":[{"calle_1":"Pavon","calle_2":"Mitre","fecha":"2018-10-04","idIncidente":2,"tipoIncidente":{"idTipoInicidente":4,"nombre":"Homicidio"}}]},
+  {"_id":"seInvolucraron/851209","_key":"851209","_rev":"_Xz0mdxK--_","dni":202,"idRolCivil":1,"incidentes":[{"calle_1":"Gorriti","calle_2":"Portugal","fecha":"2018-10-01","idIncidente":1,"tipoIncidente":{"idTipoInicidente":2,"nombre":"Robo"}}]},
+  {"_id":"seInvolucraron/851864","_key":"851864","_rev":"_Xz0ngGW--_","dni":207,"idRolCivil":1,"incidentes":[{"calle_1":"Alcorta","calle_2":"Colon","fecha":"2018-10-09","idDireccion":8,"idIncidente":3,"tipoIncidente":{"idTipoInicidente":3,"nombre":"Hurto"}}]}
+]

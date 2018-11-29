@@ -1,0 +1,5 @@
+[
+  {"_id":"EstadoSumario/848968","_key":"848968","_rev":"_Xz0MVTa--_","estado":"Concluyo","idEstadoSumario":3,"sumarios_ids":[3]},
+  {"_id":"EstadoSumario/848961","_key":"848961","_rev":"_Xz0MVTC--_","estado":"Iniciado","idEstadoSumario":1,"sumarios_ids":[2]},
+  {"_id":"EstadoSumario/848965","_key":"848965","_rev":"_Xz0MVTO--_","estado":"En Proceso","idEstadoSumario":2,"sumarios_ids":[1,4]}
+]

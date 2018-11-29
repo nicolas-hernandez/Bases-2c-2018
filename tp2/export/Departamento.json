@@ -1,0 +1,11 @@
+[
+  {"_id":"Departamento/848427","_key":"848427","_rev":"_Xz0MUTy--_","descripcion":"","idDepartamento":4,"nombre":"Avellaneda","oficiales_placas":[7]},
+  {"_id":"Departamento/848424","_key":"848424","_rev":"_Xz0MUTq--_","descripcion":"","idDepartamento":3,"nombre":"Barracas","oficiales_placas":[9]},
+  {"_id":"Departamento/848421","_key":"848421","_rev":"_Xz0MUTm--_","descripcion":"","idDepartamento":2,"nombre":"Caballito","oficiales_placas":[10]},
+  {"_id":"Departamento/848436","_key":"848436","_rev":"_Xz0MUUK--_","descripcion":"","idDepartamento":7,"nombre":"San Telmo","oficiales_placas":[]},
+  {"_id":"Departamento/848439","_key":"848439","_rev":"_Xz0MUUS--_","descripcion":"","idDepartamento":8,"nombre":"Moron","oficiales_placas":[5]},
+  {"_id":"Departamento/848430","_key":"848430","_rev":"_Xz0MUT6--_","descripcion":"","idDepartamento":5,"nombre":"San Isidro","oficiales_placas":[6]},
+  {"_id":"Departamento/848442","_key":"848442","_rev":"_Xz0MUUW--_","descripcion":"","idDepartamento":9,"nombre":"Adrogue","oficiales_placas":[8]},
+  {"_id":"Departamento/848433","_key":"848433","_rev":"_Xz0MUUC--_","descripcion":"","idDepartamento":6,"nombre":"Recoleta","oficiales_placas":[]},
+  {"_id":"Departamento/848417","_key":"848417","_rev":"_Xz0MUTe--_","descripcion":"","idDepartamento":1,"nombre":"Belgrano","oficiales_placas":[1,4,3,2]}
+]
