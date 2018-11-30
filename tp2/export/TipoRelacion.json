@@ -1,7 +1,7 @@
 [
-  {"_id":"TipoRelacion/848894","_key":"848894","_rev":"_Xz0MVKe--_","idTipoRelacion":2,"nombre":"Compañerismo"},
-  {"_id":"TipoRelacion/848890","_key":"848890","_rev":"_Xz0MVKO--_","idTipoRelacion":1,"nombre":"Amistad"},
-  {"_id":"TipoRelacion/848903","_key":"848903","_rev":"_Xz0MVLS--_","idTipoRelacion":5,"nombre":"Enemigo"},
-  {"_id":"TipoRelacion/848897","_key":"848897","_rev":"_Xz0MVKu--_","idTipoRelacion":3,"nombre":"Amorosa"},
-  {"_id":"TipoRelacion/848900","_key":"848900","_rev":"_Xz0MVLC--_","idTipoRelacion":4,"nombre":"Familiar"}
+  {"_id":"TipoRelacion/848894","_key":"848894","_rev":"_X0Ww4my--_","idTipoRelacion":2,"nombre":"Compañerismo"},
+  {"_id":"TipoRelacion/848890","_key":"848890","_rev":"_X0Ww4my--B","idTipoRelacion":1,"nombre":"Amistad"},
+  {"_id":"TipoRelacion/848903","_key":"848903","_rev":"_X0Ww4my--D","idTipoRelacion":5,"nombre":"Enemigo"},
+  {"_id":"TipoRelacion/848897","_key":"848897","_rev":"_X0Ww4my--F","idTipoRelacion":3,"nombre":"Amorosa"},
+  {"_id":"TipoRelacion/848900","_key":"848900","_rev":"_X0Ww4my--H","idTipoRelacion":4,"nombre":"Familiar"}
 ]

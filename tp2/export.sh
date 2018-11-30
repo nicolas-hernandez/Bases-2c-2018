@@ -1,4 +1,4 @@
-arangoexport --server.database tp2_bd --type json \
+arangoexport --overwrite true --server.database tp2_bd --type json \
 			--collection Oficial \
 			--collection Departamento \
 			--collection Asignacion \
@@ -17,4 +17,4 @@ arangoexport --server.database tp2_bd --type json \
 			--collection Habilidad \
 			--collection EstadoSumario \
 			--collection OficialSeInvolucro \
-			--collection seInvolucraron \
+			--collection IncidentesPorCivil \

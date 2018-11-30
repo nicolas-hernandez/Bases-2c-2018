@@ -1,12 +1,12 @@
 [
-  {"_id":"Designacion/848522","_key":"848522","_rev":"_Xz0MUdO--_","asignaciones_ids":[18],"idDesignacion":3,"nombre":"Espionaje"},
-  {"_id":"Designacion/848540","_key":"848540","_rev":"_Xz0MUdq--_","asignaciones_ids":[17],"idDesignacion":9,"nombre":"Cybercrimen"},
-  {"_id":"Designacion/848534","_key":"848534","_rev":"_Xz0MUdi--_","asignaciones_ids":[4,9,14,21],"idDesignacion":7,"nombre":"Policia Cientifica"},
-  {"_id":"Designacion/848537","_key":"848537","_rev":"_Xz0MUdm--_","asignaciones_ids":[6,15,20],"idDesignacion":8,"nombre":"Delitos financieros"},
-  {"_id":"Designacion/848543","_key":"848543","_rev":"_Xz0MUdu--_","asignaciones_ids":[10,19],"idDesignacion":10,"nombre":"Antiterrorista"},
-  {"_id":"Designacion/848519","_key":"848519","_rev":"_Xz0MUdK--_","asignaciones_ids":[5],"idDesignacion":2,"nombre":"Vigilancia Bancaria"},
-  {"_id":"Designacion/848528","_key":"848528","_rev":"_Xz0MUdW--_","asignaciones_ids":[8,16],"idDesignacion":5,"nombre":"SWAT"},
-  {"_id":"Designacion/848531","_key":"848531","_rev":"_Xz0MUda--_","asignaciones_ids":[11,12],"idDesignacion":6,"nombre":"Narcotrafico"},
-  {"_id":"Designacion/848525","_key":"848525","_rev":"_Xz0MUdS--_","asignaciones_ids":[2,7,13],"idDesignacion":4,"nombre":"Patrullaje"},
-  {"_id":"Designacion/848515","_key":"848515","_rev":"_Xz0MUdG--_","asignaciones_ids":[1,3],"idDesignacion":1,"nombre":"Transito"}
+  {"_id":"Designacion/848522","_key":"848522","_rev":"_X0WwRs2--_","asignaciones_ids":[18],"idDesignacion":3,"nombre":"Espionaje"},
+  {"_id":"Designacion/848540","_key":"848540","_rev":"_X0WwRs2--B","asignaciones_ids":[17],"idDesignacion":9,"nombre":"Cybercrimen"},
+  {"_id":"Designacion/848534","_key":"848534","_rev":"_X0WwRs2--D","asignaciones_ids":[4,9,14,21],"idDesignacion":7,"nombre":"Policia Cientifica"},
+  {"_id":"Designacion/848537","_key":"848537","_rev":"_X0WwRs2--F","asignaciones_ids":[6,15,20],"idDesignacion":8,"nombre":"Delitos financieros"},
+  {"_id":"Designacion/848543","_key":"848543","_rev":"_X0WwRs2--H","asignaciones_ids":[10,19],"idDesignacion":10,"nombre":"Antiterrorista"},
+  {"_id":"Designacion/848519","_key":"848519","_rev":"_X0WwRs2--J","asignaciones_ids":[5],"idDesignacion":2,"nombre":"Vigilancia Bancaria"},
+  {"_id":"Designacion/848528","_key":"848528","_rev":"_X0WwRs2--L","asignaciones_ids":[8,16],"idDesignacion":5,"nombre":"SWAT"},
+  {"_id":"Designacion/848531","_key":"848531","_rev":"_X0WwRs2--N","asignaciones_ids":[11,12],"idDesignacion":6,"nombre":"Narcotrafico"},
+  {"_id":"Designacion/848525","_key":"848525","_rev":"_X0WwRs2--P","asignaciones_ids":[2,7,13],"idDesignacion":4,"nombre":"Patrullaje"},
+  {"_id":"Designacion/848515","_key":"848515","_rev":"_X0WwRs2--R","asignaciones_ids":[1,3],"idDesignacion":1,"nombre":"Transito"}
 ]

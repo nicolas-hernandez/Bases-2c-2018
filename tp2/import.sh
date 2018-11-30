@@ -1,19 +1,19 @@
-arangoimp --file 'export/Oficial.json' --server.database tp2_bd --create-collection true --collection Oficial
-arangoimp --file 'export/Departamento.json' --server.database tp2_bd --create-collection true --collection Departamento
-arangoimp --file 'export/Asignacion.json' --server.database tp2_bd --create-collection true --collection Asignacion
-arangoimp --file 'export/Designacion.json' --server.database tp2_bd --create-collection true --collection Designacion
-arangoimp --file 'export/Sumario.json' --server.database tp2_bd --create-collection true --collection Sumario
-arangoimp --file 'export/Direccion.json' --server.database tp2_bd --create-collection true --collection Direccion
-arangoimp --file 'export/Barrio.json' --server.database tp2_bd --create-collection true --collection Barrio
-arangoimp --file 'export/Incidente.json' --server.database tp2_bd --create-collection true --collection Incidente
-arangoimp --file 'export/Superheroe.json' --server.database tp2_bd --create-collection true --collection Superheroe
-arangoimp --file 'export/Civil.json' --server.database tp2_bd --create-collection true --collection Civil
-arangoimp --file 'export/OrganizacionDelictiva.json' --server.database tp2_bd --create-collection true --collection OrganizacionDelictiva
-arangoimp --file 'export/TipoIncidente.json' --server.database tp2_bd --create-collection true --collection TipoIncidente
-arangoimp --file 'export/RolOficial.json' --server.database tp2_bd --create-collection true --collection RolOficial
-arangoimp --file 'export/RolCivil.json' --server.database tp2_bd --create-collection true --collection RolCivil
-arangoimp --file 'export/TipoRelacion.json' --server.database tp2_bd --create-collection true --collection TipoRelacion
-arangoimp --file 'export/Habilidad.json' --server.database tp2_bd --create-collection true --collection Habilidad
-arangoimp --file 'export/EstadoSumario.json' --server.database tp2_bd --create-collection true --collection EstadoSumario
-arangoimp --file 'export/OficialSeInvolucro.json' --server.database tp2_bd --create-collection true --collection OficialSeInvolucro
-arangoimp --file 'export/seInvolucraron.json' --server.database tp2_bd --create-collection true --collection seInvolucraron
+arangoimp --file 'export/Oficial.json' --server.database tp2_bd --create-collection true --collection Oficial &&
+arangoimp --file 'export/Departamento.json' --server.database tp2_bd --create-collection true --collection Departamento &&
+arangoimp --file 'export/Asignacion.json' --server.database tp2_bd --create-collection true --collection Asignacion &&
+arangoimp --file 'export/Designacion.json' --server.database tp2_bd --create-collection true --collection Designacion &&
+arangoimp --file 'export/Sumario.json' --server.database tp2_bd --create-collection true --collection Sumario &&
+arangoimp --file 'export/Direccion.json' --server.database tp2_bd --create-collection true --collection Direccion &&
+arangoimp --file 'export/Barrio.json' --server.database tp2_bd --create-collection true --collection Barrio &&
+arangoimp --file 'export/Incidente.json' --server.database tp2_bd --create-collection true --collection Incidente &&
+arangoimp --file 'export/Superheroe.json' --server.database tp2_bd --create-collection true --collection Superheroe &&
+arangoimp --file 'export/Civil.json' --server.database tp2_bd --create-collection true --collection Civil &&
+arangoimp --file 'export/OrganizacionDelictiva.json' --server.database tp2_bd --create-collection true --collection OrganizacionDelictiva &&
+arangoimp --file 'export/TipoIncidente.json' --server.database tp2_bd --create-collection true --collection TipoIncidente &&
+arangoimp --file 'export/RolOficial.json' --server.database tp2_bd --create-collection true --collection RolOficial &&
+arangoimp --file 'export/RolCivil.json' --server.database tp2_bd --create-collection true --collection RolCivil &&
+arangoimp --file 'export/TipoRelacion.json' --server.database tp2_bd --create-collection true --collection TipoRelacion &&
+arangoimp --file 'export/Habilidad.json' --server.database tp2_bd --create-collection true --collection Habilidad &&
+arangoimp --file 'export/EstadoSumario.json' --server.database tp2_bd --create-collection true --collection EstadoSumario &&
+arangoimp --file 'export/OficialSeInvolucro.json' --server.database tp2_bd --create-collection true --collection OficialSeInvolucro &&
+arangoimp --file 'export/IncidentesPorCivil.json' --server.database tp2_bd --create-collection true --collection IncidentesPorCivil
