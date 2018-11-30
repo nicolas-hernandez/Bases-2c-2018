@@ -1,7 +1,7 @@
 FOR doc IN OrganizacionDelictiva
 	FILTER doc.idMafia == 2
 	FOR delincuente IN doc.civiles
-		FOR si IN seInvolucraron
-			FILTER delincuente.dni == si.dni
-			LET incds = si.incidentes
+		FOR ixc IN IncidentesPorCivil
+			FILTER delincuente.dni == ixc.dni
+			LET incds = ixc.incidentes
 			RETURN { delincuente, incds }
