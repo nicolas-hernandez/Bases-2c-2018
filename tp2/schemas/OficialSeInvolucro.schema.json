@@ -1,0 +1,23 @@
+{
+    "type": "object", 
+    "properties": {
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "placa": {
+            "type": "number"
+        }, 
+        "idIncidente": {
+            "type": "number"
+        }, 
+        "idResponsabilidad": {
+            "type": "number"
+        }, 
+        "_id": {
+            "type": "string"
+        }
+    }
+}

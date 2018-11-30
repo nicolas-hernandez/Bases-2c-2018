@@ -1,0 +1,50 @@
+{
+    "type": "object", 
+    "properties": {
+        "apellido": {
+            "type": "string"
+        }, 
+        "archienemigos_ids": {
+            "items": {
+                "type": "object", 
+                "properties": {}
+            }, 
+            "type": "array"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "dni": {
+            "type": "number"
+        }, 
+        "contactos_ids": {
+            "items": {
+                "type": "object", 
+                "properties": {}
+            }, 
+            "type": "array"
+        }, 
+        "direcciones_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "mafias_ids": {
+            "items": {
+                "type": "object", 
+                "properties": {}
+            }, 
+            "type": "array"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }
+    }
+}

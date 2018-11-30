@@ -1,0 +1,62 @@
+{
+    "type": "object", 
+    "properties": {
+        "habilidades": {
+            "items": {
+                "type": "object", 
+                "properties": {
+                    "nombre": {
+                        "type": "string"
+                    }, 
+                    "idHabilidad": {
+                        "type": "number"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "color_capa": {
+            "type": "string"
+        }, 
+        "idSuperHeroe": {
+            "type": "number"
+        }, 
+        "archienemigos_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "incidentes_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "dni": {
+            "type": "number"
+        }, 
+        "contactos_ids": {
+            "items": {
+                "type": "object", 
+                "properties": {}
+            }, 
+            "type": "array"
+        }, 
+        "color_disfraz": {
+            "type": "string"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }
+    }
+}

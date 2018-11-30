@@ -1,0 +1,42 @@
+{
+    "type": "object", 
+    "properties": {
+        "resultado": null, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "idAsignacion": {
+            "type": "number"
+        }, 
+        "placa": {
+            "type": "number"
+        }, 
+        "idSumario": {
+            "type": "number"
+        }, 
+        "observacion": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }, 
+        "fecha": {
+            "type": "string", 
+            "format": "date"
+        }, 
+        "estadoSumario": {
+            "type": "object", 
+            "properties": {
+                "idEstadoSumario": {
+                    "type": "number"
+                }, 
+                "estado": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

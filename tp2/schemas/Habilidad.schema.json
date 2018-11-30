@@ -1,0 +1,26 @@
+{
+    "type": "object", 
+    "properties": {
+        "superheroes_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "idHabilidad": {
+            "type": "number"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "type": "object", 
+    "properties": {
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "oficiales_placas": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "descripcion": {
+            "type": "string"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }, 
+        "idDepartamento": {
+            "type": "number"
+        }
+    }
+}

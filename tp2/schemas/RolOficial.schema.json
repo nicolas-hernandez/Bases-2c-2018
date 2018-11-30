@@ -1,0 +1,20 @@
+{
+    "type": "object", 
+    "properties": {
+        "_key": {
+            "type": "string"
+        }, 
+        "descripcion": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }, 
+        "idResponsabilidad": {
+            "type": "number"
+        }
+    }
+}
