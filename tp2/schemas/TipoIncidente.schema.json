@@ -1,8 +1,8 @@
 {
     "type": "object", 
     "properties": {
-        "idTipoInicidente": {
-            "type": "number"
+        "_id": {
+            "type": "string"
         }, 
         "_key": {
             "type": "string"
@@ -12,16 +12,15 @@
         }, 
         "incidentes_ids": {
             "items": {
-                "type": "object", 
-                "properties": {}
+                "type": "number"
             }, 
             "type": "array"
         }, 
         "nombre": {
             "type": "string"
         }, 
-        "_id": {
-            "type": "string"
+        "idTipoInicidente": {
+            "type": "number"
         }
     }
 }

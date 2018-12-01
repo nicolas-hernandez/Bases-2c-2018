@@ -27,7 +27,7 @@
             }, 
             "type": "array"
         }, 
-        "_key": {
+        "color_disfraz": {
             "type": "string"
         }, 
         "_rev": {
@@ -44,12 +44,11 @@
         }, 
         "contactos_ids": {
             "items": {
-                "type": "object", 
-                "properties": {}
+                "type": "number"
             }, 
             "type": "array"
         }, 
-        "color_disfraz": {
+        "_key": {
             "type": "string"
         }, 
         "nombre": {

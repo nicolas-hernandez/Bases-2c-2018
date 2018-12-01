@@ -14,11 +14,11 @@
         "placa": {
             "type": "number"
         }, 
-        "idSumario": {
-            "type": "number"
-        }, 
         "observacion": {
             "type": "string"
+        }, 
+        "idSumario": {
+            "type": "number"
         }, 
         "_id": {
             "type": "string"

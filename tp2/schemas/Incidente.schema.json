@@ -37,8 +37,16 @@
             }, 
             "type": "array"
         }, 
-        "_key": {
-            "type": "string"
+        "tipoIncidente": {
+            "type": "object", 
+            "properties": {
+                "nombre": {
+                    "type": "string"
+                }, 
+                "idTipoInicidente": {
+                    "type": "number"
+                }
+            }
         }, 
         "_rev": {
             "type": "string"
@@ -46,11 +54,11 @@
         "direccion": {
             "type": "object", 
             "properties": {
-                "calle": {
-                    "type": "string"
-                }, 
                 "idDireccion": {
                     "type": "number"
+                }, 
+                "calle": {
+                    "type": "string"
                 }, 
                 "barrio": {
                     "type": "object", 
@@ -71,29 +79,21 @@
         "idIncidente": {
             "type": "number"
         }, 
+        "fecha": {
+            "type": "string", 
+            "format": "date"
+        }, 
         "calle_2": {
             "type": "string"
         }, 
         "calle_1": {
             "type": "string"
         }, 
-        "tipoIncidente": {
-            "type": "object", 
-            "properties": {
-                "nombre": {
-                    "type": "string"
-                }, 
-                "idTipoInicidente": {
-                    "type": "number"
-                }
-            }
-        }, 
         "_id": {
             "type": "string"
         }, 
-        "fecha": {
-            "type": "string", 
-            "format": "date"
+        "_key": {
+            "type": "string"
         }, 
         "superheroes": {
             "items": {

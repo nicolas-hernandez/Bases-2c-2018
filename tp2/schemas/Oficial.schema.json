@@ -5,10 +5,10 @@
             "type": "string", 
             "format": "date"
         }, 
-        "tipo": {
+        "apellido": {
             "type": "string"
         }, 
-        "apellido": {
+        "tipo": {
             "type": "string"
         }, 
         "_key": {

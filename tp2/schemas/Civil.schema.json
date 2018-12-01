@@ -1,15 +1,14 @@
 {
     "type": "object", 
     "properties": {
-        "apellido": {
-            "type": "string"
-        }, 
         "archienemigos_ids": {
             "items": {
-                "type": "object", 
-                "properties": {}
+                "type": "number"
             }, 
             "type": "array"
+        }, 
+        "apellido": {
+            "type": "string"
         }, 
         "_key": {
             "type": "string"
@@ -22,8 +21,7 @@
         }, 
         "contactos_ids": {
             "items": {
-                "type": "object", 
-                "properties": {}
+                "type": "number"
             }, 
             "type": "array"
         }, 
@@ -35,8 +33,7 @@
         }, 
         "mafias_ids": {
             "items": {
-                "type": "object", 
-                "properties": {}
+                "type": "number"
             }, 
             "type": "array"
         }, 
