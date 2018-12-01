@@ -60,7 +60,36 @@
                     "sumarios": {
                         "items": {
                             "type": "object", 
-                            "properties": {}
+                            "properties": {
+                                "resultado": null, 
+                                "placa": {
+                                    "type": "number"
+                                }, 
+                                "observacion": {
+                                    "type": "string"
+                                }, 
+                                "idSumario": {
+                                    "type": "number"
+                                }, 
+                                "_id": {
+                                    "type": "string"
+                                }, 
+                                "fecha": {
+                                    "type": "string", 
+                                    "format": "date"
+                                }, 
+                                "estadoSumario": {
+                                    "type": "object", 
+                                    "properties": {
+                                        "idEstadoSumario": {
+                                            "type": "number"
+                                        }, 
+                                        "estado": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
                         }, 
                         "type": "array"
                     }
