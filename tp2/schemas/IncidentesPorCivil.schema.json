@@ -17,18 +17,20 @@
             "items": {
                 "type": "object", 
                 "properties": {
-                    "idIncidente": {
-                        "type": "number"
+                    "tipoIncidente": {
+                        "type": "object", 
+                        "properties": {
+                            "nombre": {
+                                "type": "string"
+                            }, 
+                            "idTipoInicidente": {
+                                "type": "number"
+                            }
+                        }
                     }, 
                     "fecha": {
                         "type": "string", 
                         "format": "date"
-                    }, 
-                    "calle_2": {
-                        "type": "string"
-                    }, 
-                    "calle_1": {
-                        "type": "string"
                     }, 
                     "direccion": {
                         "type": "object", 
@@ -54,6 +56,15 @@
                                 "type": "number"
                             }
                         }
+                    }, 
+                    "idIncidente": {
+                        "type": "number"
+                    }, 
+                    "calle_2": {
+                        "type": "string"
+                    }, 
+                    "calle_1": {
+                        "type": "string"
                     }
                 }
             }, 

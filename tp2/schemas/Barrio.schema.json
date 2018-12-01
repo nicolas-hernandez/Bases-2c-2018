@@ -1,13 +1,19 @@
 {
     "type": "object", 
     "properties": {
+        "direcciones_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
         "_key": {
             "type": "string"
         }, 
-        "nombre": {
+        "_rev": {
             "type": "string"
         }, 
-        "_rev": {
+        "nombre": {
             "type": "string"
         }, 
         "_id": {
