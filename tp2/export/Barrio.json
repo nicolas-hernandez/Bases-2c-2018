@@ -1,11 +1,11 @@
 [
-  {"_id":"Barrio/848654","_key":"848654","_rev":"_X0Wwb5a--_","idBarrio":6,"nombre":"Recoleta"},
-  {"_id":"Barrio/848663","_key":"848663","_rev":"_X0Wwb5a--B","idBarrio":9,"nombre":"Adrogue"},
-  {"_id":"Barrio/848657","_key":"848657","_rev":"_X0Wwb5a--D","idBarrio":7,"nombre":"sAN TELMO"},
-  {"_id":"Barrio/848638","_key":"848638","_rev":"_X0Wwb5a--F","idBarrio":1,"nombre":"Belgrano"},
-  {"_id":"Barrio/848645","_key":"848645","_rev":"_X0Wwb5a--H","idBarrio":3,"nombre":"Barracas"},
-  {"_id":"Barrio/848651","_key":"848651","_rev":"_X0Wwb5a--J","idBarrio":5,"nombre":"San Isidro"},
-  {"_id":"Barrio/848648","_key":"848648","_rev":"_X0Wwb5a--L","idBarrio":4,"nombre":"Avellaneda"},
-  {"_id":"Barrio/848660","_key":"848660","_rev":"_X0Wwb5a--N","idBarrio":8,"nombre":"Moron"},
-  {"_id":"Barrio/848642","_key":"848642","_rev":"_X0Wwb5a--P","idBarrio":2,"nombre":"Caballito"}
+  {"_id":"Barrio/1081126","_key":"1081126","_rev":"_X0dPnL6--_","direcciones_ids":[14],"idBarrio":8,"nombre":"Moron"},
+  {"_id":"Barrio/1081117","_key":"1081117","_rev":"_X0dPnLi--_","direcciones_ids":[7,8,9],"idBarrio":5,"nombre":"San Isidro"},
+  {"_id":"Barrio/1081111","_key":"1081111","_rev":"_X0dPnLK--_","direcciones_ids":[21,22,23],"idBarrio":3,"nombre":"Barracas"},
+  {"_id":"Barrio/1081123","_key":"1081123","_rev":"_X0dPnLy--_","direcciones_ids":[13],"idBarrio":7,"nombre":"sAN TELMO"},
+  {"_id":"Barrio/1081120","_key":"1081120","_rev":"_X0dPnLq--_","direcciones_ids":[1,10],"idBarrio":6,"nombre":"Recoleta"},
+  {"_id":"Barrio/1081108","_key":"1081108","_rev":"_X0dPnL---_","direcciones_ids":[2,3],"idBarrio":2,"nombre":"Caballito"},
+  {"_id":"Barrio/1081104","_key":"1081104","_rev":"_X0dPnKy--_","direcciones_ids":[17,18,19,20],"idBarrio":1,"nombre":"Belgrano"},
+  {"_id":"Barrio/1081129","_key":"1081129","_rev":"_X0dPnMC--_","direcciones_ids":[15,16],"idBarrio":9,"nombre":"Adrogue"},
+  {"_id":"Barrio/1081114","_key":"1081114","_rev":"_X0dPnLW--_","direcciones_ids":[4,5,6,11,12],"idBarrio":4,"nombre":"Avellaneda"}
 ]
