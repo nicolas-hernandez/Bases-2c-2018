@@ -1,0 +1,27 @@
+{
+    "type": "object", 
+    "properties": {
+        "idTipoInicidente": {
+            "type": "number"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "incidentes_ids": {
+            "items": {
+                "type": "object", 
+                "properties": {}
+            }, 
+            "type": "array"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }
+    }
+}

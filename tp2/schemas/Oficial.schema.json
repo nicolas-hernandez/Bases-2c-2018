@@ -1,0 +1,75 @@
+{
+    "type": "object", 
+    "properties": {
+        "fechaIngreso": {
+            "type": "string", 
+            "format": "date"
+        }, 
+        "tipo": {
+            "type": "string"
+        }, 
+        "apellido": {
+            "type": "string"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "dni": {
+            "type": "number"
+        }, 
+        "placa": {
+            "type": "number"
+        }, 
+        "rango": {
+            "type": "string"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }, 
+        "asignaciones": {
+            "items": {
+                "type": "object", 
+                "properties": {
+                    "placa": {
+                        "type": "number"
+                    }, 
+                    "idAsignacion": {
+                        "type": "number"
+                    }, 
+                    "designacion": {
+                        "type": "object", 
+                        "properties": {
+                            "idDesignacion": {
+                                "type": "number"
+                            }, 
+                            "nombre": {
+                                "type": "string"
+                            }
+                        }
+                    }, 
+                    "fechaInicio": {
+                        "type": "string", 
+                        "format": "date"
+                    }, 
+                    "sumarios": {
+                        "items": {
+                            "type": "object", 
+                            "properties": {}
+                        }, 
+                        "type": "array"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "idDepartamento": {
+            "type": "number"
+        }
+    }
+}

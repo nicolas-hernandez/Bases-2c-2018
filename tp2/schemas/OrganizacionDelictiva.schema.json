@@ -1,0 +1,37 @@
+{
+    "type": "object", 
+    "properties": {
+        "idMafia": {
+            "type": "number"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "civiles": {
+            "items": {
+                "type": "object", 
+                "properties": {
+                    "nombre": {
+                        "type": "string"
+                    }, 
+                    "dni": {
+                        "type": "number"
+                    }, 
+                    "apellido": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "nombre": {
+            "type": "string"
+        }, 
+        "_id": {
+            "type": "string"
+        }
+    }
+}

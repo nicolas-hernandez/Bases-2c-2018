@@ -1,0 +1,46 @@
+{
+    "type": "object", 
+    "properties": {
+        "calle": {
+            "type": "string"
+        }, 
+        "civiles_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "incidentes_ids": {
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array"
+        }, 
+        "idDireccion": {
+            "type": "number"
+        }, 
+        "_id": {
+            "type": "string"
+        }, 
+        "barrio": {
+            "type": "object", 
+            "properties": {
+                "nombre": {
+                    "type": "string"
+                }, 
+                "idBarrio": {
+                    "type": "number"
+                }
+            }
+        }, 
+        "altura": {
+            "type": "number"
+        }
+    }
+}
