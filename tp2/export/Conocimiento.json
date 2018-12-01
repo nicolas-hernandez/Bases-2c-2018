@@ -1,0 +1,6 @@
+[
+  {"_id":"Conocimiento/1075317","_key":"1075317","_rev":"_X0ccfB---_","conocedor":2,"conocido":1,"fechaConocimiento":"2008-05-05","idTipoRelacion":1},
+  {"_id":"Conocimiento/1075320","_key":"1075320","_rev":"_X0ccfBC--_","conocedor":7,"conocido":106,"fechaConocimiento":"2008-05-05","idTipoRelacion":1},
+  {"_id":"Conocimiento/1075313","_key":"1075313","_rev":"_X0ccfA6--_","conocedor":1,"conocido":2,"fechaConocimiento":"2008-05-05","idTipoRelacion":1},
+  {"_id":"Conocimiento/1075323","_key":"1075323","_rev":"_X0ccfBG--_","conocedor":106,"conocido":7,"fechaConocimiento":"2008-05-05","idTipoRelacion":4}
+]
