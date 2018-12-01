@@ -42,7 +42,28 @@ def schema(obj):
         if type(obj) is t:
             return f(obj)
 
+def union(objs):
+    if len(objs) == 0:
+        return
+    if isinstance(objs[0],dict):
+        keys = set()
+        for obj in objs:
+            keys |= set(obj.keys())
+        d = {}
+        for k in keys:
+            d[k] = union([obj[k] for obj in objs])
+        return d
+    elif isinstance(objs[0], list):
+        l = []
+        for obj in objs:
+            l.extend(obj)
+        return l
+    else:
+        return objs[0]
+
 if __name__ == '__main__':
     input_str = sys.stdin.read()
-    first_object = json.loads(input_str)[0]
-print json.dumps(schema(first_object), indent=4)
+    objects = json.loads(input_str)
+    obj = union(objects)
+
+print json.dumps(schema(obj), indent=4)
