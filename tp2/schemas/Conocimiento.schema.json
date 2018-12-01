@@ -1,0 +1,27 @@
+{
+    "type": "object", 
+    "properties": {
+        "_key": {
+            "type": "string"
+        }, 
+        "_rev": {
+            "type": "string"
+        }, 
+        "conocido": {
+            "type": "number"
+        }, 
+        "conocedor": {
+            "type": "number"
+        }, 
+        "idTipoRelacion": {
+            "type": "number"
+        }, 
+        "_id": {
+            "type": "string"
+        }, 
+        "fechaConocimiento": {
+            "type": "string", 
+            "format": "date"
+        }
+    }
+}
